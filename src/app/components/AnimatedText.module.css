@@ -1,0 +1,37 @@
+.container {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  background: #becccc;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 2px;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensures no overflow */
+}
+
+.heading {
+  font-size: 4vw; /* Default for smaller screens */
+  position: relative;
+  margin: 0.5em 0; /* Space between lines */
+  text-shadow: 1px 1px 0px #cccccc, 2px 2px 0px #b3b3b3, 3px 3px 0px #999999,
+    4px 4px 0px #808080, 5px 5px 0px #666666, 6px 6px 0px #4d4d4d,
+    7px 7px 0px #333333, 8px 8px 7px rgba(0, 0, 0, 0.7);
+}
+
+/* Media query for larger screens */
+@media (min-width: 900px) {
+  .heading {
+    font-size: 3.25vw; /* Smaller font size for larger screens */
+  }
+}
+
+/* Media query for extra-large screens */
+@media (min-width: 1440px) {
+  .heading {
+    font-size: 1.5vw; /* Even smaller for extra-large screens */
+  }
+}

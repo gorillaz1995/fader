@@ -8,10 +8,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "640px",
+        md: "968px",
+        lg: "1124px",
+        xl: "1440px",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "abstract-gradient": `
+          radial-gradient(circle at 120% 40%, #ff1654, transparent 60%),
+          radial-gradient(circle at 310% 30%, #000000, transparent 60%)
+        `,
+      },
+
+      fontFamily: {
+        "stint-ultra-expanded": ['"Stint Ultra Expanded"', "sans-serif"],
+        "pontano-sans": ['"Pontano Sans"', "sans-serif"],
+        "luxurious-script": ['"Luxurious Script"', "cursive"],
+        "familjen-grotesk": ['"Familjen Grotesk"', "sans-serif"],
       },
     },
   },
