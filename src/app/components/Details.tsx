@@ -5,7 +5,7 @@ import faderImage from "@/images/hero/fader.webp";
 
 const Details: React.FC = () => {
   return (
-    <div className="relative grid grid-cols-1 lg:grid-cols-2 h-[60vh] gap-6">
+    <div className="relative grid grid-cols-1 lg:grid-cols-2 h-[90vh] sm:h-[60vh]  gap-6">
       {/* Image Section */}
       <div className="relative flex items-center justify-center pb-2 lg:pb-0">
         <div className="absolute top-1/2 transform -translate-y-[35%] mx-auto w-[560px] h-[560px] md:w-[900px] md:h-[900px] rounded-2xl overflow-hidden z-10">
@@ -29,7 +29,7 @@ const Details: React.FC = () => {
 
         <Heading
           as="h2"
-          className="text-xl font-pontano-sans font-semibold text-center lg:text-left"
+          className="text-lg font-pontano-sans font-semibold text-center lg:text-left"
           lineHeight="tall"
         >
           <Highlight

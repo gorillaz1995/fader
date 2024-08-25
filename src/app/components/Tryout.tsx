@@ -15,7 +15,7 @@ const Tryout: React.FC = () => {
     <div className="overflow-hidden h-[85vh]">
       <Grid
         className="overflow-hidden"
-        h="80vh"
+        h="85vh"
         templateRows="repeat(5, 1fr)"
         templateColumns="repeat(5, 1fr)"
         gap={3}
