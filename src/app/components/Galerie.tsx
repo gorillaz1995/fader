@@ -112,7 +112,7 @@ const EmblaCarousel: React.FC = () => {
                 objectFit="cover"
                 className="rounded-2xl"
                 quality={100}
-                loading="lazy"
+                priority
               />
             </Box>
           ))}
