@@ -5,6 +5,7 @@ import Tryout from "./components/Tryout";
 import Mapc from "./Mapc";
 import Actenec from "./components/Actenec";
 import Flex from "./components/Flex";
+import Galerie from "./components/Galerie";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <Tryout />
         <Flex />
         <Actenec />
+        <Galerie />
         <Mapc />
       </main>
     </>
