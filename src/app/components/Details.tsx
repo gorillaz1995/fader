@@ -5,25 +5,25 @@ import faderImage from "@/images/hero/fader.webp";
 
 const Details: React.FC = () => {
   return (
-    <div className="relative grid grid-cols-1 lg:grid-cols-2 h-[90vh] sm:h-[60vh]  gap-6">
+    <div className="relative grid grid-cols-1 lg:grid-cols-2 min-h-[90vh] lg:min-h-[60vh] gap-6">
       {/* Image Section */}
       <div className="relative flex items-center justify-center pb-2 lg:pb-0">
-        <div className="absolute top-1/2 transform -translate-y-[35%] mx-auto w-[560px] h-[560px] md:w-[900px] md:h-[900px] rounded-2xl overflow-hidden z-10">
+        <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[560px] h-[560px] md:max-w-[900px] md:h-[900px] rounded-2xl overflow-hidden z-10">
           <Image
             src={faderImage}
             alt="Ciprian Ungureanu - Master barber"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
             quality={100}
-            loading="lazy"
+            priority
             className="object-cover"
           />
         </div>
       </div>
 
       {/* Text Section */}
-      <div className="flex flex-col justify-center items-center lg:items-start z-20">
-        <h1 className="text-2xl font-semibold text-[#023d82] mb-4 text-center lg:text-left font-stint-ultra-expanded pt-32">
+      <div className="flex flex-col justify-center items-center lg:items-start z-20 px-4 lg:px-0">
+        <h1 className="text-2xl font-semibold text-[#023d82] mb-4 text-center lg:text-left font-stint-ultra-expanded  lg:pt-0">
           Debutul ideal in cariera de frizer
         </h1>
 

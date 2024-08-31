@@ -101,18 +101,19 @@ const EmblaCarousel: React.FC = () => {
               width={{ base: "100%", md: "33%" }}
               height={{ base: "550px", md: "800px" }}
               position="relative"
-              p={2} // Add padding around each image
-              border="2px solid #023d82" // Add border with custom color
-              borderRadius="2xl" // Rounded corners for the border
+              p={2}
+              border="2px solid #023d82"
+              borderRadius="2xl"
             >
               <Image
                 src={image.src}
                 alt={image.alt}
-                layout="fill"
-                objectFit="cover"
+                fill
+                sizes="(max-width: 768px) 100vw, (min-width: 769px) and (max-width: 1200px) 50vw, 33vw" // Added sizes prop
+                style={{ objectFit: "cover" }}
                 className="rounded-2xl"
                 quality={100}
-                priority
+                priority={index < 3} // Preload first 3 images
               />
             </Box>
           ))}

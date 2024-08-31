@@ -12,7 +12,7 @@ const floating = keyframes`
 
 const Tryout: React.FC = () => {
   return (
-    <div className="overflow-hidden h-[85vh]">
+    <div className="overflow-hidden">
       <Grid
         className="overflow-hidden"
         h="85vh"
