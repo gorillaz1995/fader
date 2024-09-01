@@ -9,7 +9,7 @@ import MergedComponent from "./components/MergedComponent";
 export default function Home() {
   return (
     <main className="flex flex-col overflow-hidden">
-      <div className="bg-[#ededed]">
+      <div className="bg-pattern">
         <div>
           <HeroSection />
           <Details />

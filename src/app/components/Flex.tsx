@@ -26,7 +26,6 @@ import { MdOutlineEmojiPeople } from "react-icons/md";
 import { TbZoomQuestion } from "react-icons/tb";
 import { MdOutlineNotificationImportant } from "react-icons/md";
 import { GiTeacher } from "react-icons/gi";
-import faderImage from "@/images/foarfeci7.webp";
 
 const Flex: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,10 +43,6 @@ const Flex: React.FC = () => {
         maxW="sm"
         w="150%"
         h="150%"
-        backgroundImage={`url(${faderImage.src})`}
-        backgroundSize="cover"
-        backgroundPosition="center"
-        backgroundRepeat="no-repeat"
         borderRadius="150px"
         display="flex"
         justifyContent="center"

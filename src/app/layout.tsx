@@ -6,7 +6,7 @@ import {
   Familjen_Grotesk,
 } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers"; // Import the Providers component
+import { Providers } from "./providers";
 
 const stintUltraExpanded = Stint_Ultra_Expanded({
   subsets: ["latin"],
@@ -32,7 +32,6 @@ export const metadata: Metadata = {
     "cursuri frizerie",
     "formare frizeri",
   ],
-
   robots: "index, follow",
 };
 

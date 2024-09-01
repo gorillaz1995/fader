@@ -46,7 +46,7 @@ const Details: React.FC = () => {
           </Highlight>
         </Heading>
 
-        <p className="text-base text-[#070F18] text-center lg:text-left leading-relaxed font-pontano-sans py-2">
+        <p className="text-md text-[#070F18] text-center lg:text-left leading-relaxed font-pontano-sans py-4">
           <span className="border-b-4 border-[#BC9E9E] inline-block">
             Locurile se ocupa foarte repede, asa ca grabeste-te!
           </span>

@@ -16,21 +16,23 @@ export default function HeroSection() {
 
   useEffect(() => {
     if (typedRef.current) {
-      // Set a fixed width to prevent layout shift
       typedRef.current.style.display = "inline-block";
-      typedRef.current.style.minWidth = "7ch"; // Adjust based on the longest year
+      typedRef.current.style.minWidth = "7ch";
+      typedRef.current.style.minHeight = "1em"; // Added min-height
+      typedRef.current.style.backgroundColor = "#023d82";
+      typedRef.current.style.color = "#ededed";
+      typedRef.current.style.padding = "0.15em 0.28em";
+      typedRef.current.style.borderRadius = "0.6em";
 
       const typed = new Typed(typedRef.current, {
         strings: ["2019", "2020", "2021", "2022", "2023", "2024"],
-        typeSpeed: 70, // Slower typing speed
-        backSpeed: 40, // Slower backspace speed
-        backDelay: 1700, // Increased delay before backspacing
+        typeSpeed: 70,
+        backSpeed: 40,
+        backDelay: 1700,
         loop: true,
         showCursor: false,
-        // Remove the stringsElement property
-        preStringTyped: (arrayPos, self) => {
+        preStringTyped: () => {
           if (typedRef.current) {
-            typedRef.current.style.color = "#023d82";
             typedRef.current.style.fontFamily =
               "'Stint Ultra Expanded', cursive";
             typedRef.current.style.letterSpacing = "0.15em";
@@ -39,10 +41,11 @@ export default function HeroSection() {
       });
 
       return () => {
-        typed.destroy(); // Cleanup on unmount
+        typed.destroy();
         if (typedRef.current) {
-          typedRef.current.style.display = "  ";
-          typedRef.current.style.minWidth = " ";
+          typedRef.current.style.display = "";
+          typedRef.current.style.minWidth = "";
+          typedRef.current.style.minHeight = ""; // Reset min-height
         }
       };
     }
@@ -141,14 +144,16 @@ export default function HeroSection() {
           FADE ACADEMY
         </h1>
 
-        <h1 className="text-4xl md:text-4xl font-pontano-sans text-center pr-5 md:pr-20 lg:pr-0 text-[#333] pt-6 md:pt-10 opacity-85">
+        <h1 className="text-2xl md:text-4xl font-pontano-sans text-center pr-5 md:pr-20 lg:pr-0 text-[#333] pt-6 md:pt-10 opacity-85">
           Cea mai buna scoala de frizerie{" "}
-          <span className="font-extrabold text-[#023d82]">5 ani</span> la rand!{" "}
-          <br></br>
+          <span className=" font-stint-ultra-expanded text-[#023d82] text-4xl">
+            <br></br>5 ani
+          </span>{" "}
+          consecutivi <br></br>
           <span ref={typedRef}></span>
         </h1>
 
-        <h1 className="text-md md:text-4xl font-pontano-sans text-right pr-6 max-w-sm md:max-w-7xl ml-auto pt-22 lg:pt-6 text-[#000000] border-b-4 border-[#023d82]">
+        <h1 className="text-md md:text-4xl font-pontano-sans text-right pr-6 max-w-sm md:max-w-7xl ml-auto pt-22 lg:pt-6 text-[#000000]  pb-20">
           Invata frizerie de la zero si descopera cum au devenit celebri cei mai
           buni frizeri, sub ghidarea unui expert cu recunoastere internationala.
         </h1>

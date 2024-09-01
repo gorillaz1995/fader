@@ -5,17 +5,25 @@ import { Grid, GridItem, Text, keyframes } from "@chakra-ui/react";
 
 // Floating animation keyframes
 const floating = keyframes`
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-1%); }
-  100% { transform: translateY(0); }
+  0% { transform: translateY(0) rotate(0deg); }
+  10% { transform: translateY(-2%) rotate(1deg); }
+  20% { transform: translateY(-4%) rotate(-1deg); }
+  30% { transform: translateY(-6%) rotate(1deg); }
+  40% { transform: translateY(-8%) rotate(-1deg); }
+  50% { transform: translateY(-10%) rotate(1deg); }
+  60% { transform: translateY(-8%) rotate(-1deg); }
+  70% { transform: translateY(-6%) rotate(1deg); }
+  80% { transform: translateY(-4%) rotate(-1deg); }
+  90% { transform: translateY(-2%) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 `;
 
 const Tryout: React.FC = () => {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden h-[130vh]  bg-[#000000] py-7">
       <Grid
         className="overflow-hidden"
-        h="85vh"
+        h="120vh"
         templateRows="repeat(5, 1fr)"
         templateColumns="repeat(5, 1fr)"
         gap={3}
