@@ -7,6 +7,8 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import Menux from "./components/Menux";
+import Footer from "./components/Footer";
 
 const stintUltraExpanded = Stint_Ultra_Expanded({
   subsets: ["latin"],
@@ -55,9 +57,13 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${stintUltraExpanded.className} ${pontanoSans.className} ${luxuriousScript.className} ${familjenGrotesk.className}`}
+        className={`${stintUltraExpanded.className} ${pontanoSans.className} ${luxuriousScript.className} ${familjenGrotesk.className} flex flex-col min-h-screen`}
       >
-        <Providers>{children}</Providers> {/* Wrap children with Providers */}
+        <Menux />
+        <Providers>
+          <main className="flex-grow">{children}</main>
+        </Providers>
+        <Footer />
       </body>
     </html>
   );

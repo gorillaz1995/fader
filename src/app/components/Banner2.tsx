@@ -16,10 +16,12 @@ const Banner2: React.FC = () => {
     >
       <Image
         src="/images/f2.webp"
-        alt="Banner Image"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
+        alt="Curs frizerie incepatori , curs frizer, frizer incepatori, frizer, barbershop, barbershop incepatori, barbershop incepatori Bucuresti, barbershop incepatori Timisoara, barbershop incepatori Cluj, barbershop incepatori Iasi"
+        fill
+        style={{
+          objectFit: "cover",
+          objectPosition: "center",
+        }}
         quality={100}
         priority
       />

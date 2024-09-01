@@ -11,7 +11,7 @@ const Details: React.FC = () => {
         <div className="relative z-10">
           <Image
             src={faderImage}
-            alt="Ciprian Ungureanu - Master barber"
+            alt="Ciprian Ungureanu - Master barber - Curs frizerie incepatori"
             width={306}
             height={282}
             quality={100}
@@ -47,7 +47,7 @@ const Details: React.FC = () => {
         </Heading>
 
         <p className="text-md text-[#070F18] text-center lg:text-left leading-relaxed font-pontano-sans py-4">
-          <span className="border-b-4 border-[#BC9E9E] inline-block">
+          <span className="border-b-2 border-[#023d82] inline-block">
             Locurile se ocupa foarte repede, asa ca grabeste-te!
           </span>
           <br />

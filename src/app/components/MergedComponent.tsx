@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import {
   Card,
   CardBody,
@@ -34,6 +34,41 @@ import faderImage from "@/images/foarfeci7.webp";
 const MergedComponents: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const { gsap } = require("gsap");
+      const { ScrollTrigger } = require("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (listRef.current) {
+        const listItems = listRef.current.children;
+
+        gsap.fromTo(
+          listItems,
+          { autoAlpha: 0, x: (index: number) => (index % 2 === 0 ? -50 : 50) },
+          {
+            duration: 2.5,
+            autoAlpha: 1,
+            x: 0,
+            ease: "power2.out",
+            stagger: 0.25,
+            scrollTrigger: {
+              trigger: listRef.current,
+              start: "top 70%",
+              end: "bottom 20%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
+      };
+    }
+  }, []);
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
@@ -89,6 +124,7 @@ const MergedComponents: React.FC = () => {
           </Heading>
 
           <List
+            ref={listRef}
             spacing={3}
             className="font-pontano-sans text-2xl text-[#000000] text-center"
           >

@@ -14,9 +14,11 @@ const Banner1: React.FC = () => {
     >
       <Image
         src="/images/F.webp"
-        alt="Banner Image"
-        layout="fill"
-        objectFit="cover"
+        alt="Ciprian Ungureanu - Master barber - Curs frizerie Incepatori"
+        fill
+        style={{
+          objectFit: "cover",
+        }}
         quality={100}
         priority
       />
