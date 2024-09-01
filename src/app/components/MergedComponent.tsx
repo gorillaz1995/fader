@@ -29,6 +29,7 @@ import {
 import { TbZoomQuestion } from "react-icons/tb";
 import { GiTeacher } from "react-icons/gi";
 import { HiOutlineDocumentText } from "react-icons/hi";
+import { FaGraduationCap } from "react-icons/fa";
 import faderImage from "@/images/foarfeci7.webp";
 
 const MergedComponents: React.FC = () => {
@@ -105,8 +106,25 @@ const MergedComponents: React.FC = () => {
             colorScheme="blue"
             onClick={onOpen}
             ref={btnRef}
-            className="font-stint-ultra-expanded mt-6"
+            className="font-stint-ultra-expanded mt-6 relative overflow-hidden"
             borderRadius="full"
+            sx={{
+              "&::before": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                left: "-100%",
+                width: "100%",
+                height: "100%",
+                background:
+                  "linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent)",
+                animation: "shimmer 3s infinite",
+              },
+              "@keyframes shimmer": {
+                "0%": { left: "-100%" },
+                "100%": { left: "100%" },
+              },
+            }}
           >
             Detalii curs
           </Button>
@@ -160,67 +178,67 @@ const MergedComponents: React.FC = () => {
         size={{ base: "xs", md: "xl" }}
       >
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader className="font-stint-ultra-expanded text-[#023d82]">
+        <DrawerContent bg="linear-gradient(135deg, #023d82, #0461ab, #0277bd)">
+          <DrawerCloseButton color="#ededed" />
+          <DrawerHeader className="font-stint-ultra-expanded text-[#ededed]">
             TEME ABORDATE
           </DrawerHeader>
           <DrawerBody>
-            <List spacing={3} className="font-pontano-sans text-[#000000]">
+            <List spacing={3} className="font-pontano-sans text-[#ededed]">
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Tunsori barbati personalizate
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Tunsori personalizate după fizionomia feței și forma capului
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Tehnici de tuns:<br></br> Treptele - Graduarea - Linia - etc.
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Tunsori barbati clasice
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Tuns:<br></br> - foarfeca și pieptan <br></br> - foarfeca si
                 masina de tuns
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Masina de tuns:<br></br> - Clipper over comb techniques
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Par facial / barba - barbierit cu brici - styling barba
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Samponat - Spalat - Masaj
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Masaj: -facial - capilar
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Styling - Special techniques
               </ListItem>
               <ListItem>
-                <ListIcon as={MdOutlineEmojiPeople} color="#023d82" />
+                <ListIcon as={MdOutlineEmojiPeople} color="#ededed" />
                 Consultatie si abordare client
               </ListItem>
               <ListItem>
-                <ListIcon as={IoShareSocialOutline} color="#023d82" />
+                <ListIcon as={IoShareSocialOutline} color="#ededed" />
                 Brand & Imagine:<br></br>
                 -Dezvoltarea prezentei in mediul online<br></br>
                 -Identificarea valorilor cheie pentru brand-ul tau<br></br>
                 -Tehnologii folosite in industrie
               </ListItem>
               <ListItem>
-                <ListIcon as={TbZoomQuestion} color="#023d82" />
+                <ListIcon as={TbZoomQuestion} color="#ededed" />
                 Identificarea uneltelor necesare pentru a oferi orice tip de
                 tunsoare si ethicheta la salon.
               </ListItem>
@@ -231,30 +249,69 @@ const MergedComponents: React.FC = () => {
               size="md"
               mt={8}
               mb={4}
-              className="font-stint-ultra-expanded text-[#023d82]"
+              className="font-stint-ultra-expanded text-[#ededed]"
             >
               PROGRAM CURS FRIZERIE:
             </Heading>
-            <List spacing={3} className="font-pontano-sans text-[#000000]">
+            <List spacing={3} className="font-pontano-sans text-[#ededed]">
               <ListItem>Cuprinde TEORIE & PRACTICA:</ListItem>
               <ListItem>
-                <ListIcon as={GiTeacher} color="#023d82" />
+                <ListIcon as={GiTeacher} color="#ededed" />
                 Teorie – 6 ore / saptamana<br></br> marti 12:00–18:00
               </ListItem>
               <ListItem>
-                <ListIcon as={PiScissors} color="#023d82" />
+                <ListIcon as={PiScissors} color="#ededed" />
                 Practica – 6 ore / saptamana<br></br> marti, miercuri, joi
                 18:00-20:00
               </ListItem>
               <ListItem>
-                <ListIcon as={MdOutlineNotificationImportant} color="#023d82" />
+                <ListIcon as={MdOutlineNotificationImportant} color="#ededed" />
                 Programul poate depasi numarul de ore pentru practica
+              </ListItem>
+            </List>
+
+            <Heading
+              as="h3"
+              size="md"
+              mt={8}
+              mb={4}
+              className="font-stint-ultra-expanded text-[#ededed]"
+            >
+              Curs Frizerie - Recunoscut National / International
+            </Heading>
+            <List spacing={3} className="font-pontano-sans text-[#ededed]">
+              <ListItem>
+                <ListIcon as={FaGraduationCap} color="#ededed" />
+                Acest curs este autorizat de Ministerul Muncii si Ministerul
+                Educatiei, la final fiind oferit un certificat de absolvire al
+                cursului de frizerie incepatori.
               </ListItem>
             </List>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
+            <Button
+              variant="solid"
+              mr={3}
+              onClick={onClose}
+              color="#ededed"
+              bg="#023d82"
+              borderRadius="full"
+              fontWeight="bold"
+              px={6}
+              py={3}
+              _hover={{
+                bg: "#0461ab",
+                transform: "translateY(-2px)",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              }}
+              _active={{
+                bg: "#012c5e",
+                transform: "translateY(1px)",
+                boxShadow: "inset 0 2px 4px rgba(0, 0, 0, 0.1)",
+              }}
+              transition="all 0.2s"
+            >
               Inchide
             </Button>
           </DrawerFooter>

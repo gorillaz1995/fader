@@ -91,12 +91,12 @@ const Menux: React.FC = () => {
               aria-label="Options"
               icon={<HamburgerIcon boxSize={24} />}
               variant="solid"
-              bg="#ededed"
-              color="black"
+              bg="linear-gradient(145deg, #0461ab, #023d82)"
+              color="white"
               size="lg"
-              borderRadius="full"
-              _hover={{ bg: "#d9d9d9" }}
-              _active={{ bg: "#c4c4c4" }}
+              borderRadius="30%"
+              _active={{ bg: "linear-gradient(145deg, #035694, #023168)" }}
+              boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
             />
             <AnimatePresence mode="wait">
               {isOpen && (
