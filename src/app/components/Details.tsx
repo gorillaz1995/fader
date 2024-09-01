@@ -5,18 +5,18 @@ import faderImage from "@/images/hero/fader.webp";
 
 const Details: React.FC = () => {
   return (
-    <div className="relative grid grid-cols-1 lg:grid-cols-2 min-h-[90vh] lg:min-h-[60vh] gap-6">
+    <div className="relative grid grid-cols-1 lg:grid-cols-2 min-h-[90vh] lg:min-h-[60vh] gap-6 py-10">
       {/* Image Section */}
       <div className="relative flex items-center justify-center pb-2 lg:pb-0">
-        <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[560px] h-[560px] md:max-w-[900px] md:h-[900px] rounded-2xl overflow-hidden z-10">
+        <div className="relative z-10">
           <Image
             src={faderImage}
             alt="Ciprian Ungureanu - Master barber"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+            width={306}
+            height={282}
             quality={100}
             priority
-            className="object-cover"
+            className="object-contain"
           />
         </div>
       </div>
