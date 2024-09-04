@@ -15,7 +15,7 @@ export default function BotosaniPage() {
         imageSrc="/images/botosani_foto.webp"
         formatorName="TUCALIUC ANDI BENAMIN"
         locationName="Botosani"
-        description="La Fade Academy Botosani, Andi este liderul care a format peste 25 de frizeri activi, dintre care multi si-au deschis propriile saloane. Cursurile de frizerie Botosani sunt recunoscute pentru atentia la detalii si pentru pregatirea completa pe care o ofera, sub indrumarea unui profesionist dedicat. Cu o experienta bogata si o pasiune pentru educatie, [Nume Formator] asigura ca fiecare cursant invata tehnicile necesare pentru a deveni un frizer de succes si, mai mult decat atat, isi dezvolta increderea pentru a-si lansa propria afacere in acest domeniu dinamic."
+        description="La Fade Academy Botosani, Andi este liderul care a format peste 25 de frizeri activi, dintre care multi si-au deschis propriile saloane. Cursurile de frizerie Botosani sunt recunoscute pentru atentia la detalii si pentru pregatirea completa pe care o ofera, sub indrumarea unui profesionist dedicat. Cu o experienta bogata si o pasiune pentru educatie, Andi asigura ca fiecare cursant invata tehnicile necesare pentru a deveni un frizer de succes si, mai mult decat atat, isi dezvolta increderea pentru a-si lansa propria afacere in acest domeniu dinamic."
       />
       <PriceContact
         price="3500 RON"
