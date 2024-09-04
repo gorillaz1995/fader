@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import Typed from "typed.js";
@@ -16,15 +16,16 @@ export default function HeroSection() {
 
   useEffect(() => {
     if (typedRef.current) {
-      typedRef.current.style.display = "inline-block";
-      typedRef.current.style.minWidth = "7ch";
-      typedRef.current.style.minHeight = "1em"; // Added min-height
-      typedRef.current.style.backgroundColor = "#023d82";
-      typedRef.current.style.color = "#ededed";
-      typedRef.current.style.padding = "0.15em 0.28em";
-      typedRef.current.style.borderRadius = "0.6em";
+      const typedElement = typedRef.current;
+      typedElement.style.display = "inline-block";
+      typedElement.style.minWidth = "7ch";
+      typedElement.style.minHeight = "1em";
+      typedElement.style.backgroundColor = "#023d82";
+      typedElement.style.color = "#ededed";
+      typedElement.style.padding = "0.15em 0.28em";
+      typedElement.style.borderRadius = "0.6em";
 
-      const typed = new Typed(typedRef.current, {
+      const typed = new Typed(typedElement, {
         strings: ["2019", "2020", "2021", "2022", "2023", "2024"],
         typeSpeed: 70,
         backSpeed: 40,
@@ -32,26 +33,19 @@ export default function HeroSection() {
         loop: true,
         showCursor: false,
         preStringTyped: () => {
-          if (typedRef.current) {
-            typedRef.current.style.fontFamily =
-              "'Stint Ultra Expanded', cursive";
-            typedRef.current.style.letterSpacing = "0.15em";
-          }
+          typedElement.style.fontFamily = "'Stint Ultra Expanded', cursive";
+          typedElement.style.letterSpacing = "0.15em";
         },
       });
 
       return () => {
         typed.destroy();
-        if (typedRef.current) {
-          typedRef.current.style.display = "";
-          typedRef.current.style.minWidth = "";
-          typedRef.current.style.minHeight = ""; // Reset min-height
-        }
+        typedElement.style.cssText = "";
       };
     }
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
@@ -104,7 +98,7 @@ export default function HeroSection() {
       className="relative h-screen w-screen flex flex-col items-center justify-center overflow-hidden"
     >
       <div className="relative z-20 flex flex-col space-y-6 md:space-y-4">
-        <div className="flex flex-row space-x-2 md:space-x-6 items-center justify-center pt-10  lg:pt-0">
+        <div className="flex flex-row space-x-2 md:space-x-6 items-center justify-center pt-10 lg:pt-0">
           <div ref={ciprianRef} className="flex items-center">
             <h1 className="font-luxurious-script text-7xl md:text-9xl text-black pr-2">
               C
@@ -146,14 +140,14 @@ export default function HeroSection() {
 
         <h1 className="text-2xl md:text-4xl font-pontano-sans text-center pr-5 md:pr-20 lg:pr-0 text-[#333] pt-6 md:pt-10 opacity-85">
           Cea mai buna scoala de frizerie{" "}
-          <span className=" font-stint-ultra-expanded text-[#023d82] text-4xl">
-            <br></br>5 ani
+          <span className="font-stint-ultra-expanded text-[#023d82] text-4xl">
+            <br />5 ani
           </span>{" "}
-          consecutivi <br></br>
+          consecutivi <br />
           <span ref={typedRef}></span>
         </h1>
 
-        <h1 className="text-md md:text-4xl font-pontano-sans text-right pr-6 max-w-sm md:max-w-7xl ml-auto pt-22 lg:pt-6 text-[#000000]  pb-20">
+        <h1 className="text-md md:text-4xl font-pontano-sans text-right pr-6 max-w-sm md:max-w-7xl ml-auto pt-22 lg:pt-6 text-[#000000] pb-20">
           Invata frizerie de la zero si descopera cum au devenit celebri cei mai
           buni frizeri, sub ghidarea unui expert cu recunoastere internationala.
         </h1>
