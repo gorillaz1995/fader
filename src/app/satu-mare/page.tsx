@@ -12,7 +12,7 @@ export default function SMPage() {
         imageSrc="/images/sm_foto.webp"
         formatorName="Bajus Francisc"
         locationName="Satu Mare"
-        description="[Description for Satu Mare Fade Academy]"
+        description="Un formator de top al Fade Academy din Satu-Mare, cu o experienta vasta in arta frizeriei. Cu o pasiune autentica pentru acest domeniu, el se dedica instruirii viitoarelor generatii de frizeri, punand accent pe tehnici moderne si tendinte actuale in hairstyling. Cursurile sale sunt structurate astfel incat fiecare participant sa obtina abilitati practice solide si cunostinte esentiale pentru a-si construi o cariera de succes in frizerie. Datorita experientei sale si a metodei de predare interactive, formatorul din Satu-Mare inspira incredere si profesionalism."
       />
       <PriceContact
         price="3000 RON"

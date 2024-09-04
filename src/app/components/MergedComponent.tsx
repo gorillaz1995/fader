@@ -283,9 +283,9 @@ const MergedComponents: React.FC = () => {
               </ListItem>
               <ListItem>
                 <ListIcon as={FaToolbox} color="#ededed" />
-                Cursantul trebuie sa aiba unstensile personale, se pot procura
-                de pe site-ul colaboratorilor nostri unde avem reduceri
-                speciale, aici{" "}
+                Cursantul trebuie sa aiba ustensile personale, se pot procura de
+                pe site-ul colaboratorilor nostri unde avem reduceri speciale,
+                aici{" "}
                 <Link
                   href="http://barber-store.ro/?affiliate=asociatia-frizer-art"
                   target="_blank"

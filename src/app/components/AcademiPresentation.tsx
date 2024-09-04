@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Grid, GridItem, Text, Box, Image, keyframes } from "@chakra-ui/react";
 
-const shimmer = keyframes`
-  0% { left: -100%; }
-  100% { left: 100%; }
+const float = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 `;
 
 interface FadeAcademySectionProps {
@@ -21,6 +21,8 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
   locationName,
   description,
 }) => {
+  const imageRef = useRef<HTMLImageElement>(null);
+
   return (
     <Box className="overflow-hidden bg-[#cbdad4] py-7">
       <Grid
@@ -31,8 +33,12 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
       >
         {/* Image */}
         <GridItem colSpan={1} order={{ base: 1, lg: 2 }}>
-          <Box className="lg:w-3/4 lg:mx-auto">
+          <Box
+            className="lg:w-3/4 lg:mx-auto overflow-hidden"
+            animation={`${float} 3s ease-in-out infinite`}
+          >
             <Image
+              ref={imageRef}
               src={imageSrc}
               alt={`Fade ${locationName}`}
               width="100%"
@@ -58,17 +64,6 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
               borderRadius="2xl"
               position="relative"
               overflow="hidden"
-              _before={{
-                content: '""',
-                position: "absolute",
-                top: 0,
-                left: "-100%",
-                width: "100%",
-                height: "100%",
-                background:
-                  "linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent)",
-                animation: `${shimmer} 3s infinite`,
-              }}
             >
               <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB]">
                 <Text
@@ -78,14 +73,14 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
                   {formatorName}
                 </Text>
                 <br />
-                <Text as="span" className="text-md">
+                <Text as="span" className="text-md font-pontano-sans">
                   Formator Fade Academy {locationName}
                 </Text>
               </Text>
             </GridItem>
 
             <GridItem>
-              <Text className="font-pontano-sans text-md text-center text-gray-700">
+              <Text className="font-pontano-sans text-md text-center text-gray-700 font-semibold">
                 {description}
               </Text>
             </GridItem>
