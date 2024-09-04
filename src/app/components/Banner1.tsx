@@ -4,7 +4,12 @@ import React from "react";
 import Image from "next/image";
 import { Box } from "@chakra-ui/react";
 
-const Banner1: React.FC = () => {
+interface Banner1Props {
+  imageSrc: string;
+  altText: string;
+}
+
+const Banner1: React.FC<Banner1Props> = ({ imageSrc, altText }) => {
   return (
     <Box
       position="relative"
@@ -13,8 +18,8 @@ const Banner1: React.FC = () => {
       minHeight={{ base: "200px", lg: "250px" }}
     >
       <Image
-        src="/images/F.webp"
-        alt="Ciprian Ungureanu - Master barber - Curs frizerie Incepatori"
+        src={imageSrc}
+        alt={altText}
         fill
         style={{
           objectFit: "cover",

@@ -42,7 +42,7 @@ const Details: React.FC = () => {
               rounded: "full",
             }}
           >
-            PROGRAM CURSURI FRIZERIE INCEPATORI
+            PROGRAM CURSURI FRIZERIE INCEPATORI - Bucuresti
           </Highlight>
         </Heading>
 
@@ -51,11 +51,11 @@ const Details: React.FC = () => {
             Locurile se ocupa foarte repede, asa ca grabeste-te!
           </span>
           <br />
-          CURS 10 <span className="font-extrabold">SEPTEMBRIE</span> - 19{" "}
-          <span className="font-extrabold">NOIEMBRIE</span> 2024
+          CURS 10 <span className="font-extrabold">IANUARIE</span> - 21{" "}
+          <span className="font-extrabold">MARTIE</span> 2025
           <br />
-          <span className="font-extrabold">Ultima zi</span> de inscrieri: 01
-          Septembrie
+          <span className="font-extrabold">Ultima zi</span> de inscrieri: 30
+          Decembrie
           <br />
           Durata totala - 2 luni jumate /
           <span className="font-extrabold"> 10 saptamani</span>

@@ -111,47 +111,43 @@ const Menux: React.FC = () => {
                       textAlign="center"
                       className="font-stint-ultra-expanded"
                     >
-                      FADE ACADEMY
+                      Acasa
                     </Text>
                   </StyledMenuItem>
                   <StyledMenuItem
-                    onClick={() => handleNavigation("/academie-1")}
+                    onClick={() => handleNavigation("/fade-bucuresti")}
                   >
                     <Text
                       textAlign="center"
                       className="font-stint-ultra-expanded"
                     >
-                      Academie 1
+                      FADE Bucuresti
+                    </Text>
+                  </StyledMenuItem>
+                  <StyledMenuItem onClick={() => handleNavigation("/mioveni")}>
+                    <Text
+                      textAlign="center"
+                      className="font-stint-ultra-expanded"
+                    >
+                      FADE Mioveni
                     </Text>
                   </StyledMenuItem>
                   <StyledMenuItem
-                    onClick={() => handleNavigation("/academie-2")}
+                    onClick={() => handleNavigation("/satu-mare")}
                   >
                     <Text
                       textAlign="center"
                       className="font-stint-ultra-expanded"
                     >
-                      Academie 2
+                      FADE Satu Mare
                     </Text>
                   </StyledMenuItem>
-                  <StyledMenuItem
-                    onClick={() => handleNavigation("/academie-3")}
-                  >
+                  <StyledMenuItem onClick={() => handleNavigation("/botosani")}>
                     <Text
                       textAlign="center"
                       className="font-stint-ultra-expanded"
                     >
-                      Academie 3
-                    </Text>
-                  </StyledMenuItem>
-                  <StyledMenuItem
-                    onClick={() => handleNavigation("/academie-4")}
-                  >
-                    <Text
-                      textAlign="center"
-                      className="font-stint-ultra-expanded"
-                    >
-                      Academie 4
+                      FADE Botosani
                     </Text>
                   </StyledMenuItem>
                 </MotionMenuList>

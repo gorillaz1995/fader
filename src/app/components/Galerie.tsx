@@ -79,7 +79,7 @@ const EmblaCarousel: React.FC = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <Box bg="#000000" py={{ base: 10, md: 20 }}>
+    <Box bg="#cbdad4" py={{ base: 10, md: 20 }}>
       {/* Title Section */}
       <Heading
         as="h2"
@@ -129,7 +129,7 @@ const EmblaCarousel: React.FC = () => {
               height={{ base: "550px", md: "800px" }}
               position="relative"
               p={2}
-              border="1px solid #fa6529"
+              border="1px solid #023d82"
               borderRadius="3xl"
               boxShadow="0 4px 8px rgba(0, 0, 0, 0.5), 0 6px 20px rgba(0, 0, 0, 0.3)"
             >
