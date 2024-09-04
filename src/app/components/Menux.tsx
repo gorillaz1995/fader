@@ -99,28 +99,36 @@ const Menux: React.FC = () => {
               Acasa
             </Text>
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => handleNavigation("/fade-bucuresti")}>
+          <StyledMenuItem
+            onClick={() => handleNavigation("/curs-frizerie-bucuresti")}
+          >
             <Text textAlign="center">
               <span className="font-stint-ultra-expanded">Fade Academy</span>
               <br />
               <span className="font-pontano-sans">Bucuresti</span>
             </Text>
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => handleNavigation("/mioveni")}>
+          <StyledMenuItem
+            onClick={() => handleNavigation("/curs-frizerie-mioveni")}
+          >
             <Text textAlign="center">
               <span className="font-stint-ultra-expanded">Fade Academy</span>
               <br />
               <span className="font-pontano-sans">Mioveni</span>
             </Text>
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => handleNavigation("/satu-mare")}>
+          <StyledMenuItem
+            onClick={() => handleNavigation("/curs-frizerie-satu-mare")}
+          >
             <Text textAlign="center">
               <span className="font-stint-ultra-expanded">Fade Academy</span>
               <br />
               <span className="font-pontano-sans">Satu Mare</span>
             </Text>
           </StyledMenuItem>
-          <StyledMenuItem onClick={() => handleNavigation("/botosani")}>
+          <StyledMenuItem
+            onClick={() => handleNavigation("/curs-frizerie-botosani")}
+          >
             <Text textAlign="center">
               <span className="font-stint-ultra-expanded">Fade Academy</span>
               <br />
