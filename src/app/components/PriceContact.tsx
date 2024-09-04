@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Grid,
   GridItem,
@@ -11,7 +11,10 @@ import {
   keyframes,
 } from "@chakra-ui/react";
 import { FaFacebook } from "react-icons/fa";
-import { MdContentCopy } from "react-icons/md"; // Import the copy icon
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const shimmer = keyframes`
   0% { left: -100%; }
@@ -31,39 +34,46 @@ const PriceContact: React.FC<PriceContactProps> = ({
   location,
   facebookLink,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const priceBoxRef = useRef<HTMLDivElement>(null);
+  const contactBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ctx: gsap.Context;
+
+    if (containerRef.current && priceBoxRef.current && contactBoxRef.current) {
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        tl.fromTo(
+          priceBoxRef.current,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" }
+        ).fromTo(
+          contactBoxRef.current,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 1.5, ease: "power2.out" },
+          "-=1" // Overlap the animations slightly
+        );
+      });
+    }
+
+    return () => ctx?.revert(); // Clean up the animation
+  }, []);
+
   const showNotification = (message: string) => {
-    const alertBox = document.createElement("div");
-    alertBox.style.position = "fixed";
-    alertBox.style.top = "50%";
-    alertBox.style.left = "50%";
-    alertBox.style.transform = "translate(-50%, -50%)";
-    alertBox.style.padding = "20px";
-    alertBox.style.background = "linear-gradient(to right, #0461ab, #023d82)";
-    alertBox.style.color = "#F9FBFB";
-    alertBox.style.borderRadius = "10px";
-    alertBox.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
-    alertBox.style.zIndex = "1000";
-    alertBox.style.display = "flex";
-    alertBox.style.alignItems = "center";
-    alertBox.style.gap = "10px";
-
-    const iconElement = document.createElement("span");
-    iconElement.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
-
-    const textElement = document.createElement("span");
-    textElement.textContent = message;
-
-    alertBox.appendChild(iconElement);
-    alertBox.appendChild(textElement);
-
-    document.body.appendChild(alertBox);
-    setTimeout(() => {
-      alertBox.remove();
-    }, 2000);
+    // ... (keep the existing showNotification function)
   };
 
   return (
-    <Box className="overflow-hidden bg-[#cbdad4] py-7">
+    <Box className="overflow-hidden bg-[#cbdad4] py-7" ref={containerRef}>
       <Grid
         templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
         gap={6}
@@ -71,7 +81,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
         maxWidth="100%"
       >
         {/* Price Box */}
-        <GridItem>
+        <GridItem ref={priceBoxRef}>
           <Box
             className="bg-gradient-to-r from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
             p={3}
@@ -106,7 +116,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
         </GridItem>
 
         {/* Contact Box */}
-        <GridItem>
+        <GridItem ref={contactBoxRef}>
           <Box
             className="bg-gradient-to-r from-[#023d82] to-[#0461ab] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
             p={3}

@@ -2,6 +2,10 @@
 
 import React, { useEffect, useRef } from "react";
 import { Grid, GridItem, Text, Box, Image, keyframes } from "@chakra-ui/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const float = keyframes`
   0%, 100% { transform: translateY(0); }
@@ -22,9 +26,45 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
   description,
 }) => {
   const imageRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const formatorBoxRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let ctx: gsap.Context;
+
+    if (
+      containerRef.current &&
+      formatorBoxRef.current &&
+      descriptionRef.current
+    ) {
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 50%",
+            end: "bottom 20%",
+            toggleActions: "play none none none",
+          },
+        });
+
+        tl.fromTo(
+          formatorBoxRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 1.5, ease: "power2.out" }
+        ).fromTo(
+          descriptionRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 2, ease: "power2.out" }
+        );
+      });
+    }
+
+    return () => ctx?.revert(); // Clean up the animation
+  }, []);
 
   return (
-    <Box className="overflow-hidden bg-[#cbdad4] py-7">
+    <Box className="overflow-hidden bg-[#cbdad4] py-7" ref={containerRef}>
       <Grid
         templateColumns={{ base: "1fr", lg: "repeat(2, 1fr)" }}
         gap={6}
@@ -53,6 +93,7 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
         <GridItem colSpan={1} order={{ base: 2, lg: 1 }}>
           <Grid templateRows="repeat(2, auto)" gap={3} height="100%">
             <GridItem
+              ref={formatorBoxRef}
               className="bg-gradient-to-r from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
               p={4}
               display="flex"
@@ -64,6 +105,7 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
               borderRadius="2xl"
               position="relative"
               overflow="hidden"
+              opacity={0}
             >
               <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB]">
                 <Text
@@ -79,7 +121,7 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
               </Text>
             </GridItem>
 
-            <GridItem>
+            <GridItem ref={descriptionRef} opacity={0}>
               <Text className="font-pontano-sans text-md text-center text-gray-700 font-semibold">
                 {description}
               </Text>
