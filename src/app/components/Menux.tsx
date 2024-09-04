@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import styled from "@emotion/styled";
 
 const StyledMenuList = styled(MenuList)`
@@ -72,8 +71,6 @@ const StyledMenuItem = styled(MenuItem)`
   }
 `;
 
-const MotionMenuList = motion(StyledMenuList);
-
 const Menux: React.FC = () => {
   const router = useRouter();
 
@@ -84,77 +81,53 @@ const Menux: React.FC = () => {
   return (
     <Box position="fixed" top={4} right={6} zIndex={1000}>
       <Menu>
-        {({ isOpen }) => (
-          <>
-            <MenuButton
-              as={IconButton}
-              aria-label="Options"
-              icon={<HamburgerIcon boxSize={24} />}
-              variant="solid"
-              bg="linear-gradient(145deg, #0461ab, #023d82)"
-              color="white"
-              size="lg"
-              borderRadius="30%"
-              _active={{ bg: "linear-gradient(145deg, #035694, #023168)" }}
-              boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
-            />
-            <AnimatePresence mode="wait">
-              {isOpen && (
-                <MotionMenuList
-                  initial={{ opacity: 0, scale: 0.9, y: -20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                >
-                  <StyledMenuItem onClick={() => handleNavigation("/")}>
-                    <Text
-                      textAlign="center"
-                      className="font-stint-ultra-expanded"
-                    >
-                      Acasa
-                    </Text>
-                  </StyledMenuItem>
-                  <StyledMenuItem
-                    onClick={() => handleNavigation("/fade-bucuresti")}
-                  >
-                    <Text
-                      textAlign="center"
-                      className="font-stint-ultra-expanded"
-                    >
-                      FADE Bucuresti
-                    </Text>
-                  </StyledMenuItem>
-                  <StyledMenuItem onClick={() => handleNavigation("/mioveni")}>
-                    <Text
-                      textAlign="center"
-                      className="font-stint-ultra-expanded"
-                    >
-                      FADE Mioveni
-                    </Text>
-                  </StyledMenuItem>
-                  <StyledMenuItem
-                    onClick={() => handleNavigation("/satu-mare")}
-                  >
-                    <Text
-                      textAlign="center"
-                      className="font-stint-ultra-expanded"
-                    >
-                      FADE Satu Mare
-                    </Text>
-                  </StyledMenuItem>
-                  <StyledMenuItem onClick={() => handleNavigation("/botosani")}>
-                    <Text
-                      textAlign="center"
-                      className="font-stint-ultra-expanded"
-                    >
-                      FADE Botosani
-                    </Text>
-                  </StyledMenuItem>
-                </MotionMenuList>
-              )}
-            </AnimatePresence>
-          </>
-        )}
+        <MenuButton
+          as={IconButton}
+          aria-label="Options"
+          icon={<HamburgerIcon boxSize={24} />}
+          variant="solid"
+          bg="linear-gradient(145deg, #0461ab, #023d82)"
+          color="white"
+          size="lg"
+          borderRadius="30%"
+          _active={{ bg: "linear-gradient(145deg, #035694, #023168)" }}
+          boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
+        />
+        <StyledMenuList>
+          <StyledMenuItem onClick={() => handleNavigation("/")}>
+            <Text textAlign="center" className="font-stint-ultra-expanded">
+              Acasa
+            </Text>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => handleNavigation("/fade-bucuresti")}>
+            <Text textAlign="center">
+              <span className="font-stint-ultra-expanded">Fade Academy</span>
+              <br />
+              <span className="font-pontano-sans">Bucuresti</span>
+            </Text>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => handleNavigation("/mioveni")}>
+            <Text textAlign="center">
+              <span className="font-stint-ultra-expanded">Fade Academy</span>
+              <br />
+              <span className="font-pontano-sans">Mioveni</span>
+            </Text>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => handleNavigation("/satu-mare")}>
+            <Text textAlign="center">
+              <span className="font-stint-ultra-expanded">Fade Academy</span>
+              <br />
+              <span className="font-pontano-sans">Satu Mare</span>
+            </Text>
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => handleNavigation("/botosani")}>
+            <Text textAlign="center">
+              <span className="font-stint-ultra-expanded">Fade Academy</span>
+              <br />
+              <span className="font-pontano-sans">Botosani</span>
+            </Text>
+          </StyledMenuItem>
+        </StyledMenuList>
       </Menu>
     </Box>
   );

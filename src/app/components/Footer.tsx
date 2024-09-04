@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaPhone, FaEnvelope } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -8,15 +9,33 @@ const Footer: React.FC = () => {
         <h2 className="text-lg font-medium mb-1 text-[#ededed] font-stint-ultra-expanded">
           Contacteaza-ne:
         </h2>
-        <p className="text-sm text-[#ededed] font-pontano-sans">
-          <span className="font-medium">Ciprian Ungureanu:</span> (+40) 723 403
-          403
-        </p>
+        <a
+          href="tel:+40723403403"
+          className="text-sm text-[#ededed] font-pontano-sans flex items-center hover:underline w-full"
+        >
+          <FaPhone className="mr-2 flex-shrink-0" />
+          <span className="flex-grow truncate">(+40) 723 403 403</span>
+        </a>
+        <a
+          href="tel:+40723705702"
+          className="text-sm text-[#ededed] font-pontano-sans flex items-center mt-1 hover:underline w-full"
+        >
+          <FaPhone className="mr-2 flex-shrink-0" />
+          <span className="flex-grow truncate">(+40) 723 705 702</span>
+        </a>
+        <a
+          href="tel:+40771418581"
+          className="text-sm text-[#ededed] font-pontano-sans flex items-center mt-1 hover:underline w-full"
+        >
+          <FaPhone className="mr-2 flex-shrink-0" />
+          <span className="flex-grow truncate">(+40) 771 418 581</span>
+        </a>
         <a
           href="mailto:contact@fadeacademy.ro"
-          className="text-sm text-[#ededed] font-pontano-sans hover:underline"
+          className="text-sm text-[#ededed] font-pontano-sans hover:underline flex items-center mt-1"
         >
-          contact@fadeacademy.ro
+          <FaEnvelope className="mr-2 flex-shrink-0" />
+          <span className="flex-grow truncate">contact@fadeacademy.ro</span>
         </a>
       </div>
       <div className="text-center">

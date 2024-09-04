@@ -31,6 +31,10 @@ import { GiTeacher } from "react-icons/gi";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { FaGraduationCap } from "react-icons/fa";
 import faderImage from "@/images/foarfeci7.webp";
+import { FaToolbox, FaExternalLinkAlt } from "react-icons/fa";
+import Image from "next/image";
+import Link from "next/link";
+import { Icon } from "@chakra-ui/react";
 
 const MergedComponents: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -156,11 +160,20 @@ const MergedComponents: React.FC = () => {
             </ListItem>
             <ListItem>
               <ListIcon as={HiOutlineDocumentText} color="#023d82" />
-              Copie certificat casatorie (doar in cazul schimbarii numelui)
+              Copie certificat casatorie
+              <br />
+              <span className="text-lg">Doar in cazul schimbarii numelui</span>
             </ListItem>
             <ListItem>
               <ListIcon as={HiOutlineDocumentText} color="#023d82" />
               Copie dupa ultimul act de studii
+              <br />
+              <span className="text-lg">
+                Minim diploma 8 clase
+                <br />
+                In cazul in care cursantul a studiat in afara tarii, diploma
+                trebuie echivalata si apostilata Haga
+              </span>
             </ListItem>
             <ListItem>
               <ListIcon as={HiOutlineDocumentText} color="#023d82" />
@@ -267,6 +280,19 @@ const MergedComponents: React.FC = () => {
               <ListItem>
                 <ListIcon as={MdOutlineNotificationImportant} color="#ededed" />
                 Programul poate depasi numarul de ore pentru practica
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FaToolbox} color="#ededed" />
+                Cursantul trebuie sa aiba unstensile personale, se pot procura
+                de pe site-ul colaboratorilor nostri unde avem reduceri
+                speciale, aici{" "}
+                <Link
+                  href="http://barber-store.ro/?affiliate=asociatia-frizer-art"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon as={FaExternalLinkAlt} mx="2px" />
+                </Link>
               </ListItem>
             </List>
 

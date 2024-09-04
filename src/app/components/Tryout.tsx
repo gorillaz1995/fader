@@ -20,12 +20,11 @@ const floating = keyframes`
 
 const Tryout: React.FC = () => {
   return (
-    <div className="overflow-hidden h-[130vh] bg-[#cbdad4] py-7">
+    <Box className="overflow-hidden bg-[#cbdad4] py-7">
       <Box className="w-full lg:w-[60%] mx-auto" maxWidth="100%">
         <Grid
           className="overflow-hidden"
-          h="120vh"
-          templateRows="repeat(5, 1fr)"
+          templateRows="repeat(6, auto)"
           templateColumns="repeat(5, 1fr)"
           gap={3}
           p={4}
@@ -74,7 +73,7 @@ const Tryout: React.FC = () => {
               </Text>{" "}
               CIPRIAN UNGUREANU{" "}
               <Text as="span" className="font-bold text-xl block text-center">
-                4500 RON
+                5000 RON
               </Text>
             </Text>
           </GridItem>
@@ -122,7 +121,19 @@ const Tryout: React.FC = () => {
               <Text as="span" className="text-md">
                 Robert Micu - 800 RON
               </Text>
-              .
+              <br />
+              <Text as="span" className="text-md">
+                <Text as="span" className="font-bold text-xl">
+                  Se poate achita in 3 rate.
+                </Text>
+              </Text>
+              <br />
+              <Text as="span" className="text-md">
+                <Text as="span" className=" text-lg">
+                  1.Rezervare loc <br /> 2.Inceputul cursului <br /> 3.Jumatatea
+                  cursului
+                </Text>
+              </Text>
             </Text>
           </GridItem>
 
@@ -142,7 +153,7 @@ const Tryout: React.FC = () => {
                 10%{" "}
               </Text>
               <Text as="span" className=" text-xl">
-                reducere pentru plata integrala a cursului.
+                reducere pentru plata integrala a cursului frizerie incepatori.
               </Text>
             </Text>
           </GridItem>
@@ -167,9 +178,45 @@ const Tryout: React.FC = () => {
               .
             </Text>
           </GridItem>
+
+          {/* Box 8 */}
+          <GridItem
+            colSpan={5}
+            className="bg-gradient-to-r from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
+            p={6}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            border="1px solid #fa6529"
+          >
+            <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB] mb-2">
+              CONT BANCAR PENTRU REZERVARI
+            </Text>
+            <Text
+              className="font-pontano-sans text-xl font-bold text-center text-[#F9FBFB] mb-2 cursor-pointer hover:bg-[#0461ab] transition-colors duration-300"
+              border="2px solid #fa6529"
+              borderRadius="md"
+              px={2}
+              py={1}
+              onClick={() => {
+                navigator.clipboard.writeText("RO63RNCB0094001976240003");
+                alert("IBAN copiat în clipboard!");
+              }}
+              title="Click pentru a copia IBAN-ul"
+            >
+              RO63RNCB0094001976240003
+              <span className="block text-sm font-normal mt-1">
+                (Apasă pentru a copia)
+              </span>
+            </Text>
+            <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB]">
+              Titular Cont - Ciprian Ungureanu
+            </Text>
+          </GridItem>
         </Grid>
       </Box>
-    </div>
+    </Box>
   );
 };
 
