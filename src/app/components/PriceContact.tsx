@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Grid,
   GridItem,
@@ -11,6 +11,10 @@ import {
   keyframes,
 } from "@chakra-ui/react";
 import { FaFacebook } from "react-icons/fa";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const shimmer = keyframes`
   0% { left: -100%; }
@@ -30,6 +34,38 @@ const PriceContact: React.FC<PriceContactProps> = ({
   location,
   facebookLink,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const priceBoxRef = useRef<HTMLDivElement>(null);
+  const contactBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current && priceBoxRef.current && contactBoxRef.current) {
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: () => (window.innerWidth > 1000 ? "top 80%" : "top 40%"),
+          end: () => (window.innerWidth > 1000 ? "bottom 30%" : "bottom 10%"),
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      timeline.fromTo(
+        [priceBoxRef.current, contactBoxRef.current],
+        {
+          y: "60%",
+          opacity: 0,
+        },
+        {
+          y: "0%",
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          stagger: 0.35,
+        }
+      );
+    }
+  }, []);
+
   const showNotification = (message: string) => {
     const alertBox = document.createElement("div");
     alertBox.style.position = "fixed";
@@ -91,7 +127,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
   };
 
   return (
-    <Box className="overflow-hidden bg-[#cbdad4] py-7">
+    <Box className="overflow-hidden bg-[#cbdad4] py-7" ref={containerRef}>
       <Grid
         templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
         gap={6}
@@ -100,6 +136,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
       >
         <GridItem>
           <Box
+            ref={priceBoxRef}
             className="bg-gradient-to-r from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
             {...commonBoxStyles}
           >
@@ -114,6 +151,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
 
         <GridItem>
           <Box
+            ref={contactBoxRef}
             className="bg-gradient-to-r from-[#023d82] to-[#0461ab] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
             {...commonBoxStyles}
           >
