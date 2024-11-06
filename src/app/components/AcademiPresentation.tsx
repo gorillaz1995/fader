@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const float = keyframes`
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 `;
 
 interface FadeAcademySectionProps {
@@ -42,25 +42,30 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 50%",
-            end: "bottom 20%",
-            toggleActions: "play none none none",
+            start: "top 60%", // Adjusted for earlier trigger
+            end: "bottom 30%",
+            toggleActions: "play none none reverse", // Added reverse for smoother scroll experience
           },
         });
 
         tl.fromTo(
-          formatorBoxRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 1.5, ease: "power2.out" }
-        ).fromTo(
-          descriptionRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 2, ease: "power2.out" }
+          [formatorBoxRef.current, descriptionRef.current],
+          {
+            opacity: 0,
+            y: 20, // Added subtle y movement
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            stagger: 0.2, // Staggered animation for better flow
+          }
         );
       });
     }
 
-    return () => ctx?.revert(); // Clean up the animation
+    return () => ctx?.revert();
   }, []);
 
   return (
@@ -75,7 +80,7 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
         <GridItem colSpan={1} order={{ base: 1, lg: 2 }}>
           <Box
             className="lg:w-3/4 lg:mx-auto overflow-hidden"
-            animation={`${float} 3s ease-in-out infinite`}
+            animation={`${float} 4s ease-in-out infinite`}
           >
             <Image
               ref={imageRef}
@@ -85,6 +90,7 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
               height="auto"
               objectFit="cover"
               borderRadius="2xl"
+              loading="lazy"
             />
           </Box>
         </GridItem>

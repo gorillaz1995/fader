@@ -17,8 +17,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const shimmer = keyframes`
-  0% { left: -100%; }
-  100% { left: 100%; }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 `;
 
 interface PriceContactProps {
@@ -39,31 +39,30 @@ const PriceContact: React.FC<PriceContactProps> = ({
   const contactBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (containerRef.current && priceBoxRef.current && contactBoxRef.current) {
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: () => (window.innerWidth > 1000 ? "top 80%" : "top 40%"),
-          end: () => (window.innerWidth > 1000 ? "bottom 30%" : "bottom 10%"),
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      timeline.fromTo(
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
         [priceBoxRef.current, contactBoxRef.current],
         {
-          y: "60%",
+          y: 60,
           opacity: 0,
         },
         {
-          y: "0%",
+          y: 0,
           opacity: 1,
           duration: 1.5,
           ease: "power3.out",
           stagger: 0.35,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom 30%",
+            toggleActions: "play none none reverse",
+          },
         }
       );
-    }
+    });
+
+    return () => ctx.revert();
   }, []);
 
   const showNotification = (message: string) => {
@@ -102,30 +101,6 @@ const PriceContact: React.FC<PriceContactProps> = ({
     showNotification("Număr de telefon copiat în clipboard!");
   };
 
-  const commonBoxStyles = {
-    p: 3,
-    display: "flex",
-    flexDirection: "column" as const,
-    alignItems: "center",
-    justifyContent: "center",
-    border: "1px solid #fa6529",
-    borderRadius: "2xl",
-    position: "relative" as const,
-    overflow: "hidden",
-    height: "85%",
-    _before: {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: "-100%",
-      width: "100%",
-      height: "100%",
-      background:
-        "linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent)",
-      animation: `${shimmer} 4s infinite`,
-    },
-  };
-
   return (
     <Box className="overflow-hidden bg-[#cbdad4] py-7" ref={containerRef}>
       <Grid
@@ -137,8 +112,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
         <GridItem>
           <Box
             ref={priceBoxRef}
-            className="bg-gradient-to-r from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
-            {...commonBoxStyles}
+            className="bg-gradient-to-r from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)] p-3 flex flex-col items-center justify-center border border-[#fa6529] relative overflow-hidden h-[85%]"
           >
             <Text className="font-pontano-sans text-xl text-center text-[#F9FBFB] mb-1">
               PRET
@@ -152,8 +126,7 @@ const PriceContact: React.FC<PriceContactProps> = ({
         <GridItem>
           <Box
             ref={contactBoxRef}
-            className="bg-gradient-to-r from-[#023d82] to-[#0461ab] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
-            {...commonBoxStyles}
+            className="bg-gradient-to-r from-[#023d82] to-[#0461ab] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)] p-3 flex flex-col items-center justify-center border border-[#fa6529] relative overflow-hidden h-[85%]"
           >
             <Text className="font-pontano-sans text-xl text-center text-[#F9FBFB] mb-1">
               Ne gasesti aici:
