@@ -2,10 +2,10 @@ import Banner1 from "../components/Banner1";
 import AnimatedText from "../components/AnimatedText";
 import FadeAcademySection from "../components/AcademiPresentation";
 import PriceContact from "../components/PriceContact";
-
+import RevSm from "../components/RevSm";
 export default function SMPage() {
   return (
-    <div className="bg-[#cbdad4]">
+    <div className="bg-[#cbdad4] overflow-hidden">
       <Banner1 imageSrc="/images/sm_bg.webp" altText="SM Background" />
       <AnimatedText />
       <FadeAcademySection
@@ -20,6 +20,7 @@ export default function SMPage() {
         location="Gentleman's Barber Shop, Strada Prahova 10, Satu Mare 440115"
         facebookLink="https://www.facebook.com/gentlemansbarbershopsatumare"
       />
+      <RevSm />
     </div>
   );
 }

@@ -2,10 +2,11 @@ import Banner1 from "../components/Banner1";
 import AnimatedText from "../components/AnimatedText";
 import FadeAcademySection from "../components/AcademiPresentation";
 import PriceContact from "../components/PriceContact";
+import RevM from "../components/RevM";
 
 export default function MioveniPage() {
   return (
-    <div className="bg-[#cbdad4]">
+    <div className="bg-[#cbdad4] overflow-hidden">
       <Banner1
         imageSrc="/images/mioveni_bg.webp"
         altText="Mioveni Background"
@@ -23,6 +24,7 @@ export default function MioveniPage() {
         location="Salon FLORY, Aleea Căminului 2, Mioveni 115400"
         facebookLink="https://www.facebook.com/salonflori"
       />
+      <RevM />
     </div>
   );
 }
