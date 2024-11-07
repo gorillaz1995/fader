@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Grid, GridItem, Text, keyframes, Box } from "@chakra-ui/react";
+import { Grid, GridItem, Text, keyframes, Box, Button } from "@chakra-ui/react";
 
 // Floating animation keyframes
 const floating = keyframes`
@@ -48,6 +48,10 @@ const Tryout: React.FC = () => {
     setTimeout(() => {
       alertBox.remove();
     }, 2000);
+  };
+
+  const handleCallClick = () => {
+    window.location.href = "tel:+40723403403";
   };
 
   return (
@@ -186,6 +190,41 @@ const Tryout: React.FC = () => {
               <Text as="span" className=" text-xl">
                 reducere pentru plata integrala a cursului frizerie incepatori.
               </Text>
+            </Text>
+          </GridItem>
+
+          {/* Box 6 - Black Friday Special */}
+          <GridItem
+            id="black-friday-special"
+            colSpan={5}
+            className="bg-[#fa6529] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)] scale-120 transform"
+            p={6}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            border="1px solid #fa6529"
+          >
+            <Text className="font-stint-ultra-expanded text-xl text-center text-black">
+              Oferta Speciala De Black Friday:
+              <Text as="span" className="font-bold text-2xl block mt-2">
+                20% reducere pentru plata integrala!
+              </Text>
+              <Text as="span" className="text-xl block mt-2">
+                Pana pe 1 decembrie poti plati doar 4000RON!
+              </Text>
+              <Button
+                onClick={handleCallClick}
+                className="font-bold text-2xl mt-4"
+                bg="black"
+                color="white"
+                _hover={{ bg: "gray.800", transform: "scale(1.05)" }}
+                transition="all 0.3s ease"
+                px={8}
+                py={4}
+                borderRadius="full"
+              >
+                PROFITA ACUM!
+              </Button>
             </Text>
           </GridItem>
 
