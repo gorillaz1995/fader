@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import Typed from "typed.js";
 import logoImg from "@/images/logo.png";
+import ScrollButton from "./Buxt";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -92,6 +93,13 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  const handleScroll = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div
       ref={containerRef}
@@ -151,6 +159,12 @@ export default function HeroSection() {
           Invata frizerie de la zero si descopera cum au devenit celebri cei mai
           buni frizeri, sub ghidarea unui expert cu recunoastere internationala.
         </h1>
+
+        <div className="flex justify-center pb-16">
+          <ScrollButton onClick={handleScroll}>
+            Informatii necesare inscriere curs
+          </ScrollButton>
+        </div>
       </div>
     </div>
   );

@@ -40,6 +40,7 @@ const MergedComponents: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const arrowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -69,6 +70,17 @@ const MergedComponents: React.FC = () => {
         );
       }
 
+      // Arrow animation
+      if (arrowRef.current) {
+        gsap.to(arrowRef.current, {
+          y: 10,
+          duration: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+        });
+      }
+
       return () => {
         ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
       };
@@ -92,7 +104,28 @@ const MergedComponents: React.FC = () => {
           justifyContent="center"
           alignItems="center"
           p={6}
+          position="relative"
         >
+          <div
+            ref={arrowRef}
+            className="absolute top-[80%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 text-center"
+          >
+            <p className="text-white font-stint-ultra-expanded mb-2 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+              Apasa
+            </p>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              fill="white"
+              style={{
+                transform: "rotate(90deg)",
+                filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.8))",
+              }}
+            >
+              <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+            </svg>
+          </div>
           <CardBody
             display="flex"
             flexDirection="column"

@@ -18,7 +18,7 @@ interface BlackFridayPopupProps {
 }
 
 const BlackFridayPopup: React.FC<BlackFridayPopupProps> = ({
-  priority = false,
+  priority = true, // Changed default to true
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -121,7 +121,7 @@ const BlackFridayPopup: React.FC<BlackFridayPopupProps> = ({
             alt="Black Friday Offer"
             fill
             style={{ objectFit: "contain" }}
-            priority={priority}
+            priority={true} // Set priority to true
           />
           <Button
             position="absolute"
