@@ -3,7 +3,7 @@ import AnimatedText from "../components/AnimatedText";
 import FadeAcademySection from "../components/AcademiPresentation";
 import PriceContact from "../components/PriceContact";
 import RevM from "../components/RevM";
-
+import MergedComponents from "../components/MergedComponent";
 export default function MioveniPage() {
   return (
     <div className="bg-[#cbdad4] overflow-hidden">
@@ -24,6 +24,7 @@ export default function MioveniPage() {
         location="Salon FLORY, Aleea Căminului 2, Mioveni 115400"
         facebookLink="https://www.facebook.com/salonflori"
       />
+      <MergedComponents />
       <RevM />
     </div>
   );

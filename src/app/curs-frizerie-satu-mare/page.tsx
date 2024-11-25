@@ -3,6 +3,8 @@ import AnimatedText from "../components/AnimatedText";
 import FadeAcademySection from "../components/AcademiPresentation";
 import PriceContact from "../components/PriceContact";
 import RevSm from "../components/RevSm";
+import MergedComponents from "../components/MergedComponent";
+
 export default function SMPage() {
   return (
     <div className="bg-[#cbdad4] overflow-hidden">
@@ -20,6 +22,7 @@ export default function SMPage() {
         location="Gentleman's Barber Shop, Strada Prahova 10, Satu Mare 440115"
         facebookLink="https://www.facebook.com/gentlemansbarbershopsatumare"
       />
+      <MergedComponents />
       <RevSm />
     </div>
   );

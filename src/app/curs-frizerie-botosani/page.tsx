@@ -3,6 +3,7 @@ import AnimatedText from "../components/AnimatedText";
 import FadeAcademySection from "../components/AcademiPresentation";
 import PriceContact from "../components/PriceContact";
 import RevB from "../components/RevB";
+import MergedComponents from "../components/MergedComponent";
 
 export default function BotosaniPage() {
   return (
@@ -24,6 +25,7 @@ export default function BotosaniPage() {
         location="T.A.G95Barber, Aleea Mihail Kogalniceanu 32, Botoșani 710182"
         facebookLink="https://www.facebook.com/T.A.G95Barber?mibextid=LQQJ4d&rdid=36dsP8i5fxWEg0Eu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FU7JBGZdHMwSxHMmc%2F%3Fmibextid%3DLQQJ4d"
       />
+      <MergedComponents />
       <RevB />
     </div>
   );
