@@ -135,6 +135,11 @@ const Menux: React.FC = () => {
               <span className="font-pontano-sans">Botosani</span>
             </Text>
           </StyledMenuItem>
+          <StyledMenuItem onClick={() => handleNavigation("/testimoniale")}>
+            <Text textAlign="center" className="font-stint-ultra-expanded">
+              Testimoniale
+            </Text>
+          </StyledMenuItem>
         </StyledMenuList>
       </Menu>
     </Box>
