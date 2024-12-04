@@ -18,30 +18,38 @@ const formatorData = {
   alinCiucas: {
     imageSrc: "/images/testimoniale/ciucas2.webp",
     formatorName: "Alin Ciucas",
-    description: `DE FOAME Da, ați citit bine; FOAMEA este cea care mi-a descoperit PASIUNEA pentru tuns.
-
-      La vârsta de 35 de ani după 17 ani în care mi-am dedicat aptitudinile, in domeniul vânzărilor, am rămas fără job…Eram ASM la o firma destul de mare și vizibilă pe piață. Adică bani mulți…și…baaaam…a doua zi…ZERO. Magazin chinezesc in centru, doua mașini de tuns, un set de piepteni, o pelerină, un scaun cu sondă din Leroy și am trecut la treabă.
-
-      E adevărat, toți ne naștem să știm să facem ceva foarte bine dar trebuie sa ajungem la lucrul ăla…De multe ori nevoile, greutățile, dorința părinților noștri de a ne face "astronauți" reprezintă piedici în drumul de a întâlni pasiunea.
-
-      Când am realizat că ăsta e drumul, am căutat să fiu prezent la orice lucru care mă ajuta să evoluez și am plecat de acasă lăsând familia, nevoile financiare, prietenii pe locul doi pentru a fi prezent la orice seminar, curs, workshop care mă propulsa cu încă un pas înainte spre cunoaștere. Azi culeg ROADELE. Celui care trebuie să îi mulțumesc toată viața este Ciprian Ungureanu, omul care a văzut în mine ce nu am văzut eu!
-
-      La mine nevoia de a supraviețui mi-a descoperit pasiunea pentru TUNS. Și am transformat-o in pasiune cu 90% muncă + 10% talent.
-
-      Am 43 de ani și iubesc aceasta meserie pentru că mă asigură material și spiritual să duc o viață liniștită înconjurat de oameni frumoși. Poate mulți vă veți regăsi aici…și mă bucur pentru voi că nu ați rămas corijenți cu viața…
-
-      Luv ya ♥️💈`,
-    achievements: `Din 2016 nu cred ca am ratat 10 concursuri care s-au desfășurat in online si/sau fizic!
-
-      In noiembrie 2018 am fost nominalizat BEST BARBER pe ce mai mare grup de frizerie din Romania "FRIZURI COAFURI SI TUNSORI DE TOP si am castigat unul dintre cele mai râvnite trofee la acea vreme!
-
-      Am profitat de toate cunoștințele si publicitatea gratuită pe care o oferă meeiul online si am investit in imaginea mea! Am peste 20 de concursuri in care am reușit sa urc pe podium!
-
-      In perioada pandemiei am reușit sa tin unita aceasta comunitate cu unul dintre cele mai tari proiecte, BARBER LA MICROFON unde împreună cu Ciprian Ungureanu am adus in prin-plan toți frizerii de top prin liveuri pe grupul de mai sus!
-
-      In 2023 am creat fizic propriul eveniment/concurs THEBARBERPOST ROMANIA împreună cu Ciprian Ungureanu unde am avut pe scena iconii industriei cu demonstrații de măestrie iar concursul din cadrul evenimentului a adunat pe 60 de concurenți unde câștigătorii au avit parte de cele mai mari premii valoric care s-au dat vreodată in România!
-
-      In prezent fac parte cu onoare din FadeAcademy unde sunt asistent-aducator ajutând la formarea tonetilor care vin către această frumoasă meserie!`,
+    description: `
+      **DE FOAME.** Da, ați citit bine: FOAMEA este cea care mi-a descoperit PASIUNEA pentru tuns.<br><br>
+      
+      La vârsta de 35 de ani, după 17 ani dedicați domeniului vânzărilor, am rămas fără job. Eram ASM la o firmă mare și vizibilă pe piață. Salariu mare… și, dintr-odată, a doua zi: ZERO.<br><br>
+      
+      Un magazin chinezesc în centru, două mașini de tuns, un set de piepteni, o pelerină, un scaun cu sondă din Leroy Merlin… și m-am apucat de treabă.<br><br>
+      
+      Toți ne naștem cu un talent ascuns, dar de multe ori greutățile, nevoile sau dorința părinților noștri de a ne face "astronauți" ne împiedică să ne descoperim adevărata chemare.<br><br>
+      
+      Când am realizat că tunsul este drumul meu, am făcut tot ce era necesar să evoluez. Am plecat de acasă, lăsând familia, nevoile financiare și prietenii pe plan secund pentru a participa la fiecare seminar, curs sau workshop care mă propulsa înainte.<br><br>
+      
+      Azi culeg ROADELE. Dacă există o persoană căreia trebuie să îi mulțumesc toată viața, acela este Ciprian Ungureanu, omul care a văzut în mine ceea ce eu nu vedeam!<br><br>
+      
+      Nevoia de supraviețuire mi-a descoperit pasiunea pentru TUNS, pe care am transformat-o în carieră cu 90% muncă și 10% talent.<br><br>
+      
+      Acum, la 43 de ani, iubesc această meserie. Ea îmi oferă stabilitate materială și spirituală, iar prin ea sunt înconjurat de oameni frumoși. Poate mulți dintre voi vă veți regăsi în această poveste, iar pentru cei care nu au rămas corijenți la viață, mă bucur din suflet pentru voi.<br><br>
+      
+      Luv ya ♥️💈
+    `,
+    achievements: `
+      Din 2016, nu cred că am ratat mai mult de 10 concursuri organizate fizic sau online.<br><br>
+      
+      În noiembrie 2018, am fost nominalizat BEST BARBER pe cel mai mare grup de frizerie din România, "Frizuri, Coafuri și Tunsori de Top", și am câștigat unul dintre cele mai râvnite trofee ale vremii!<br><br>
+      
+      Am profitat din plin de cunoștințele și publicitatea gratuită pe care le oferă mediul online și am investit în imaginea mea. Am participat la peste 20 de concursuri, în care am reușit să urc pe podium.<br><br>
+      
+      În perioada pandemiei, am reușit să țin unită comunitatea frizerilor printr-un proiect unic: BARBER LA MICROFON. Împreună cu Ciprian Ungureanu, am adus în prim-plan cei mai buni frizeri din România prin live-uri pe grupul menționat mai sus.<br><br>
+      
+      În 2023, am creat propriul eveniment/concurs, THEBARBERPOST ROMANIA, împreună cu Ciprian Ungureanu. La eveniment au fost prezenți iconii industriei, iar concursul a adunat 60 de participanți, câștigătorii primind cele mai mari premii oferite vreodată în România!<br><br>
+      
+      Astăzi fac parte cu onoare din Fade Academy, unde sunt asistent-educator, ajutând la formarea tinerilor care aleg această frumoasă meserie.<br><br>
+    `,
   },
 };
 
@@ -149,17 +157,15 @@ const FadeAcademySection: React.FC<FadeAcademySectionProps> = ({
                 fontSize={{ base: "md", md: "lg" }}
                 lineHeight="1.8"
                 textAlign="left"
-              >
-                {description}
-              </Text>
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
               <Text
                 className="font-pontano-sans text-gray-700 font-semibold mt-8"
                 fontSize={{ base: "md", md: "lg" }}
                 lineHeight="1.8"
                 textAlign="left"
-              >
-                {achievements}
-              </Text>
+                dangerouslySetInnerHTML={{ __html: achievements }}
+              />
             </GridItem>
           </Grid>
         </GridItem>

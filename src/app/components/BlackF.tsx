@@ -117,7 +117,7 @@ const BlackFridayPopup: React.FC<BlackFridayPopupProps> = ({
           overflow="hidden"
         >
           <Image
-            src="/images/Blackfriday.webp"
+            src="/images/merry.webp"
             alt="Black Friday Offer"
             fill
             style={{ objectFit: "contain" }}
@@ -128,22 +128,23 @@ const BlackFridayPopup: React.FC<BlackFridayPopupProps> = ({
             bottom="5%"
             left="50%"
             transform="translateX(-50%)"
-            bg="linear-gradient(to right, #fa6529, #ff8c00)"
-            color="white"
+            bg="linear-gradient(to right, #f0f5ff, #e0e9ff)"
+            color="#d42426"
             px={8}
             py={4}
             fontSize={{ base: "lg", md: "xl" }}
             fontWeight="bold"
             borderRadius="full"
             _hover={{
-              bg: "linear-gradient(to right, #ff8c00, #fa6529)",
+              bg: "linear-gradient(to right, #e0e9ff, #f0f5ff)",
               transform: "translateX(-50%) scale(1.05)",
             }}
             transition="all 0.3s ease"
             onClick={handleButtonClick}
-            boxShadow="0 4px 15px rgba(0,0,0,0.2)"
+            boxShadow="0 4px 15px rgba(0,0,0,0.1)"
+            className="font-stint-ultra-expanded"
           >
-            REZERVĂ ACUM!
+            REZERVA ACUM!
           </Button>
         </Box>
       </ModalContent>

@@ -17,7 +17,9 @@ const formatorData = {
   adyRamses: {
     imageSrc: "/images/testimoniale/morar2.webp",
     formatorName: "Ady Ramses",
-    description: `Eu sunt Ady Ramses am 20 de ani faca asta de 4 ani jumate si am devenit artist Barber , pana acum un an lucram la un salon unde faceam bani dar nu eram multumit si simteam ca lot mai mult decat un lucrator la scaun si am ales sa fac primul meu seminar la ciprian de unde am simtit nevoi sa petrec mai mult timp alaturi de el si m am angajat la el sa il pot studia si mai mult si de un an de zile sunt alaturi de el prin toate seminariile in toata tara si m a ajutat foarte mult sa imi dezvolt foarte mult viziunea despre frizerie de a invata tunderea corecta a parului finisaje etc si vreau sa ajung si eu educator si sa impartasesc la randul meu cunostitele acumulate de mine`,
+    description: `Eu sunt Ady Ramses, am 20 de ani și practic această meserie de 4 ani și jumătate. În tot acest timp, am devenit un artist barber. Până acum un an, lucram într-un salon unde câștigam bani, însă nu eram mulțumit. Simțeam că pot face mai mult decât să fiu doar un frizer la scaun. Așa că am luat decizia de a participa la primul meu seminar organizat de Ciprian. De atunci, am simțit nevoia să petrec mai mult timp alături de el, așa că m-am angajat la salonul lui pentru a-l putea studia în detaliu și a învăța cât mai multe.
+
+De un an de zile, îl însoțesc la toate seminariile pe care le organizează în toată țara, iar această experiență m-a ajutat enorm. Mi-am dezvoltat viziunea despre frizerie, am învățat tehnici corecte de tuns, finisaje și multe altele.`,
   },
 };
 

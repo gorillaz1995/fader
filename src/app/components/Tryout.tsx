@@ -193,31 +193,34 @@ const Tryout: React.FC = () => {
             </Text>
           </GridItem>
 
-          {/* Box 6 - Black Friday Special */}
+          {/* Box 6 - Holiday Special */}
           <GridItem
             id="black-friday-special"
             colSpan={5}
-            className="bg-[#fa6529] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)] scale-120 transform"
+            className="bg-gradient-to-r from-[#d42426] to-[#b31d1f] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)] scale-120 transform"
             p={6}
             display="flex"
             alignItems="center"
             justifyContent="center"
-            border="1px solid #fa6529"
+            border="1px solid #f0f5ff"
           >
-            <Text className="font-stint-ultra-expanded text-xl text-center text-black">
-              Oferta Speciala De Black Friday:
+            <Text className="font-stint-ultra-expanded text-xl text-center text-white">
+              Oferta Speciala De Sarbatori:
               <Text as="span" className="font-bold text-2xl block mt-2">
-                20% reducere pentru plata integrala!
+                15% reducere pentru plata integrala!
               </Text>
               <Text as="span" className="text-xl block mt-2">
-                Pana pe 1 decembrie poti plati doar 4000RON!
+                Pana pe 4 ianuarie poti plati doar 4250RON!
               </Text>
               <Button
                 onClick={handleCallClick}
                 className="font-bold text-2xl mt-4"
-                bg="black"
-                color="white"
-                _hover={{ bg: "gray.800", transform: "scale(1.05)" }}
+                bg="linear-gradient(to right, #f0f5ff, #e0e9ff)"
+                color="#d42426"
+                _hover={{
+                  bg: "linear-gradient(to right, #e0e9ff, #f0f5ff)",
+                  transform: "scale(1.05)",
+                }}
                 transition="all 0.3s ease"
                 px={8}
                 py={4}
