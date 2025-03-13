@@ -97,3 +97,21 @@
 .embla__dot.is-selected {
   background-color: #023d82;
 }
+
+.background-color {
+  background-image: linear-gradient(
+    to bottom,
+    #cbdad4,
+    #c8d8d1,
+    #c5d5cf,
+    #c2d3cc,
+    #bfd1ca,
+    #bfd1ca,
+    #bfd1ca,
+    #bfd1ca,
+    #c2d3cc,
+    #c5d5cf,
+    #c8d8d1,
+    #cbdad4
+  );
+}
