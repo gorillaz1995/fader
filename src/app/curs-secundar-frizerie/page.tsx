@@ -95,6 +95,9 @@ export default function CursSecundarFrizerie() {
   const courseDetailsRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
 
+  // State for video loading error
+  const [videoError, setVideoError] = useState(false);
+
   // Framer Motion useInView hooks for scroll animations
   const teachersInView = useInView(teachersRef, { once: true, amount: 0.3 });
   const assistantsInView = useInView(assistantsRef, {
@@ -127,20 +130,33 @@ export default function CursSecundarFrizerie() {
           />
         </div>
 
-        {/* Video Background - Only on mobile devices */}
+        {/* Video Background - Only on mobile devices with fallback */}
         <div className="absolute inset-0 w-full h-full z-0 sm:hidden">
           <div className="absolute inset-0 bg-black/50 z-10"></div>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
-            poster="/images/F.webp"
-          >
-            <source src="/images/video-bg-c2.mp4" type="video/mp4" />
-            {/* Fallback for browsers that don't support video */}
+          {!videoError ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover"
+              poster="/images/F.webp"
+              onError={() => setVideoError(true)}
+            >
+              <source src="/public/video-bg-c2.mp4" type="video/mp4" />
+              {/* Fallback for browsers that don't support video */}
+              <Image
+                src="/images/F.webp"
+                alt="Background"
+                fill
+                className="object-cover"
+                priority
+                sizes="100vw"
+              />
+            </video>
+          ) : (
+            // Fallback image when video fails to load
             <Image
               src="/images/F.webp"
               alt="Background"
@@ -149,7 +165,7 @@ export default function CursSecundarFrizerie() {
               priority
               sizes="100vw"
             />
-          </video>
+          )}
         </div>
 
         <div className="container mx-auto max-w-7xl text-center relative z-10">
@@ -163,7 +179,7 @@ export default function CursSecundarFrizerie() {
               CURS FRIZERIE
             </h1>
             <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-stint-ultra-expanded text-white mb-4 sm:mb-6 md:mb-8 text-shadow-lg">
-              ACREDITAT
+              pentru incepatori
             </h2>
           </motion.div>
 
@@ -175,7 +191,7 @@ export default function CursSecundarFrizerie() {
           >
             <div className="inline-block bg-gradient-to-r from-[#023d82] to-[#0461ab] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-xl">
               <span className="text-sm sm:text-base md:text-lg lg:text-xl font-pontano-sans font-semibold">
-                Pentru Începători cu DIPLOMĂ DE CALIFICARE
+                PROFESORI FADE ACADEMY BUCURESTI
               </span>
             </div>
           </motion.div>
@@ -193,33 +209,39 @@ export default function CursSecundarFrizerie() {
             </p>
           </motion.div>
 
+          {/* Hero Cards - Improved Mobile Design */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 1.5 }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-3xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-2"
           >
+            {/* Price Card - Mobile Optimized */}
             <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-stint-ultra-expanded text-[#023d82]">
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-stint-ultra-expanded text-[#023d82] leading-tight">
                 <AnimatedCounter end={3500} />
               </div>
-              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1">
+              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
                 Lei - Preț Curs
               </div>
             </div>
+
+            {/* Duration Card - Mobile Optimized */}
             <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-stint-ultra-expanded text-[#023d82]">
+              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-stint-ultra-expanded text-[#023d82] leading-tight">
                 <AnimatedCounter end={10} />
               </div>
-              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1">
+              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
                 Săptămâni
               </div>
             </div>
+
+            {/* Date Card - Mobile Optimized */}
             <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-stint-ultra-expanded text-[#023d82]">
+              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-stint-ultra-expanded text-[#023d82] leading-tight">
                 02 Sep - 19 Nov
               </div>
-              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1">
+              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
                 2025
               </div>
             </div>
@@ -341,7 +363,7 @@ export default function CursSecundarFrizerie() {
         </div>
       </section>
 
-      {/* Assistants Section - Mobile Optimized */}
+      {/* Assistants Section - Improved Mobile Design */}
       <section
         ref={assistantsRef}
         className="py-12 sm:py-16 md:py-20 bg-[#cbdad4] px-4"
@@ -356,7 +378,8 @@ export default function CursSecundarFrizerie() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
+          {/* Improved Mobile Layout - Stack vertically on mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
             {/* Assistant 1 - Andreii */}
             <motion.div
               whileHover={{ y: -5, scale: 1.02 }}
@@ -364,27 +387,28 @@ export default function CursSecundarFrizerie() {
               className="assistant-card relative group"
             >
               <div className="relative overflow-hidden rounded-xl shadow-lg bg-white">
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-[#023d82] ring-opacity-20 flex-shrink-0">
+                <div className="p-6 sm:p-8">
+                  {/* Mobile: Stack vertically, Desktop: Side by side */}
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div className="w-24 h-24 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-[#023d82] ring-opacity-20 flex-shrink-0">
                       <Image
                         src={andreiiImage}
-                        alt="Andreii - Asistent"
-                        width={80}
-                        height={80}
+                        alt="Andrei - Asistent"
+                        width={96}
+                        height={96}
                         className="w-full h-full object-cover object-[center_5%]"
                         priority
                         loading="eager"
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-1 truncate">
-                        ANDREII
+                    <div className="flex-1 text-center sm:text-left min-w-0">
+                      <h3 className="text-xl sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-2 sm:mb-1">
+                        ANDREI
                       </h3>
-                      <p className="text-sm sm:text-base font-pontano-sans text-[#333333] mb-1">
+                      <p className="text-base sm:text-base font-pontano-sans text-[#333333] mb-2 sm:mb-1">
                         Asistent Tehnic
                       </p>
-                      <p className="text-xs sm:text-sm font-pontano-sans text-[#666666] leading-relaxed">
+                      <p className="text-sm sm:text-sm font-pontano-sans text-[#666666] leading-relaxed">
                         Specializat în tehnici moderne de styling
                       </p>
                     </div>
@@ -400,27 +424,28 @@ export default function CursSecundarFrizerie() {
               className="assistant-card relative group"
             >
               <div className="relative overflow-hidden rounded-xl shadow-lg bg-white">
-                <div className="p-4 sm:p-6">
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-[#023d82] ring-opacity-20 flex-shrink-0">
+                <div className="p-6 sm:p-8">
+                  {/* Mobile: Stack vertically, Desktop: Side by side */}
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div className="w-24 h-24 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-[#023d82] ring-opacity-20 flex-shrink-0">
                       <Image
                         src={antonioImage}
                         alt="Antonio - Asistent"
-                        width={80}
-                        height={80}
+                        width={96}
+                        height={96}
                         className="w-full h-full object-cover object-[center_15%]"
                         priority
                         loading="eager"
                       />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-1 truncate">
+                    <div className="flex-1 text-center sm:text-left min-w-0">
+                      <h3 className="text-xl sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-2 sm:mb-1">
                         ANTONIO
                       </h3>
-                      <p className="text-sm sm:text-base font-pontano-sans text-[#333333] mb-1">
+                      <p className="text-base sm:text-base font-pontano-sans text-[#333333] mb-2 sm:mb-1">
                         Asistent Tehnic
                       </p>
-                      <p className="text-xs sm:text-sm font-pontano-sans text-[#666666] leading-relaxed">
+                      <p className="text-sm sm:text-sm font-pontano-sans text-[#666666] leading-relaxed">
                         Expert în tehnici clasice de frizerie
                       </p>
                     </div>
