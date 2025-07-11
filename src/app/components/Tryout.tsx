@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Grid, GridItem, Text, keyframes, Box, Button } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 // Floating animation keyframes
 const floating = keyframes`
@@ -19,6 +20,8 @@ const floating = keyframes`
 `;
 
 const Tryout: React.FC = () => {
+  const router = useRouter();
+
   const showNotification = (message: string) => {
     const alertBox = document.createElement("div");
     alertBox.style.position = "fixed";
@@ -108,30 +111,33 @@ const Tryout: React.FC = () => {
               </Text>{" "}
               CIPRIAN UNGUREANU{" "}
               <Text as="span" className="font-bold text-xl block text-center">
-                5000 RON
+                6000 RON
               </Text>
             </Text>
           </GridItem>
 
-          {/* Box 3 */}
+          {/* Box 3 - Converted to Button */}
           <GridItem
             colSpan={2}
-            className="bg-gradient-to-l from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)]"
-            p={4}
             display="flex"
             alignItems="center"
             justifyContent="center"
-            border="1px solid #fa6529"
           >
-            <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB]">
-              <Text as="span" className="font-bold text-xl">
-                Curs frizerie incepatori
-              </Text>{" "}
-              ROBERT MICU{" "}
-              <Text as="span" className="font-bold text-xl block text-center">
-                2500 RON
+            <Button
+              onClick={() => router.push("/curs-secundar-frizerie")}
+              className="w-full h-full bg-gradient-to-l from-[#0461ab] to-[#023d82] rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.25)] text-[#F9FBFB] border border-[#fa6529] hover:opacity-90 transition-opacity duration-300"
+              p={4}
+            >
+              <Text className="font-pontano-sans text-lg text-center">
+                <Text as="span" className="font-bold text-xl block">
+                  Curs Profesori
+                </Text>
+                Academie
+                <Text as="span" className="text-sm block mt-2 italic">
+                  APASA AICI
+                </Text>
               </Text>
-            </Text>
+            </Button>
           </GridItem>
 
           {/* Box 4 */}
@@ -150,12 +156,9 @@ const Tryout: React.FC = () => {
               </Text>
               <br />
               <Text as="span" className="text-xl">
-                Ciprian Ungureanu - 1000 RON
+                Ciprian Ungureanu - 2000 RON
               </Text>{" "}
               <br />
-              <Text as="span" className="text-md">
-                Robert Micu - 800 RON
-              </Text>
               <br />
               <Text as="span" className="text-md">
                 <Text as="span" className="font-bold text-xl">
@@ -165,8 +168,9 @@ const Tryout: React.FC = () => {
               <br />
               <Text as="span" className="text-md">
                 <Text as="span" className=" text-lg">
-                  1.Rezervare loc <br /> 2.Inceputul cursului <br /> 3.Jumatatea
-                  cursului
+                  1.Rezervare loc - 2000RON <br /> 2.Inceputul cursului - 2000
+                  RON
+                  <br /> 3.Jumatatea cursului 2000 RON
                 </Text>
               </Text>
             </Text>
@@ -185,10 +189,11 @@ const Tryout: React.FC = () => {
             <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB]">
               Profita de{" "}
               <Text as="span" className="font-bold text-xl">
-                10%{" "}
+                10% reducere
               </Text>
               <Text as="span" className=" text-xl">
-                reducere pentru plata integrala a cursului frizerie incepatori.
+                <br></br> 5400RON pret final pentru plata integrala a cursului
+                frizerie incepatori.
               </Text>
             </Text>
           </GridItem>

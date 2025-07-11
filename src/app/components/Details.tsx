@@ -90,11 +90,9 @@ const Details: React.FC = () => {
                 Locurile se ocupa foarte repede, asa ca grabeste-te!
               </span>
               <br />
-              CURS 23 <span className="font-extrabold">APRILIE</span> - 01{" "}
-              <span className="font-extrabold">IULIE</span> 2025
+              CURS 02 <span className="font-extrabold">SEPTEMBRIE</span> - 20{" "}
+              <span className="font-extrabold">NOIEMBRIE</span> 2025
               <br />
-              <span className="font-extrabold">Ultima zi</span> de inscrieri: 25
-              APRILIE
               <br />
               Durata totala - 2 luni jumate /
               <span className="font-extrabold"> 10 saptamani</span>

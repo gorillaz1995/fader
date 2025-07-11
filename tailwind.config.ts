@@ -19,6 +19,8 @@ const config: Config = {
           radial-gradient(circle at 120% 40%, #ff1654, transparent 60%),
           radial-gradient(circle at 310% 30%, #000000, transparent 60%)
         `,
+        "gradient-conic":
+          "conic-gradient(from 0deg, #023d82, #0461ab, #023d82)",
       },
 
       fontFamily: {
