@@ -114,6 +114,19 @@ export default function CursSecundarFrizerie() {
         ref={heroRef}
         className="relative min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#ffd700]/80 via-black to-[#ff8c00]/80 px-4 py-8 sm:py-12 md:py-20"
       >
+        {/* Desktop Background Image */}
+        <div className="absolute inset-0 w-full h-full z-0 hidden sm:block">
+          <div className="absolute inset-0 bg-black/60 z-10"></div>
+          <Image
+            src="/images/F.webp"
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        </div>
+
         {/* Video Background - Only on mobile devices */}
         <div className="absolute inset-0 w-full h-full z-0 sm:hidden">
           <div className="absolute inset-0 bg-black/50 z-10"></div>
@@ -122,9 +135,20 @@ export default function CursSecundarFrizerie() {
             muted
             loop
             playsInline
+            preload="auto"
             className="w-full h-full object-cover"
+            poster="/images/F.webp"
           >
             <source src="/images/video-bg-c2.mp4" type="video/mp4" />
+            {/* Fallback for browsers that don't support video */}
+            <Image
+              src="/images/F.webp"
+              alt="Background"
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
           </video>
         </div>
 
@@ -234,6 +258,7 @@ export default function CursSecundarFrizerie() {
                           height={224}
                           className="w-full h-full object-cover object-[center_5%]"
                           priority
+                          loading="eager"
                         />
                       </div>
                       <motion.div
@@ -280,6 +305,7 @@ export default function CursSecundarFrizerie() {
                           height={224}
                           className="w-full h-full object-cover object-[center_5%]"
                           priority
+                          loading="eager"
                         />
                       </div>
                       <motion.div
@@ -347,6 +373,8 @@ export default function CursSecundarFrizerie() {
                         width={80}
                         height={80}
                         className="w-full h-full object-cover object-[center_5%]"
+                        priority
+                        loading="eager"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -380,7 +408,9 @@ export default function CursSecundarFrizerie() {
                         alt="Antonio - Asistent"
                         width={80}
                         height={80}
-                        className="w-full h-full object-cover object-[center_15%] "
+                        className="w-full h-full object-cover object-[center_15%]"
+                        priority
+                        loading="eager"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
