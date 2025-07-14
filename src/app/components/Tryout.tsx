@@ -240,18 +240,18 @@ const Tryout: React.FC = () => {
               px={2}
               py={1}
               onClick={() => {
-                navigator.clipboard.writeText("RO63RNCB0094001976240003");
+                navigator.clipboard.writeText("RO53BTRLRONCRT0P67302901");
                 showNotification("IBAN copiat în clipboard!");
               }}
               title="Click pentru a copia IBAN-ul"
             >
-              RO63RNCB0094001976240003
+              RO53BTRLRONCRT0P67302901
               <span className="block text-sm font-normal mt-1">
                 (Apasă pentru a copia)
               </span>
             </Text>
             <Text className="font-pontano-sans text-lg text-center text-[#F9FBFB]">
-              Titular Cont - Ciprian Ungureanu
+              Titular Cont - Anto Perfect Style SRL
             </Text>
           </GridItem>
         </Grid>

@@ -201,6 +201,10 @@ const MergedComponents: React.FC = () => {
               <ListIcon as={HiOutlineDocumentText} color="#023d82" />
               Copie dupa ultimul act de studii
               <br />
+              <span className="text-lg text-red-500">
+                Minim 16 ani impliniti pentru a putea urma cursul
+                <br />
+              </span>
               <span className="text-lg">
                 Minim diploma 8 clase
                 <br />
@@ -303,12 +307,11 @@ const MergedComponents: React.FC = () => {
               <ListItem>Cuprinde TEORIE & PRACTICA:</ListItem>
               <ListItem>
                 <ListIcon as={GiTeacher} color="#ededed" />
-                Teorie – 6 ore / saptamana<br></br> marti 12:00–18:00
+                Teorie <br></br> marti, miercuri si joi de la 10:00 la 15:30
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Practica – 6 ore / saptamana<br></br> marti, miercuri, joi
-                18:00-20:00
+                Practica <br></br> marti, miercuri, joi 16:00-18:00
               </ListItem>
               <ListItem>
                 <ListIcon as={MdOutlineNotificationImportant} color="#ededed" />

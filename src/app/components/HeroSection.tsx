@@ -27,7 +27,7 @@ export default function HeroSection() {
       typedElement.style.borderRadius = "0.6em";
 
       const typed = new Typed(typedElement, {
-        strings: ["2019", "2020", "2021", "2022", "2023", "2024"],
+        strings: ["2019", "2020", "2021", "2022", "2023", "2024", "2025"],
         typeSpeed: 70,
         backSpeed: 40,
         backDelay: 1700,
@@ -149,7 +149,7 @@ export default function HeroSection() {
         <h1 className="text-2xl md:text-4xl font-pontano-sans text-center pr-5 md:pr-20 lg:pr-0 text-[#333] pt-6 md:pt-10 opacity-85">
           Cea mai buna scoala de frizerie{" "}
           <span className="font-stint-ultra-expanded text-[#023d82] text-4xl">
-            <br />5 ani
+            <br />6 ani
           </span>{" "}
           consecutivi <br />
           <span ref={typedRef}></span>

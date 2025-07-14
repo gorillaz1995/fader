@@ -7,7 +7,7 @@ import { motion, useInView } from "framer-motion";
 // Import teacher and assistant images
 import aiaImage from "@/images/aia121.jpeg";
 import faraonusImage from "@/images/faraonus.jpeg";
-import andreiiImage from "@/images/andreii121.jpeg";
+import andreiiImage from "@/images/andrei14.jpeg";
 import antonioImage from "@/images/antonio121.jpeg";
 
 // Animation variants for scroll animations
@@ -205,7 +205,11 @@ export default function CursSecundarFrizerie() {
             <p className="text-base sm:text-lg md:text-xl font-pontano-sans text-white max-w-4xl mx-auto leading-relaxed px-4 text-shadow-sm bg-black/40 p-4 rounded-lg">
               🎓 Începe-ți cariera în frizerie! Acest curs intensiv este
               destinat celor care doresc să învețe tehnicile esențiale ale
-              frizeriei, sub îndrumarea unor profesioniști cu experiență.
+              frizeriei, sub îndrumarea unor{" "}
+              <strong>
+                profesioniști instruiți în arta predării frizeriei de către
+                Ciprian Ungureanu
+              </strong>
             </p>
           </motion.div>
 
@@ -396,7 +400,7 @@ export default function CursSecundarFrizerie() {
                         alt="Andrei - Asistent"
                         width={96}
                         height={96}
-                        className="w-full h-full object-cover object-[center_5%]"
+                        className="w-full h-full object-cover object-[center_20%]"
                         priority
                         loading="eager"
                       />
