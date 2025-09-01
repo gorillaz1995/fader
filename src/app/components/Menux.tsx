@@ -108,15 +108,7 @@ const Menux: React.FC = () => {
               <span className="font-pontano-sans">Bucuresti</span>
             </Text>
           </StyledMenuItem>
-          <StyledMenuItem
-            onClick={() => handleNavigation("/curs-frizerie-mioveni")}
-          >
-            <Text textAlign="center">
-              <span className="font-stint-ultra-expanded">Fade Academy</span>
-              <br />
-              <span className="font-pontano-sans">Mioveni</span>
-            </Text>
-          </StyledMenuItem>
+
           <StyledMenuItem
             onClick={() => handleNavigation("/curs-frizerie-satu-mare")}
           >
