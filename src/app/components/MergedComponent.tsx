@@ -231,54 +231,51 @@ const MergedComponents: React.FC = () => {
         <DrawerContent bg="linear-gradient(135deg, #023d82, #0461ab, #0277bd)">
           <DrawerCloseButton color="#ededed" />
           <DrawerHeader className="font-stint-ultra-expanded text-[#ededed]">
-            TEME ABORDATE
+            Ce vei invata?
           </DrawerHeader>
           <DrawerBody>
             <List spacing={3} className="font-pontano-sans text-[#ededed]">
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Tunsori barbati personalizate
+                Tunsori personalizate adaptate fizionomiei feței și formei
+                capului
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Tunsori personalizate după fizionomia feței și forma capului
+                Tehnici de tuns clasice cu foarfeca și pieptănul
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Tehnici de tuns:<br></br> Treptele - Graduarea - Linia - etc.
+                Tunsori realizate cu mașina de tuns
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Tunsori barbati clasice
+                Clipper over comb
+              </ListItem>
+
+              <ListItem>
+                <ListIcon as={PiScissors} color="#ededed" />
+                Skin fade și geometria necesară pentru realizarea acestuia
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Tuns:<br></br> - foarfeca și pieptan <br></br> - foarfeca si
-                masina de tuns
+                Rasul bărbii cu briciul
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Masina de tuns:<br></br> - Clipper over comb techniques
+                Spălarea părului și îngrijirea scalpului
               </ListItem>
               <ListItem>
                 <ListIcon as={PiScissors} color="#ededed" />
-                Par facial / barba - barbierit cu brici - styling barba
-              </ListItem>
-              <ListItem>
-                <ListIcon as={PiScissors} color="#ededed" />
-                Samponat - Spalat - Masaj
-              </ListItem>
-              <ListItem>
-                <ListIcon as={PiScissors} color="#ededed" />
-                Masaj: -facial - capilar
-              </ListItem>
-              <ListItem>
-                <ListIcon as={PiScissors} color="#ededed" />
-                Styling - Special techniques
+                Styling și tehnici profesionale de uscare
               </ListItem>
               <ListItem>
                 <ListIcon as={MdOutlineEmojiPeople} color="#ededed" />
-                Consultatie si abordare client
+                Masaj facial și capilar
+              </ListItem>
+              <ListItem>
+                <ListIcon as={MdOutlineEmojiPeople} color="#ededed" />
+                Noțiuni de geometrie aplicată în tunsori
               </ListItem>
               <ListItem>
                 <ListIcon as={IoShareSocialOutline} color="#ededed" />
@@ -289,8 +286,16 @@ const MergedComponents: React.FC = () => {
               </ListItem>
               <ListItem>
                 <ListIcon as={TbZoomQuestion} color="#ededed" />
-                Identificarea uneltelor necesare pentru a oferi orice tip de
-                tunsoare si ethicheta la salon.
+                Fiecare cursant trebuie să aibă propriile ustensile. Acestea pot
+                fi achiziționate cu reducere de pe site-ul partenerilor noștri:{" "}
+                <Link
+                  href="https://barber-store.ro/?gad_source=1&gad_campaignid=17314553915&gclid=CjwKCAjwprjDBhBTEiwA1m1d0nEt-RhtNcAiISrAHJpHT5F8F1PXl1BUX_Ll2ySk7PUjtqfq12hR3RoCH8cQAvD_BwE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-[#ededed]"
+                >
+                  Barber Store
+                </Link>
               </ListItem>
             </List>
 

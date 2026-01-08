@@ -87,15 +87,16 @@ const Details: React.FC = () => {
 
             <p className="text-md text-[#070F18] text-center lg:text-left leading-relaxed font-pontano-sans py-4">
               <span className="border-b-2 border-[#023d82] inline-block">
-                Locurile se ocupa foarte repede, asa ca grabeste-te!
+                Locurile sunt limitate! Rezervă-ți acum locul și începe-ți
+                cariera în frizerie împreună cu cei mai buni!
               </span>
               <br />
-              CURS 12 <span className="font-extrabold">IANUARIE</span> 2025 - 13{" "}
-              <span className="font-extrabold">APRILIE</span> 2026
+              CURS 14 <span className="font-extrabold">APRILIE</span> 2026 - 3{" "}
+              <span className="font-extrabold"> IULIE</span> 2026
               <br />
               <br />
               Durata totala - 2 luni jumate /
-              <span className="font-extrabold"> 10 saptamani</span>
+              <span className="font-extrabold"> 12 saptamani</span>
             </p>
           </Box>
 
