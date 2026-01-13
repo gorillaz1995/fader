@@ -9,15 +9,15 @@ import Autoplay from "embla-carousel-autoplay"; // Import the autoplay plugin
 
 const images = [
   {
-    src: "/images/galerie/galerie1.webp",
+    src: "/images/ungureanu2026-2.jpg",
     alt: "Cursuri frizerie incepatori - Ciprian Ungureanu Fade academy 1",
   },
   {
-    src: "/images/galerie/galerie2.webp",
+    src: "/images/ungureanu2026-1.jpg",
     alt: "Cursuri frizerie incepatori - Ciprian Ungureanu Fade academy 2",
   },
   {
-    src: "/images/galerie/galerie3.webp",
+    src: "/images/ungureanu2026-3.jpg",
     alt: "Cursuri frizerie incepatori - Ciprian Ungureanu Fade academy 3",
   },
   {
@@ -25,11 +25,11 @@ const images = [
     alt: "Cursuri frizerie incepatori - Ciprian Ungureanu Fade academy 4",
   },
   {
-    src: "/images/galerie/galerie5.webp",
+    src: "/images/ungureanu2026-5.jpg",
     alt: "Cursuri frizerie incepatori - Ciprian Ungureanu Fade academy 5",
   },
   {
-    src: "/images/galerie/galerie7.webp",
+    src: "/images/ungureanu2026-4.jpg",
     alt: "Cursuri frizerie incepatori - Ciprian Ungureanu Fade academy 7",
   },
   {

@@ -9,6 +9,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 import Menux from "./components/Menux";
 import Footer from "./components/Footer";
+import CookieConsent from "./components/CookieConsent";
+import AwardPopup from "./components/AwardPopup";
 
 const stintUltraExpanded = Stint_Ultra_Expanded({
   subsets: ["latin"],
@@ -64,6 +66,8 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
         </Providers>
         <Footer />
+        <CookieConsent />
+        <AwardPopup />
       </body>
     </html>
   );

@@ -482,10 +482,10 @@ export default function CursSecundarFrizerie() {
                 </h3>
                 <div className="space-y-2 font-pontano-sans text-[#333333] text-sm sm:text-base">
                   <p>
-                    <strong>Perioada:</strong> Septembrie - Noiembrie 2025
+                    <strong>Perioada:</strong> APRILIE - IULIE 2026
                   </p>
                   <p>
-                    <strong>Data începerii:</strong> 3 Septembrie 2025
+                    <strong>Data începerii:</strong> 14 APRILIE 2025
                   </p>
                   <p>
                     <strong>Durată:</strong> 2 luni și jumătate (10 săptămâni)
