@@ -6,7 +6,7 @@ import { motion, useInView } from "framer-motion";
 
 // Import teacher and assistant images
 import aiaImage from "@/images/aia121.jpeg";
-import faraonusImage from "@/images/faraonus.jpeg";
+import faraonusImage from "@/images/stupari.jpg";
 import andreiiImage from "@/images/andrei14.jpeg";
 import antonioImage from "@/images/antonio121.jpeg";
 
@@ -75,7 +75,7 @@ const AnimatedCounter = ({
           }, 1000 / 60);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (counterRef.current) {
@@ -350,14 +350,19 @@ export default function CursSecundarFrizerie() {
                       </motion.div>
                     </div>
                     <h3 className="text-lg sm:text-xl md:text-2xl font-stint-ultra-expanded text-[#4a90e2] mb-2 text-center">
-                      Adi Ramses
+                      Robert Micu & Alberto Sarbu
                     </h3>
                     <p className="text-sm sm:text-base md:text-lg font-pontano-sans text-[#e0e0e0] text-center leading-relaxed">
-                      Maestru în arta frizeriei cu o viziune unică și
-                      inovatoare. Conceptele sale curate și expresive au
-                      stabilit noi standarde în industrie. Cu o înțelegere
-                      profundă a artei frizeriei și un talent remarcabil pentru
-                      detalii, creează look-uri memorabile și contemporane.
+                      Maeștri în arta frizeriei, Robert Micu și Alberto Sârbu
+                      combină experiența vastă și precizia impecabilă cu
+                      viziunea inovatoare asupra stilului și tehnicilor moderne.
+                      Împreună, creează un mediu de învățare dinamic, în care
+                      cursanții învață atât rigurozitatea clasica a frizeriei,
+                      cât și abordările creative, dezvoltându-și propriul stil
+                      și excelența în fiecare detaliu al lucrului lor. Pasiunea
+                      lor pentru artă și dedicarea față de transmiterea
+                      cunoștințelor asigură o experiență completă și
+                      inspirațională pentru fiecare student.
                     </p>
                   </div>
                 </div>

@@ -9,15 +9,18 @@ import {
   IconButton,
   Box,
   Text,
+  Button,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import styled from "@emotion/styled";
 
+// Styled MenuList
 const StyledMenuList = styled(MenuList)`
   background: linear-gradient(145deg, #005cb2, #00407d);
   border-color: #00509d;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.1),
     inset 0 -1px 1px rgba(0, 0, 0, 0.05);
   padding: 0.5rem;
@@ -38,6 +41,7 @@ const StyledMenuList = styled(MenuList)`
   }
 `;
 
+// Styled MenuItem
 const StyledMenuItem = styled(MenuItem)`
   background: rgba(0, 80, 157, 0.6);
   color: white;
@@ -50,24 +54,47 @@ const StyledMenuItem = styled(MenuItem)`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
 
   &:hover {
     background: rgba(0, 96, 189, 0.8);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.2),
       inset 0 1px 1px rgba(255, 255, 255, 0.2);
   }
 
   &:active {
     transform: translateY(1px);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1),
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.1),
       inset 0 1px 1px rgba(255, 255, 255, 0.1);
   }
 
   &:last-child {
     margin-bottom: 0;
+  }
+`;
+
+const StyledMenuButton = styled(Button)`
+  background: rgba(0, 80, 157, 0.6);
+  color: white;
+  font-size: 1.2rem;
+  font-family: "Familjen Grotesk", sans-serif;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba(0, 96, 189, 0.8);
   }
 `;
 
@@ -94,21 +121,40 @@ const Menux: React.FC = () => {
           boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
         />
         <StyledMenuList>
+          {/* Home */}
           <StyledMenuItem onClick={() => handleNavigation("/")}>
             <Text textAlign="center" className="font-stint-ultra-expanded">
               Acasa
             </Text>
           </StyledMenuItem>
-          <StyledMenuItem
-            onClick={() => handleNavigation("/curs-frizerie-bucuresti")}
-          >
-            <Text textAlign="center">
-              <span className="font-stint-ultra-expanded">Fade Academy</span>
-              <br />
-              <span className="font-pontano-sans">Bucuresti</span>
-            </Text>
-          </StyledMenuItem>
 
+          {/* Fade Academy Bucuresti with Submenu */}
+          <Menu>
+            <MenuButton as={StyledMenuButton} rightIcon={<ChevronDownIcon />}>
+              <Text textAlign="center">
+                <span className="font-stint-ultra-expanded">Fade Academy</span>
+                <br />
+                <span className="font-pontano-sans">Bucuresti</span>
+              </Text>
+            </MenuButton>
+            <StyledMenuList>
+              <StyledMenuItem
+                onClick={() => handleNavigation("/curs-frizerie-bucuresti")}
+              >
+                Curs Ciprian Ungureanu
+              </StyledMenuItem>
+              <StyledMenuItem
+                onClick={() => handleNavigation("/curs-secundar-frizerie")}
+              >
+                Curs Frizerie Secundar
+              </StyledMenuItem>
+              <StyledMenuItem onClick={() => handleNavigation("/curs-1-1")}>
+                Curs 1 la 1
+              </StyledMenuItem>
+            </StyledMenuList>
+          </Menu>
+
+          {/* Other Locations */}
           <StyledMenuItem
             onClick={() => handleNavigation("/curs-frizerie-satu-mare")}
           >
@@ -118,6 +164,7 @@ const Menux: React.FC = () => {
               <span className="font-pontano-sans">Satu Mare</span>
             </Text>
           </StyledMenuItem>
+
           <StyledMenuItem
             onClick={() => handleNavigation("/curs-frizerie-botosani")}
           >
@@ -127,6 +174,15 @@ const Menux: React.FC = () => {
               <span className="font-pontano-sans">Botosani</span>
             </Text>
           </StyledMenuItem>
+
+          {/* Evenimente */}
+          <StyledMenuItem onClick={() => handleNavigation("/evenimente")}>
+            <Text textAlign="center" className="font-stint-ultra-expanded">
+              Evenimente & Sesiuni
+            </Text>
+          </StyledMenuItem>
+
+          {/* Testimonials */}
           <StyledMenuItem onClick={() => handleNavigation("/testimoniale")}>
             <Text textAlign="center" className="font-stint-ultra-expanded">
               Testimoniale
