@@ -243,10 +243,10 @@ export default function CursSecundarFrizerie() {
             {/* Date Card - Mobile Optimized */}
             <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
               <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-stint-ultra-expanded text-[#023d82] leading-tight">
-                02 Sep - 19 Nov
+                14 Aprilie - 3 Iulie
               </div>
               <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
-                2025
+                2026
               </div>
             </div>
           </motion.div>
@@ -490,7 +490,7 @@ export default function CursSecundarFrizerie() {
                     <strong>Perioada:</strong> APRILIE - IULIE 2026
                   </p>
                   <p>
-                    <strong>Data începerii:</strong> 14 APRILIE 2025
+                    <strong>Data începerii:</strong> 14 APRILIE 2026
                   </p>
                   <p>
                     <strong>Durată:</strong> 2 luni și jumătate (10 săptămâni)
@@ -504,15 +504,15 @@ export default function CursSecundarFrizerie() {
 
               <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
                 <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  ⏰ PROGRAM ZILNIC
+                  ⏰ PROGRAM
                 </h3>
                 <div className="space-y-2 font-pontano-sans text-[#333333] text-sm sm:text-base">
                   <p>
-                    <strong>📖 Teorie:</strong> 6 ore/săptămână, Luni
-                    10:00-16:00
+                    <strong>📖 Teorie:</strong> 6 ore/săptămână - Marti,
+                    Miercuri, Joi in functie de numarul de grupe
                   </p>
                   <p>
-                    <strong>✂️ Practică:</strong> 16:00-18:00
+                    <strong>✂️ Practică:</strong> 12:00-18:00
                   </p>
                   <p>
                     <strong>🏢 Locație practică:</strong> Salonul nostru
