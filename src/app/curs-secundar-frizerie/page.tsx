@@ -2,68 +2,78 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { cubicBezier, motion, useInView } from "framer-motion";
 
-// Import teacher and assistant images
+// Images (local imports)
 import aiaImage from "@/images/aia121.jpeg";
-import faraonusImage from "@/images/stupari.jpg";
+import faraonusImage from "@/images/stupari.jpg"; // used for both Robert & Alberto (for now)
 import andreiiImage from "@/images/andrei14.jpeg";
 import antonioImage from "@/images/antonio121.jpeg";
 
-// Animation variants for scroll animations
+// Accent
+const ACCENT = "#79FD15";
+
+// Motion variants
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.7, ease: cubicBezier(0.16, 1, 0.3, 1) },
   },
 };
 
-const staggerContainer = {
+const stagger = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
   },
 };
 
-// BorderBeam component for card animations - Fixed for hydration
-const BorderBeam = ({ className = "" }) => {
-  return (
-    <div className={`absolute inset-0 overflow-hidden rounded-xl ${className}`}>
-      <motion.div
-        initial={{ rotate: 0 }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-0 w-full h-full bg-gradient-conic from-[#023d82] via-[#0461ab] to-[#023d82] rounded-xl"
-      />
-    </div>
-  );
-};
+// Border beam (subtle animated accent line)
+const BorderBeam = ({ className = "" }: { className?: string }) => (
+  <div
+    className={`pointer-events-none absolute inset-0 overflow-hidden rounded-2xl ${className}`}
+  >
+    <motion.div
+      initial={{ rotate: 0 }}
+      animate={{ rotate: 360 }}
+      transition={{ duration: 2.6, repeat: Infinity, ease: "linear" }}
+      className="absolute inset-0"
+      style={{
+        background:
+          "conic-gradient(from 180deg, rgba(121,253,21,0.0), rgba(121,253,21,0.65), rgba(121,253,21,0.0), rgba(121,253,21,0.25), rgba(121,253,21,0.0))",
+      }}
+    />
+    <div className="absolute inset-[2px] rounded-2xl bg-black/80" />
+  </div>
+);
 
-// Animated Counter Component
+// Animated Counter
 const AnimatedCounter = ({
   end,
-  duration = 2,
+  duration = 1.8,
 }: {
   end: number;
   duration?: number;
 }) => {
   const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const counterRef = useRef(null);
+  const [hasStarted, setHasStarted] = useState(false);
+  const counterRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
+    if (!counterRef.current) return;
+
+    const el = counterRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isVisible) {
-          setIsVisible(true);
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
           let start = 0;
-          const increment = end / (duration * 60); // 60 FPS
+          const fps = 60;
+          const increment = end / (duration * fps);
+
           const timer = setInterval(() => {
             start += increment;
             if (start >= end) {
@@ -72,682 +82,1116 @@ const AnimatedCounter = ({
             } else {
               setCount(Math.floor(start));
             }
-          }, 1000 / 60);
+          }, 1000 / fps);
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.25 },
     );
 
-    if (counterRef.current) {
-      observer.observe(counterRef.current);
-    }
-
+    observer.observe(el);
     return () => observer.disconnect();
-  }, [end, duration, isVisible]);
+  }, [end, duration, hasStarted]);
 
   return <span ref={counterRef}>{count}</span>;
 };
+
+// Reusable UI pieces
+const SectionTitle = ({
+  kicker,
+  title,
+  subtitle,
+}: {
+  kicker?: string;
+  title: string;
+  subtitle?: string;
+}) => (
+  <div className="text-center mb-8 sm:mb-12 md:mb-16 px-2">
+    {kicker ? (
+      <div
+        className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-4 border"
+        style={{
+          borderColor: "rgba(121,253,21,0.35)",
+          background: "rgba(121,253,21,0.08)",
+        }}
+      >
+        <span className="text-xs sm:text-sm font-pontano-sans tracking-wide text-white/90">
+          {kicker}
+        </span>
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{ background: ACCENT, boxShadow: `0 0 18px ${ACCENT}` }}
+        />
+      </div>
+    ) : null}
+
+    <h2 className="font-stint-ultra-expanded text-white text-2xl sm:text-3xl md:text-5xl lg:text-6xl leading-tight">
+      <span className="drop-shadow-[0_0_20px_rgba(0,0,0,0.75)]">{title}</span>
+      <span className="ml-2" style={{ color: ACCENT }}>
+        .
+      </span>
+    </h2>
+
+    {subtitle ? (
+      <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg font-pontano-sans text-white/80 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    ) : null}
+  </div>
+);
+
+const GlassCard = ({
+  children,
+  accent = false,
+  className = "",
+}: {
+  children: React.ReactNode;
+  accent?: boolean;
+  className?: string;
+}) => (
+  <div
+    className={`relative overflow-hidden rounded-2xl border shadow-[0_16px_55px_rgba(0,0,0,0.55)] ${className}`}
+    style={{
+      borderColor: accent ? "rgba(0,0,0,0.35)" : "rgba(121,253,21,0.18)",
+      background: accent ? ACCENT : "rgba(255,255,255,0.04)",
+    }}
+  >
+    {!accent ? (
+      <div
+        className="absolute inset-0 opacity-70"
+        style={{
+          background:
+            "radial-gradient(900px 350px at 20% 0%, rgba(121,253,21,0.18), rgba(0,0,0,0) 60%), radial-gradient(700px 260px at 85% 15%, rgba(121,253,21,0.12), rgba(0,0,0,0) 55%)",
+        }}
+      />
+    ) : (
+      <div
+        className="absolute inset-0 opacity-25"
+        style={{
+          background:
+            "radial-gradient(800px 320px at 20% 0%, rgba(0,0,0,0.35), rgba(0,0,0,0) 60%)",
+        }}
+      />
+    )}
+
+    <div className="relative z-10">{children}</div>
+  </div>
+);
 
 export default function CursSecundarFrizerie() {
   const heroRef = useRef<HTMLDivElement>(null);
   const teachersRef = useRef<HTMLDivElement>(null);
   const assistantsRef = useRef<HTMLDivElement>(null);
-  const courseDetailsRef = useRef<HTMLDivElement>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
 
-  // State for video loading error
-  const [videoError, setVideoError] = useState(false);
-
-  // Framer Motion useInView hooks for scroll animations
-  const teachersInView = useInView(teachersRef, { once: true, amount: 0.3 });
+  const teachersInView = useInView(teachersRef, { once: true, amount: 0.25 });
   const assistantsInView = useInView(assistantsRef, {
     once: true,
-    amount: 0.3,
+    amount: 0.25,
   });
-  const courseDetailsInView = useInView(courseDetailsRef, {
-    once: true,
-    amount: 0.3,
-  });
-  const priceInView = useInView(priceRef, { once: true, amount: 0.3 });
+  const detailsInView = useInView(detailsRef, { once: true, amount: 0.25 });
+  const priceInView = useInView(priceRef, { once: true, amount: 0.25 });
 
   return (
-    <main className="flex flex-col overflow-hidden">
-      {/* Hero Section - Mobile First Design */}
+    <main className="flex flex-col overflow-hidden bg-black text-white">
+      {/* HERO */}
       <section
         ref={heroRef}
-        className="relative min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#ffd700]/80 via-black to-[#ff8c00]/80 px-4 py-8 sm:py-12 md:py-20"
+        className="relative min-h-[100svh] flex items-center justify-center px-4 pt-10 pb-10 sm:pt-12 sm:pb-14"
       >
-        {/* Desktop Background Image */}
-        <div className="absolute inset-0 w-full h-full z-0 hidden sm:block">
-          <div className="absolute inset-0 bg-black/60 z-10"></div>
+        {/* Background image (3-muschetari) */}
+        <div className="absolute inset-0 z-0">
           <Image
-            src="/images/F.webp"
-            alt="Background"
+            src="/images/3-muschetari.jpeg"
+            alt="Fade Academy — spirit de echipă"
             fill
-            className="object-cover"
             priority
             sizes="100vw"
+            className="object-cover"
+          />
+          {/* layered overlays */}
+          <div className="absolute inset-0 bg-black/70" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(900px 520px at 50% 20%, rgba(121,253,21,0.18), rgba(0,0,0,0) 60%), linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.95))",
+            }}
+          />
+          {/* subtle grid */}
+          <div
+            className="absolute inset-0 opacity-[0.14]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+              backgroundSize: "34px 34px",
+            }}
           />
         </div>
 
-        {/* Video Background - Only on mobile devices with fallback */}
-        <div className="absolute inset-0 w-full h-full z-0 sm:hidden">
-          <div className="absolute inset-0 bg-black/50 z-10"></div>
-          {!videoError ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              className="w-full h-full object-cover"
-              poster="/images/F.webp"
-              onError={() => setVideoError(true)}
+        <div className="relative z-10 w-full max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            className="text-center"
+          >
+            <div
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2 border mb-6"
+              style={{
+                borderColor: "rgba(121,253,21,0.35)",
+                background: "rgba(0,0,0,0.35)",
+                backdropFilter: "blur(10px)",
+              }}
             >
-              <source src="/public/video-bg-c2.mp4" type="video/mp4" />
-              {/* Fallback for browsers that don't support video */}
-              <Image
-                src="/images/F.webp"
-                alt="Background"
-                fill
-                className="object-cover"
-                priority
-                sizes="100vw"
-              />
-            </video>
-          ) : (
-            // Fallback image when video fails to load
-            <Image
-              src="/images/F.webp"
-              alt="Background"
-              fill
-              className="object-cover"
-              priority
-              sizes="100vw"
-            />
-          )}
-        </div>
-
-        <div className="container mx-auto max-w-7xl text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-            className="mb-6 sm:mb-8 md:mb-12"
-          >
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-stint-ultra-expanded text-white mb-3 sm:mb-4 md:mb-6 leading-tight text-shadow-lg">
-              CURS FRIZERIE
-            </h1>
-            <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-stint-ultra-expanded text-white mb-4 sm:mb-6 md:mb-8 text-shadow-lg">
-              pentru incepatori
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
-            className="mb-6 sm:mb-8 md:mb-12"
-          >
-            <div className="inline-block bg-gradient-to-r from-[#023d82] to-[#0461ab] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full shadow-xl">
-              <span className="text-sm sm:text-base md:text-lg lg:text-xl font-pontano-sans font-semibold">
-                PROFESORI FADE ACADEMY BUCURESTI
+              <span className="text-xs sm:text-sm font-pontano-sans text-white/85 tracking-wide">
+                Fade Academy București • Curs Frizerie pentru începători
               </span>
+              <span
+                className="w-2 h-2 rounded-full"
+                style={{ background: ACCENT, boxShadow: `0 0 20px ${ACCENT}` }}
+              />
             </div>
+
+            <h1 className="font-stint-ultra-expanded text-3xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] drop-shadow-[0_0_25px_rgba(0,0,0,0.75)]">
+              CURS FRIZERIE
+              <span className="block mt-2 sm:mt-3 text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white/85">
+                pentru începători
+                <span style={{ color: ACCENT }}>.</span>
+              </span>
+            </h1>
+
+            <p className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg font-pontano-sans text-white/85 max-w-4xl mx-auto leading-relaxed">
+              Povestea noastră începe simplu: cu oameni care au ales să nu
+              renunțe. Practică după practică, greșeală după greșeală, până când
+              mâna capătă siguranță iar ochiul vede proporțiile dintr-o privire.
+              În Fade Academy, „talentul” e doar scânteia —{" "}
+              <span style={{ color: ACCENT }}>perseverența</span> e
+              combustibilul.
+              <br />
+              <br />
+              Vei învăța într-un cadru profesionist, cu profesori formați în
+              spiritul disciplinei și al standardelor ridicate — cu o cultură de
+              lucru care păstrează legătura cu mentoratul și rigoarea inspirate
+              de Ciprian Ungureanu.
+            </p>
           </motion.div>
 
+          {/* Hero Stat Cards */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 1.0 }}
-            className="mb-8 sm:mb-12 md:mb-16"
+            transition={{ duration: 0.8, delay: 0.25, ease: "easeOut" }}
+            className="mt-10 sm:mt-12"
           >
-            <p className="text-base sm:text-lg md:text-xl font-pontano-sans text-white max-w-4xl mx-auto leading-relaxed px-4 text-shadow-sm bg-black/40 p-4 rounded-lg">
-              🎓 Începe-ți cariera în frizerie! Acest curs intensiv este
-              destinat celor care doresc să învețe tehnicile esențiale ale
-              frizeriei, sub îndrumarea unor{" "}
-              <strong>
-                profesioniști instruiți în arta predării frizeriei de către
-                Ciprian Ungureanu
-              </strong>
-            </p>
-          </motion.div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 max-w-4xl mx-auto">
+              <GlassCard className="p-5 sm:p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-xs font-pontano-sans text-white/70">
+                      Preț curs
+                    </div>
+                    <div className="mt-1 font-stint-ultra-expanded text-3xl sm:text-4xl">
+                      <span style={{ color: ACCENT }}>
+                        <AnimatedCounter end={3500} />
+                      </span>{" "}
+                      <span className="text-white/85 text-xl sm:text-2xl">
+                        lei
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="w-10 h-10 rounded-xl grid place-items-center border"
+                    style={{
+                      borderColor: "rgba(121,253,21,0.25)",
+                      background: "rgba(121,253,21,0.08)",
+                    }}
+                  >
+                    <span style={{ color: ACCENT }}>✂️</span>
+                  </div>
+                </div>
+                <div className="mt-3 text-sm font-pontano-sans text-white/70">
+                  opțiune reducere pentru plată integrală
+                </div>
+              </GlassCard>
 
-          {/* Hero Cards - Improved Mobile Design */}
+              <GlassCard className="p-5 sm:p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <div className="text-xs font-pontano-sans text-white/70">
+                      Durată
+                    </div>
+                    <div className="mt-1 font-stint-ultra-expanded text-3xl sm:text-4xl">
+                      <span style={{ color: ACCENT }}>
+                        <AnimatedCounter end={10} />
+                      </span>{" "}
+                      <span className="text-white/85 text-xl sm:text-2xl">
+                        săpt.
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="w-10 h-10 rounded-xl grid place-items-center border"
+                    style={{
+                      borderColor: "rgba(121,253,21,0.25)",
+                      background: "rgba(121,253,21,0.08)",
+                    }}
+                  >
+                    <span style={{ color: ACCENT }}>📆</span>
+                  </div>
+                </div>
+                <div className="mt-3 text-sm font-pontano-sans text-white/70">
+                  ritm susținut, focus pe practică
+                </div>
+              </GlassCard>
+
+              <GlassCard accent className="p-5 sm:p-6">
+                <div className="flex items-start justify-between">
+                  <div className="text-black">
+                    <div className="text-xs font-pontano-sans text-black/70">
+                      Perioadă
+                    </div>
+                    <div className="mt-1 font-stint-ultra-expanded text-2xl sm:text-3xl leading-tight">
+                      14 Aprilie – 3 Iulie
+                    </div>
+                    <div className="mt-1 text-sm font-pontano-sans text-black/80">
+                      2026
+                    </div>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl grid place-items-center bg-black/10">
+                    <span className="text-black">🎯</span>
+                  </div>
+                </div>
+                <div className="mt-3 text-sm font-pontano-sans text-black/80">
+                  locuri limitate • înscrieri deschise
+                </div>
+              </GlassCard>
+            </div>
+
+            {/* CTA row */}
+            <div className="mt-7 sm:mt-9 flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center px-1">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() =>
+                  window.open("https://wa.me/40723403403", "_blank")
+                }
+                className="rounded-2xl px-6 py-3 font-pontano-sans font-bold text-black shadow-[0_18px_60px_rgba(0,0,0,0.6)]"
+                style={{
+                  background: ACCENT,
+                }}
+              >
+                Rezervă pe WhatsApp
+              </motion.button>
+
+              <a
+                href="#pret-si-contact"
+                className="rounded-2xl px-6 py-3 font-pontano-sans font-semibold text-white/90 border text-center"
+                style={{
+                  borderColor: "rgba(121,253,21,0.30)",
+                  background: "rgba(255,255,255,0.03)",
+                }}
+              >
+                Vezi preț & rate
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* TEACHERS */}
+      <section ref={teachersRef} className="py-14 sm:py-16 md:py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle
+            kicker="Top-level training • standarde reale, fără scurtături"
+            title="Profesorii noștri"
+            subtitle="O echipă construită pe disciplină, practică și mentalitatea „faci de 100 de ori până iese perfect”."
+          />
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-2"
+            variants={stagger}
+            initial="hidden"
+            animate={teachersInView ? "visible" : "hidden"}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6"
           >
-            {/* Price Card - Mobile Optimized */}
-            <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
-              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-stint-ultra-expanded text-[#023d82] leading-tight">
-                <AnimatedCounter end={3500} />
-              </div>
-              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
-                Lei - Preț Curs
-              </div>
-            </div>
+            {/* Teacher: Teodora */}
+            <motion.div variants={fadeInUp} className="lg:col-span-1">
+              <div className="relative group">
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <GlassCard className="p-6 sm:p-7">
+                  <div className="flex flex-col items-center text-center">
+                    <div
+                      className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border"
+                      style={{ borderColor: "rgba(121,253,21,0.35)" }}
+                    >
+                      <Image
+                        src={aiaImage}
+                        alt="Teodora — Profesor"
+                        fill
+                        className="object-cover object-[center_10%]"
+                        priority
+                      />
+                    </div>
 
-            {/* Duration Card - Mobile Optimized */}
-            <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
-              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-stint-ultra-expanded text-[#023d82] leading-tight">
-                <AnimatedCounter end={10} />
-              </div>
-              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
-                Săptămâni
-              </div>
-            </div>
+                    <div className="mt-4">
+                      <div
+                        className="font-stint-ultra-expanded text-2xl"
+                        style={{ color: ACCENT }}
+                      >
+                        TEODORA
+                      </div>
+                      <div className="mt-1 text-sm font-pontano-sans text-white/75">
+                        Profesor • tehnici moderne + fundamente solide
+                      </div>
+                    </div>
 
-            {/* Date Card - Mobile Optimized */}
-            <div className="text-center bg-white/90 backdrop-blur-md rounded-xl p-4 sm:p-6 shadow-xl">
-              <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-stint-ultra-expanded text-[#023d82] leading-tight">
-                14 Aprilie - 3 Iulie
+                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
+                      Parcursul ei e despre consecvență: ore de practică,
+                      feedback aplicat, apoi încă o rundă — până când detaliul
+                      devine reflex. În școală promovează metodologia pe care a
+                      internalizat-o din cultura de mentorat inspirată de
+                      Ciprian Ungureanu: claritate în pași, ordine în execuție
+                      și respect pentru geometrie.
+                    </p>
+
+                    <div className="mt-5 w-full grid grid-cols-2 gap-3">
+                      <div
+                        className="rounded-xl p-3 border"
+                        style={{ borderColor: "rgba(121,253,21,0.18)" }}
+                      >
+                        <div className="text-xs text-white/70 font-pontano-sans">
+                          Focus
+                        </div>
+                        <div
+                          className="mt-1 text-sm font-pontano-sans"
+                          style={{ color: ACCENT }}
+                        >
+                          fade curat
+                        </div>
+                      </div>
+                      <div
+                        className="rounded-xl p-3 border"
+                        style={{ borderColor: "rgba(121,253,21,0.18)" }}
+                      >
+                        <div className="text-xs text-white/70 font-pontano-sans">
+                          Stil
+                        </div>
+                        <div
+                          className="mt-1 text-sm font-pontano-sans"
+                          style={{ color: ACCENT }}
+                        >
+                          modern + precis
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
               </div>
-              <div className="text-xs sm:text-sm md:text-base font-pontano-sans text-[#333333] mt-1 leading-tight">
-                2026
+            </motion.div>
+
+            {/* Teacher: Robert Micu */}
+            <motion.div variants={fadeInUp} className="lg:col-span-1">
+              <div className="relative group">
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <GlassCard className="p-6 sm:p-7">
+                  <div className="flex flex-col items-center text-center">
+                    <div
+                      className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border"
+                      style={{ borderColor: "rgba(121,253,21,0.35)" }}
+                    >
+                      <Image
+                        src={faraonusImage}
+                        alt="Robert Micu — Profesor"
+                        fill
+                        className="object-cover object-[center_12%]"
+                        priority
+                      />
+                    </div>
+
+                    <div className="mt-4">
+                      <div
+                        className="font-stint-ultra-expanded text-2xl"
+                        style={{ color: ACCENT }}
+                      >
+                        ROBERT MICU
+                      </div>
+                      <div className="mt-1 text-sm font-pontano-sans text-white/75">
+                        Profesor • structură, disciplină, performanță
+                      </div>
+                    </div>
+
+                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
+                      Robert predă „ca la carte”, dar fără rigiditate: îți arată
+                      de ce faci fiecare mișcare, cum construiești tranziția și
+                      cum păstrezi proporțiile. Povestea lui e despre
+                      perseverență: perioade lungi de practică, standarde
+                      ridicate și o etică de lucru alimentată de ideea că
+                      fiecare client e o probă de seriozitate. În academie, duce
+                      mai departe mentalitatea de școală serioasă — aceeași
+                      linie de rigoare și mentorat conectată la Ciprian
+                      Ungureanu.
+                    </p>
+
+                    <div className="mt-5 w-full grid grid-cols-2 gap-3">
+                      <div
+                        className="rounded-xl p-3 border"
+                        style={{ borderColor: "rgba(121,253,21,0.18)" }}
+                      >
+                        <div className="text-xs text-white/70 font-pontano-sans">
+                          Special
+                        </div>
+                        <div
+                          className="mt-1 text-sm font-pontano-sans"
+                          style={{ color: ACCENT }}
+                        >
+                          clipper control
+                        </div>
+                      </div>
+                      <div
+                        className="rounded-xl p-3 border"
+                        style={{ borderColor: "rgba(121,253,21,0.18)" }}
+                      >
+                        <div className="text-xs text-white/70 font-pontano-sans">
+                          Mindset
+                        </div>
+                        <div
+                          className="mt-1 text-sm font-pontano-sans"
+                          style={{ color: ACCENT }}
+                        >
+                          repetă → reușește
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
               </div>
-            </div>
+            </motion.div>
+
+            {/* Teacher: Alberto Sarbu */}
+            <motion.div variants={fadeInUp} className="lg:col-span-1">
+              <div className="relative group">
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <GlassCard className="p-6 sm:p-7">
+                  <div className="flex flex-col items-center text-center">
+                    <div
+                      className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border"
+                      style={{ borderColor: "rgba(121,253,21,0.35)" }}
+                    >
+                      <Image
+                        src={faraonusImage}
+                        alt="Alberto Sârbu — Profesor"
+                        fill
+                        className="object-cover object-[center_12%]"
+                        priority
+                      />
+                    </div>
+
+                    <div className="mt-4">
+                      <div
+                        className="font-stint-ultra-expanded text-2xl"
+                        style={{ color: ACCENT }}
+                      >
+                        ALBERTO SÂRBU
+                      </div>
+                      <div className="mt-1 text-sm font-pontano-sans text-white/75">
+                        Profesor • finețe, simț estetic, finisaj premium
+                      </div>
+                    </div>
+
+                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
+                      Alberto e omul detaliilor: muchii, texturi, „finish-ul”
+                      care transformă un tuns bun într-unul memorabil. Îți
+                      explică simplu cum să vezi linia, cum să păstrezi
+                      curățenia în fade și cum să nu „grăbești” etapele. Vine cu
+                      o abordare calmă, dar exigentă — aceeași cultură de
+                      standard ridicat pe care Fade Academy o promovează, cu
+                      rădăcini în mentorat și disciplină asociate școlii și
+                      influenței lui Ciprian Ungureanu.
+                    </p>
+
+                    <div className="mt-5 w-full grid grid-cols-2 gap-3">
+                      <div
+                        className="rounded-xl p-3 border"
+                        style={{ borderColor: "rgba(121,253,21,0.18)" }}
+                      >
+                        <div className="text-xs text-white/70 font-pontano-sans">
+                          Focus
+                        </div>
+                        <div
+                          className="mt-1 text-sm font-pontano-sans"
+                          style={{ color: ACCENT }}
+                        >
+                          finishing
+                        </div>
+                      </div>
+                      <div
+                        className="rounded-xl p-3 border"
+                        style={{ borderColor: "rgba(121,253,21,0.18)" }}
+                      >
+                        <div className="text-xs text-white/70 font-pontano-sans">
+                          Stil
+                        </div>
+                        <div
+                          className="mt-1 text-sm font-pontano-sans"
+                          style={{ color: ACCENT }}
+                        >
+                          clean & sharp
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Teachers Section - Mobile Optimized */}
-      <section
-        ref={teachersRef}
-        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-[#cbdad4] to-[#bfd1ca] px-4"
-      >
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4 md:mb-6">
-              PROFESORII NOSTRI
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg font-pontano-sans text-[#333333] max-w-3xl mx-auto px-4">
-              Învață de la cei mai buni profesioniști cu recunoaștere
-              internațională
-            </p>
-          </div>
+      {/* ASSISTANTS */}
+      <section ref={assistantsRef} className="py-14 sm:py-16 md:py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle
+            kicker="Suport real în sală • feedback rapid • ritm bun"
+            title="Asistenții noștri"
+            subtitle="Îți stau aproape în practică: poziție, unghiuri, control și corecții — fix când ai nevoie."
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
-            {/* Teacher 1 - Aia */}
-            <motion.div className="teacher-card relative">
-              <div className="relative overflow-hidden rounded-2xl shadow-[4px_8px_16px_rgba(0,0,0,0.3)] bg-[#1a1a1a] border-2 border-[#333333]">
-                <div className="relative z-10 p-4 sm:p-6 md:p-8">
-                  <div className="flex flex-col items-center">
-                    <div className="relative mb-4 sm:mb-6">
-                      <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden ring-4 ring-[#023d82] ring-opacity-20">
-                        <Image
-                          src={aiaImage}
-                          alt="Aia - Profesor principal"
-                          width={224}
-                          height={224}
-                          className="w-full h-full object-cover object-[center_5%]"
-                          priority
-                          loading="eager"
-                        />
-                      </div>
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                          delay: 0.5,
-                          type: "spring",
-                          stiffness: 200,
-                        }}
-                        className="absolute -bottom-2 -right-2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#023d82] rounded-full flex items-center justify-center"
-                      >
-                        <span className="text-white font-bold text-sm sm:text-base md:text-lg">
-                          ★
-                        </span>
-                      </motion.div>
-                    </div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-stint-ultra-expanded text-[#4a90e2] mb-2 text-center">
-                      TEODORA
-                    </h3>
-                    <p className="text-sm sm:text-base md:text-lg font-pontano-sans text-[#e0e0e0] text-center leading-relaxed">
-                      Tânără profesoară talentată, formată sub îndrumarea
-                      maestrului Ciprian Ungureanu. Excelează în tehnici moderne
-                      de frizerie și demonstrează o precizie deosebită în
-                      execuție. Pasionată de arta frizeriei și dedicată
-                      transmiterii cunoștințelor dobândite către noua generație.
-                    </p>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={assistantsInView ? "visible" : "hidden"}
+            className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto"
+          >
+            <motion.div variants={fadeInUp}>
+              <GlassCard className="p-6 sm:p-7">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                  <div
+                    className="relative w-20 h-20 sm:w-18 sm:h-18 rounded-2xl overflow-hidden border"
+                    style={{ borderColor: "rgba(121,253,21,0.25)" }}
+                  >
+                    <Image
+                      src={andreiiImage}
+                      alt="Andrei — Asistent"
+                      fill
+                      className="object-cover object-[center_20%]"
+                      priority
+                    />
                   </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Teacher 2 - Faraonus */}
-            <motion.div className="teacher-card relative">
-              <div className="relative overflow-hidden rounded-2xl shadow-[4px_8px_16px_rgba(0,0,0,0.3)] bg-[#1a1a1a] border-2 border-[#333333]">
-                <div className="relative z-10 p-4 sm:p-6 md:p-8">
-                  <div className="flex flex-col items-center">
-                    <div className="relative mb-4 sm:mb-6">
-                      <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden ring-4 ring-[#023d82] ring-opacity-20">
-                        <Image
-                          src={faraonusImage}
-                          alt="Faraonus - Profesor principal"
-                          width={224}
-                          height={224}
-                          className="w-full h-full object-cover object-[center_5%]"
-                          priority
-                          loading="eager"
-                        />
-                      </div>
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                          delay: 0.7,
-                          type: "spring",
-                          stiffness: 200,
-                        }}
-                        className="absolute -bottom-2 -right-2 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-[#023d82] rounded-full flex items-center justify-center"
-                      >
-                        <span className="text-white font-bold text-sm sm:text-base md:text-lg">
-                          ★
-                        </span>
-                      </motion.div>
-                    </div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-stint-ultra-expanded text-[#4a90e2] mb-2 text-center">
-                      Robert Micu & Alberto Sarbu
-                    </h3>
-                    <p className="text-sm sm:text-base md:text-lg font-pontano-sans text-[#e0e0e0] text-center leading-relaxed">
-                      Maeștri în arta frizeriei, Robert Micu și Alberto Sârbu
-                      combină experiența vastă și precizia impecabilă cu
-                      viziunea inovatoare asupra stilului și tehnicilor moderne.
-                      Împreună, creează un mediu de învățare dinamic, în care
-                      cursanții învață atât rigurozitatea clasica a frizeriei,
-                      cât și abordările creative, dezvoltându-și propriul stil
-                      și excelența în fiecare detaliu al lucrului lor. Pasiunea
-                      lor pentru artă și dedicarea față de transmiterea
-                      cunoștințelor asigură o experiență completă și
-                      inspirațională pentru fiecare student.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Assistants Section - Improved Mobile Design */}
-      <section
-        ref={assistantsRef}
-        className="py-12 sm:py-16 md:py-20 bg-[#cbdad4] px-4"
-      >
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4 md:mb-6">
-              ASISTENTII NOSTRI
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg font-pontano-sans text-[#333333] max-w-3xl mx-auto px-4">
-              Echipa de suport pentru o experiență de învățare completă
-            </p>
-          </div>
-
-          {/* Improved Mobile Layout - Stack vertically on mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            {/* Assistant 1 - Andreii */}
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="assistant-card relative group"
-            >
-              <div className="relative overflow-hidden rounded-xl shadow-lg bg-white">
-                <div className="p-6 sm:p-8">
-                  {/* Mobile: Stack vertically, Desktop: Side by side */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div className="w-24 h-24 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-[#023d82] ring-opacity-20 flex-shrink-0">
-                      <Image
-                        src={andreiiImage}
-                        alt="Andrei - Asistent"
-                        width={96}
-                        height={96}
-                        className="w-full h-full object-cover object-[center_20%]"
-                        priority
-                        loading="eager"
-                      />
-                    </div>
-                    <div className="flex-1 text-center sm:text-left min-w-0">
-                      <h3 className="text-xl sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-2 sm:mb-1">
-                        ANDREI
-                      </h3>
-                      <p className="text-base sm:text-base font-pontano-sans text-[#333333] mb-2 sm:mb-1">
-                        Asistent Tehnic
-                      </p>
-                      <p className="text-sm sm:text-sm font-pontano-sans text-[#666666] leading-relaxed">
-                        Specializat în tehnici moderne de styling
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Assistant 2 - Antonio */}
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="assistant-card relative group"
-            >
-              <div className="relative overflow-hidden rounded-xl shadow-lg bg-white">
-                <div className="p-6 sm:p-8">
-                  {/* Mobile: Stack vertically, Desktop: Side by side */}
-                  <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div className="w-24 h-24 sm:w-20 sm:h-20 rounded-full overflow-hidden ring-2 ring-[#023d82] ring-opacity-20 flex-shrink-0">
-                      <Image
-                        src={antonioImage}
-                        alt="Antonio - Asistent"
-                        width={96}
-                        height={96}
-                        className="w-full h-full object-cover object-[center_15%]"
-                        priority
-                        loading="eager"
-                      />
-                    </div>
-                    <div className="flex-1 text-center sm:text-left min-w-0">
-                      <h3 className="text-xl sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-2 sm:mb-1">
-                        ANTONIO
-                      </h3>
-                      <p className="text-base sm:text-base font-pontano-sans text-[#333333] mb-2 sm:mb-1">
-                        Asistent Tehnic
-                      </p>
-                      <p className="text-sm sm:text-sm font-pontano-sans text-[#666666] leading-relaxed">
-                        Expert în tehnici clasice de frizerie
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Course Details Section - Mobile Optimized */}
-      <section
-        ref={courseDetailsRef}
-        className="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-[#bfd1ca] to-[#cbdad4] px-4"
-      >
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4 md:mb-6">
-              DETALII CURS
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
-            {/* Course Info */}
-            <div className="space-y-4 sm:space-y-6">
-              <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
-                <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  📅 PERIOADA CURSULUI
-                </h3>
-                <div className="space-y-2 font-pontano-sans text-[#333333] text-sm sm:text-base">
-                  <p>
-                    <strong>Perioada:</strong> APRILIE - IULIE 2026
-                  </p>
-                  <p>
-                    <strong>Data începerii:</strong> 14 APRILIE 2026
-                  </p>
-                  <p>
-                    <strong>Durată:</strong> 2 luni și jumătate (10 săptămâni)
-                  </p>
-                  <p>
-                    <strong>Diplomă:</strong> Recunoscută național și
-                    internațional
-                  </p>
-                </div>
-              </div>
-
-              <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
-                <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  ⏰ PROGRAM
-                </h3>
-                <div className="space-y-2 font-pontano-sans text-[#333333] text-sm sm:text-base">
-                  <p>
-                    <strong>📖 Teorie:</strong> 6 ore/săptămână - Marti,
-                    Miercuri, Joi in functie de numarul de grupe
-                  </p>
-                  <p>
-                    <strong>✂️ Practică:</strong> 12:00-18:00
-                  </p>
-                  <p>
-                    <strong>🏢 Locație practică:</strong> Salonul nostru
-                  </p>
-                  <p>
-                    <strong>📅 Zilele de practică:</strong> Luni, Marți,
-                    Miercuri, Joi
-                  </p>
-                </div>
-              </div>
-
-              <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
-                <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  📍 LOCAȚIE
-                </h3>
-                <div className="font-pontano-sans text-[#333333] text-sm sm:text-base">
-                  <p>
-                    <strong>🗺️ Adresă:</strong> București, Sector 2, Șos.
-                    Pantelimon nr. 16
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* What You'll Learn */}
-            <div className="space-y-4 sm:space-y-6">
-              <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
-                <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  📚 CE VEI ÎNVĂȚA?
-                </h3>
-                <div className="space-y-2 font-pontano-sans text-[#333333] text-sm sm:text-base">
-                  <p>✔️ Tunsori personalizate adaptate fizionomiei</p>
-                  <p>✔️ Tehnici clasice cu foarfeca și pieptănul</p>
-                  <p>✔️ Tunsori cu mașina de tuns</p>
-                  <p>✔️ Clipper over comb</p>
-                  <p>✔️ Skin fade și geometria necesară</p>
-                  <p>✔️ Rasul bărbii cu briciul</p>
-                  <p>✔️ Spălarea părului și îngrijirea scalpului</p>
-                  <p>✔️ Styling și tehnici profesionale</p>
-                  <p>✔️ Masaj facial și capilar</p>
-                  <p>✔️ Noțiuni de geometrie aplicată</p>
-                </div>
-              </div>
-
-              <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
-                <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  🛠️ ECHIPAMENTE
-                </h3>
-                <div className="space-y-2 font-pontano-sans text-[#333333] text-sm sm:text-base">
-                  <p>Fiecare cursant trebuie să aibă propriile ustensile</p>
-                  <p>Acestea pot fi achiziționate cu reducere</p>
-                  <p>
-                    🔗 <strong>Barber Store</strong> - partenerul nostru
-                  </p>
-                  <p>Academia dispune de ustensile pentru practică</p>
-                  <p>Practică pe cap de manechin și modele umane</p>
-                </div>
-              </div>
-
-              <div className="course-detail bg-white rounded-xl p-4 sm:p-6 shadow-lg">
-                <h3 className="text-lg sm:text-xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4">
-                  📄 ACTE NECESARE
-                </h3>
-                <div className="space-y-1 font-pontano-sans text-[#333333] text-xs sm:text-sm">
-                  <p>📌 Copie certificat de naștere</p>
-                  <p>📌 Copie carte de identitate</p>
-                  <p>📌 Copie certificat de căsătorie (dacă este cazul)</p>
-                  <p>📌 Copie diplomă de studii (minim 8 clase)</p>
-                  <p>📌 Aviz medical pentru aptitudine</p>
-                  <p className="text-red-600 font-bold">
-                    ⚠️ Vârsta minimă: 16 ani
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Price and Contact Section - Mobile Optimized */}
-      <section
-        ref={priceRef}
-        className="py-12 sm:py-16 md:py-20 bg-[#cbdad4] px-4"
-      >
-        <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4 md:mb-6">
-              PRET SI CONTACT
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 max-w-6xl mx-auto">
-            {/* Price Card - Mobile Optimized */}
-            <div className="price-card relative group">
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative z-10 bg-white p-4 sm:p-6 md:p-8">
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-stint-ultra-expanded text-[#023d82] mb-4 sm:mb-6 text-center">
-                    💰 COSTURI ȘI PLĂȚI
-                  </h3>
-
-                  <div className="space-y-4 font-pontano-sans text-[#333333]">
-                    <div className="text-center">
-                      <div className="text-2xl sm:text-3xl md:text-4xl font-stint-ultra-expanded text-[#023d82] mb-2">
-                        3500 LEI
-                      </div>
-                      <div className="text-sm sm:text-base md:text-lg">
-                        Preț standard
-                      </div>
-                    </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <div className="text-center bg-gradient-to-r from-[#023d82] to-[#0461ab] text-white p-3 sm:p-4 rounded-lg mb-4">
-                        <div className="text-xl sm:text-2xl md:text-3xl font-stint-ultra-expanded">
-                          3150 LEI
-                        </div>
-                        <div className="text-xs sm:text-sm">
-                          Reducere 10% - plată integrală
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <h4 className="font-bold text-base sm:text-lg mb-2">
-                        🔹 Plată în rate:
-                      </h4>
-                      <div className="space-y-1 text-sm sm:text-base">
-                        <p>• 1.000 lei – rezervarea locului</p>
-                        <p>• 1.500 lei – la începutul cursului</p>
-                        <p>• 1.000 lei – la jumătatea cursului</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Card - Mobile Optimized */}
-            <div className="space-y-4 sm:space-y-6">
-              <div className="price-card relative group">
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                  <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="relative z-10 bg-white p-4 sm:p-6 md:p-8">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-stint-ultra-expanded text-[#023d82] mb-4 sm:mb-6 text-center">
-                      📞 INFORMAȚII ȘI ÎNSCRIERI
-                    </h3>
-
-                    <div className="space-y-4 font-pontano-sans text-[#333333]">
-                      <div>
-                        <h4 className="font-bold text-base sm:text-lg mb-2">
-                          📲 Telefon:
-                        </h4>
-                        <div className="space-y-1 text-sm sm:text-base">
-                          <p>
-                            📞{" "}
-                            <a
-                              href="tel:0723403403"
-                              className="text-[#023d82] hover:underline font-medium"
-                            >
-                              0723 403 403
-                            </a>
-                          </p>
-                          <p>
-                            📞{" "}
-                            <a
-                              href="tel:0723705702"
-                              className="text-[#023d82] hover:underline font-medium"
-                            >
-                              0723 705 702
-                            </a>
-                          </p>
-                          <p>
-                            📞{" "}
-                            <a
-                              href="tel:0771418581"
-                              className="text-[#023d82] hover:underline font-medium"
-                            >
-                              0771 418 581
-                            </a>
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="border-t border-gray-200 pt-4">
-                        <h4 className="font-bold text-base sm:text-lg mb-2">
-                          🔹 Cont bancar:
-                        </h4>
-                        <div className="space-y-1 text-xs sm:text-sm">
-                          <p>
-                            <strong>Beneficiar:</strong> SC Anto Perfect Style
-                            SRL
-                          </p>
-                          <p className="break-all">
-                            <strong>IBAN:</strong> RO53BTRLRONCRT0P67302901
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="border-t border-gray-200 pt-4">
-                        <div className="bg-red-50 p-3 sm:p-4 rounded-lg">
-                          <p className="text-red-600 font-bold text-xs sm:text-sm">
-                            ⚠️ Politica de anulare: Cu două săptămâni înainte de
-                            începerea cursului, avansul nu mai poate fi returnat
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="price-card relative group">
-                <div className="relative overflow-hidden rounded-2xl shadow-2xl">
-                  <div className="relative z-10 bg-gradient-to-r from-[#023d82] to-[#0461ab] text-white p-4 sm:p-6 md:p-8 text-center">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-stint-ultra-expanded mb-3 sm:mb-4">
-                      🎯 LOCURILE SUNT LIMITATE!
-                    </h3>
-                    <p className="text-sm sm:text-base md:text-lg font-pontano-sans mb-4 sm:mb-6">
-                      Rezervă-ți acum locul și începe-ți cariera în frizerie!
-                    </p>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() =>
-                        window.open("https://wa.me/40723403403", "_blank")
-                      }
-                      className="bg-white text-[#023d82] px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-3 rounded-full font-pontano-sans font-bold text-sm sm:text-base"
+                  <div className="flex-1 text-center sm:text-left">
+                    <div
+                      className="font-stint-ultra-expanded text-xl"
+                      style={{ color: ACCENT }}
                     >
-                      REZERVĂ ACUM
-                    </motion.button>
+                      ANDREI
+                    </div>
+                    <div className="mt-1 text-sm font-pontano-sans text-white/75">
+                      Asistent tehnic • tehnici moderne
+                    </div>
+                    <p className="mt-3 text-sm font-pontano-sans text-white/80 leading-relaxed">
+                      Te ajută să-ți stabilizezi mâna și să „simți” tranziția:
+                      clipper control, pieptăn, verificări rapide și
+                      micro-corecții care fac diferența.
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.22)",
+                          color: ACCENT,
+                        }}
+                      >
+                        control
+                      </span>
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.22)",
+                          color: ACCENT,
+                        }}
+                      >
+                        ghidaj unghiuri
+                      </span>
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.22)",
+                          color: ACCENT,
+                        }}
+                      >
+                        practică
+                      </span>
+                    </div>
                   </div>
                 </div>
+              </GlassCard>
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <GlassCard className="p-6 sm:p-7">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                  <div
+                    className="relative w-20 h-20 sm:w-18 sm:h-18 rounded-2xl overflow-hidden border"
+                    style={{ borderColor: "rgba(121,253,21,0.25)" }}
+                  >
+                    <Image
+                      src={antonioImage}
+                      alt="Antonio — Asistent"
+                      fill
+                      className="object-cover object-[center_15%]"
+                      priority
+                    />
+                  </div>
+                  <div className="flex-1 text-center sm:text-left">
+                    <div
+                      className="font-stint-ultra-expanded text-xl"
+                      style={{ color: ACCENT }}
+                    >
+                      ANTONIO
+                    </div>
+                    <div className="mt-1 text-sm font-pontano-sans text-white/75">
+                      Asistent tehnic • fundamente clasice
+                    </div>
+                    <p className="mt-3 text-sm font-pontano-sans text-white/80 leading-relaxed">
+                      Te ține pe traseu: pași corecți, curățenie pe contur, ritm
+                      de lucru și disciplină în execuție. Ideal când vrei să
+                      fixezi baza.
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.22)",
+                          color: ACCENT,
+                        }}
+                      >
+                        contur
+                      </span>
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.22)",
+                          color: ACCENT,
+                        }}
+                      >
+                        bază solidă
+                      </span>
+                      <span
+                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.22)",
+                          color: ACCENT,
+                        }}
+                      >
+                        finishing
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* DETAILS */}
+      <section ref={detailsRef} className="py-14 sm:py-16 md:py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle
+            kicker="Curriculum practic • pași clari • progres vizibil"
+            title="Detalii curs"
+            subtitle="Am făcut totul ușor de urmărit: ce înveți, cum exersezi, unde vii și ce îți trebuie."
+          />
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={detailsInView ? "visible" : "hidden"}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6"
+          >
+            <motion.div variants={fadeInUp} className="space-y-5">
+              <GlassCard className="p-6 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div
+                      className="font-stint-ultra-expanded text-xl"
+                      style={{ color: ACCENT }}
+                    >
+                      📅 Perioada cursului
+                    </div>
+                    <div className="mt-4 space-y-2 text-sm sm:text-base font-pontano-sans text-white/80">
+                      <p>
+                        <strong className="text-white">Perioada:</strong>{" "}
+                        Aprilie – Iulie 2026
+                      </p>
+                      <p>
+                        <strong className="text-white">Începere:</strong> 14
+                        Aprilie 2026
+                      </p>
+                      <p>
+                        <strong className="text-white">Durată:</strong> ~10
+                        săptămâni
+                      </p>
+                      <p>
+                        <strong className="text-white">Diplomă:</strong>{" "}
+                        recunoscută național și internațional
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="w-11 h-11 rounded-2xl border grid place-items-center"
+                    style={{
+                      borderColor: "rgba(121,253,21,0.22)",
+                      background: "rgba(121,253,21,0.08)",
+                    }}
+                  >
+                    <span style={{ color: ACCENT }}>⏱️</span>
+                  </div>
+                </div>
+              </GlassCard>
+
+              <GlassCard className="p-6 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div
+                      className="font-stint-ultra-expanded text-xl"
+                      style={{ color: ACCENT }}
+                    >
+                      ⏰ Program
+                    </div>
+                    <div className="mt-4 space-y-2 text-sm sm:text-base font-pontano-sans text-white/80">
+                      <p>
+                        <strong className="text-white">Teorie:</strong> 6
+                        ore/săptămână (în funcție de grupe)
+                      </p>
+                      <p>
+                        <strong className="text-white">Practică:</strong> 12:00
+                        – 18:00
+                      </p>
+                      <p>
+                        <strong className="text-white">Zile practică:</strong>{" "}
+                        Luni – Joi
+                      </p>
+                      <p>
+                        <strong className="text-white">
+                          Locație practică:
+                        </strong>{" "}
+                        salonul nostru
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="w-11 h-11 rounded-2xl border grid place-items-center"
+                    style={{
+                      borderColor: "rgba(121,253,21,0.22)",
+                      background: "rgba(121,253,21,0.08)",
+                    }}
+                  >
+                    <span style={{ color: ACCENT }}>📍</span>
+                  </div>
+                </div>
+              </GlassCard>
+
+              <GlassCard className="p-6 sm:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div
+                      className="font-stint-ultra-expanded text-xl"
+                      style={{ color: ACCENT }}
+                    >
+                      🗺️ Locație
+                    </div>
+                    <div className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80">
+                      <p>
+                        <strong className="text-white">
+                          București, Sector 2
+                        </strong>
+                      </p>
+                      <p>Șos. Pantelimon nr. 16</p>
+                    </div>
+                  </div>
+                  <div
+                    className="w-11 h-11 rounded-2xl border grid place-items-center"
+                    style={{
+                      borderColor: "rgba(121,253,21,0.22)",
+                      background: "rgba(121,253,21,0.08)",
+                    }}
+                  >
+                    <span style={{ color: ACCENT }}>🧭</span>
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="space-y-5">
+              <GlassCard className="p-6 sm:p-7">
+                <div
+                  className="font-stint-ultra-expanded text-xl"
+                  style={{ color: ACCENT }}
+                >
+                  📚 Ce vei învăța
+                </div>
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm sm:text-base font-pontano-sans text-white/80">
+                  {[
+                    "Tunsori personalizate adaptate fizionomiei",
+                    "Tehnici clasice (foarfecă + pieptăn)",
+                    "Tunsori cu mașina de tuns",
+                    "Clipper over comb",
+                    "Skin fade + geometrie",
+                    "Rasul bărbii cu briciul",
+                    "Spălarea părului + îngrijirea scalpului",
+                    "Styling și tehnici profesionale",
+                    "Masaj facial și capilar",
+                    "Noțiuni de geometrie aplicată",
+                  ].map((x) => (
+                    <div
+                      key={x}
+                      className="rounded-xl border px-4 py-3"
+                      style={{
+                        borderColor: "rgba(121,253,21,0.16)",
+                        background: "rgba(255,255,255,0.03)",
+                      }}
+                    >
+                      <span style={{ color: ACCENT }}>✔</span>{" "}
+                      <span className="ml-2">{x}</span>
+                    </div>
+                  ))}
+                </div>
+              </GlassCard>
+
+              <GlassCard className="p-6 sm:p-7">
+                <div
+                  className="font-stint-ultra-expanded text-xl"
+                  style={{ color: ACCENT }}
+                >
+                  🛠️ Echipamente
+                </div>
+                <div className="mt-4 space-y-2 text-sm sm:text-base font-pontano-sans text-white/80">
+                  <p>
+                    • Fiecare cursant are propriile ustensile (se pot
+                    achiziționa cu reducere).
+                  </p>
+                  <p>• Academia are ustensile pentru practică în sală.</p>
+                  <p>
+                    • Practică pe cap de manechin + modele umane (când e
+                    posibil).
+                  </p>
+                </div>
+              </GlassCard>
+
+              <GlassCard className="p-6 sm:p-7">
+                <div
+                  className="font-stint-ultra-expanded text-xl"
+                  style={{ color: ACCENT }}
+                >
+                  📄 Acte necesare
+                </div>
+                <div className="mt-4 space-y-1 text-xs sm:text-sm font-pontano-sans text-white/80">
+                  <p>• Copie certificat de naștere</p>
+                  <p>• Copie carte de identitate</p>
+                  <p>• Copie certificat de căsătorie (dacă este cazul)</p>
+                  <p>• Copie diplomă de studii (minim 8 clase)</p>
+                  <p>• Aviz medical pentru aptitudine</p>
+                  <p className="mt-2 font-bold" style={{ color: ACCENT }}>
+                    ⚠ Vârsta minimă: 16 ani
+                  </p>
+                </div>
+              </GlassCard>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* PRICE & CONTACT */}
+      <section
+        id="pret-si-contact"
+        ref={priceRef}
+        className="py-14 sm:py-16 md:py-20 px-4"
+      >
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle
+            kicker="Transparent • simplu • fără surprize"
+            title="Preț și contact"
+            subtitle="Alege varianta potrivită (integral sau în rate) și rezervă-ți locul."
+          />
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate={priceInView ? "visible" : "hidden"}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6"
+          >
+            {/* Price */}
+            <motion.div variants={fadeInUp}>
+              <div className="relative group">
+                <BorderBeam className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <GlassCard className="p-6 sm:p-7">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div
+                        className="font-stint-ultra-expanded text-2xl"
+                        style={{ color: ACCENT }}
+                      >
+                        💰 Costuri și plăți
+                      </div>
+                      <div
+                        className="mt-4 rounded-2xl p-5 border"
+                        style={{
+                          borderColor: "rgba(121,253,21,0.18)",
+                          background: "rgba(255,255,255,0.03)",
+                        }}
+                      >
+                        <div className="text-sm font-pontano-sans text-white/70">
+                          Preț standard
+                        </div>
+                        <div
+                          className="mt-1 font-stint-ultra-expanded text-4xl sm:text-5xl"
+                          style={{ color: ACCENT }}
+                        >
+                          3500{" "}
+                          <span className="text-white/85 text-2xl sm:text-3xl">
+                            lei
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="mt-4">
+                        <GlassCard accent className="p-5">
+                          <div className="text-black">
+                            <div className="text-sm font-pontano-sans text-black/70">
+                              Reducere 10% (plată integrală)
+                            </div>
+                            <div className="mt-1 font-stint-ultra-expanded text-4xl">
+                              3150{" "}
+                              <span className="text-black/80 text-2xl">
+                                lei
+                              </span>
+                            </div>
+                          </div>
+                        </GlassCard>
+                      </div>
+
+                      <div
+                        className="mt-5 border-t pt-5"
+                        style={{ borderColor: "rgba(121,253,21,0.14)" }}
+                      >
+                        <div className="font-bold font-pontano-sans">
+                          Plată în rate:
+                        </div>
+                        <div className="mt-2 space-y-1 text-sm sm:text-base font-pontano-sans text-white/80">
+                          <p>• 1.000 lei – rezervarea locului</p>
+                          <p>• 1.500 lei – la începutul cursului</p>
+                          <p>• 1.000 lei – la jumătatea cursului</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      className="hidden sm:grid w-12 h-12 rounded-2xl border place-items-center"
+                      style={{
+                        borderColor: "rgba(121,253,21,0.22)",
+                        background: "rgba(121,253,21,0.08)",
+                      }}
+                    >
+                      <span style={{ color: ACCENT }}>💳</span>
+                    </div>
+                  </div>
+                </GlassCard>
               </div>
-            </div>
-          </div>
+            </motion.div>
+
+            {/* Contact */}
+            <motion.div variants={fadeInUp} className="space-y-5">
+              <GlassCard className="p-6 sm:p-7">
+                <div
+                  className="font-stint-ultra-expanded text-2xl"
+                  style={{ color: ACCENT }}
+                >
+                  📞 Informații și înscrieri
+                </div>
+
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {[
+                    { tel: "0723403403", label: "0723 403 403" },
+                    { tel: "0723705702", label: "0723 705 702" },
+                    { tel: "0771418581", label: "0771 418 581" },
+                  ].map((p) => (
+                    <a
+                      key={p.tel}
+                      href={`tel:${p.tel}`}
+                      className="rounded-2xl px-4 py-3 border text-center font-pontano-sans font-semibold transition-transform active:scale-[0.98]"
+                      style={{
+                        borderColor: "rgba(121,253,21,0.20)",
+                        background: "rgba(255,255,255,0.03)",
+                        color: "rgba(255,255,255,0.92)",
+                      }}
+                    >
+                      <span style={{ color: ACCENT }}>📞</span> {p.label}
+                    </a>
+                  ))}
+                </div>
+
+                <div
+                  className="mt-5 border-t pt-5"
+                  style={{ borderColor: "rgba(121,253,21,0.14)" }}
+                >
+                  <div className="font-bold font-pontano-sans mb-2">
+                    Cont bancar:
+                  </div>
+                  <div className="text-xs sm:text-sm font-pontano-sans text-white/80 space-y-1">
+                    <p>
+                      <strong className="text-white">Beneficiar:</strong> SC
+                      Anto Perfect Style SRL
+                    </p>
+                    <p className="break-all">
+                      <strong className="text-white">IBAN:</strong>{" "}
+                      RO53BTRLRONCRT0P67302901
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  className="mt-5 rounded-2xl border p-4"
+                  style={{
+                    borderColor: "rgba(121,253,21,0.18)",
+                    background: "rgba(121,253,21,0.06)",
+                  }}
+                >
+                  <p className="text-xs sm:text-sm font-pontano-sans text-white/80">
+                    <span style={{ color: ACCENT, fontWeight: 700 }}>
+                      ⚠ Politica de anulare:
+                    </span>{" "}
+                    cu două săptămâni înainte de începerea cursului, avansul nu
+                    mai poate fi returnat.
+                  </p>
+                </div>
+              </GlassCard>
+
+              <GlassCard accent className="p-6 sm:p-7">
+                <div className="text-black text-center">
+                  <div className="font-stint-ultra-expanded text-2xl sm:text-3xl">
+                    🎯 Locurile sunt limitate!
+                  </div>
+                  <p className="mt-3 font-pontano-sans text-black/80">
+                    Rezervă-ți locul și începe-ți cariera cu o bază serioasă,
+                    într-o școală care pune accent pe practică și standard.
+                  </p>
+
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() =>
+                      window.open("https://wa.me/40723403403", "_blank")
+                    }
+                    className="mt-5 w-full rounded-2xl px-6 py-3 font-pontano-sans font-bold bg-black text-white"
+                  >
+                    Rezervă acum
+                  </motion.button>
+                </div>
+              </GlassCard>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </main>

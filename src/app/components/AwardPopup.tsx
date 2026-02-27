@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 
+const ACCENT = "#79FD15";
+
 const AwardPopup: React.FC = () => {
   const [showPopup, setShowPopup] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -15,31 +17,27 @@ const AwardPopup: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check if user has already seen the popup
     const hasSeenPopup = localStorage.getItem("hasSeenAwardPopup");
     if (!hasSeenPopup) {
-      // Show popup after a short delay for better UX
-      setTimeout(() => {
-        setShowPopup(true);
-      }, 1500);
+      const t = setTimeout(() => setShowPopup(true), 1500);
+      return () => clearTimeout(t);
     }
   }, []);
 
   useEffect(() => {
     if (showPopup && modalRef.current) {
-      // Animate popup entrance
       const ctx = gsap.context(() => {
         gsap.set([overlayRef.current, modalRef.current], { opacity: 0 });
-        gsap.set(modalRef.current, { scale: 0.9, y: 30 });
+        gsap.set(modalRef.current, { scale: 0.92, y: 28 });
         gsap.set([imageRef.current, textRef.current, buttonRef.current], {
           opacity: 0,
-          y: 15,
+          y: 14,
         });
 
         const tl = gsap.timeline();
         tl.to(overlayRef.current, {
           opacity: 1,
-          duration: 0.3,
+          duration: 0.28,
           ease: "power2.out",
         })
           .to(
@@ -51,37 +49,37 @@ const AwardPopup: React.FC = () => {
               duration: 0.5,
               ease: "back.out(1.2)",
             },
-            "-=0.2"
+            "-=0.18",
           )
           .to(
             imageRef.current,
             {
               opacity: 1,
               y: 0,
-              duration: 0.4,
+              duration: 0.38,
               ease: "power2.out",
             },
-            "-=0.2"
+            "-=0.2",
           )
           .to(
             textRef.current,
             {
               opacity: 1,
               y: 0,
-              duration: 0.4,
+              duration: 0.38,
               ease: "power2.out",
             },
-            "-=0.3"
+            "-=0.28",
           )
           .to(
             buttonRef.current,
             {
               opacity: 1,
               y: 0,
-              duration: 0.4,
+              duration: 0.38,
               ease: "power2.out",
             },
-            "-=0.3"
+            "-=0.28",
           );
       });
 
@@ -100,29 +98,29 @@ const AwardPopup: React.FC = () => {
 
       tl.to([imageRef.current, textRef.current, buttonRef.current], {
         opacity: 0,
-        y: -15,
-        duration: 0.25,
+        y: -14,
+        duration: 0.22,
         ease: "power2.in",
       })
         .to(
           modalRef.current,
           {
             opacity: 0,
-            scale: 0.95,
-            y: 20,
-            duration: 0.25,
+            scale: 0.96,
+            y: 18,
+            duration: 0.24,
             ease: "power2.in",
           },
-          "-=0.15"
+          "-=0.12",
         )
         .to(
           overlayRef.current,
           {
             opacity: 0,
-            duration: 0.25,
+            duration: 0.24,
             ease: "power2.in",
           },
-          "-=0.15"
+          "-=0.12",
         );
     }
   };
@@ -132,94 +130,115 @@ const AwardPopup: React.FC = () => {
     router.push("/curs-frizerie-bucuresti");
   };
 
-  if (!showPopup) {
-    return null;
-  }
+  if (!showPopup) return null;
 
   return (
     <>
       {/* Backdrop Overlay */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black bg-opacity-80 z-[100] backdrop-blur-sm"
+        className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md"
         onClick={handleClose}
-      />
+      >
+        {/* Subtle green glow */}
+        <div className="pointer-events-none absolute -bottom-28 left-1/2 -translate-x-1/2 h-[520px] w-[520px] rounded-full bg-[#79FD15]/16 blur-[110px]" />
+      </div>
 
-      {/* Modal - Mobile First Design */}
+      {/* Modal */}
       <div
         ref={modalRef}
         className="fixed inset-0 z-[101] flex items-center justify-center p-3 sm:p-4 pointer-events-none"
       >
         <div
-          className="bg-white rounded-xl sm:rounded-2xl shadow-2xl w-full max-w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[95vh] overflow-y-auto pointer-events-auto relative"
+          className="pointer-events-auto relative w-full max-w-[95vw] sm:max-w-lg md:max-w-2xl lg:max-w-4xl max-h-[95vh] overflow-y-auto rounded-3xl border border-[#79FD15]/18 bg-white/5 backdrop-blur-xl shadow-[0_18px_90px_rgba(0,0,0,0.85)]"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Accent line */}
+          <div className="h-[3px] w-full bg-gradient-to-r from-transparent via-[#79FD15] to-transparent" />
+
           {/* Close Button */}
           <button
             onClick={handleClose}
-            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 flex items-center justify-center transition-colors duration-200 text-gray-700 font-bold text-xl sm:text-2xl touch-manipulation"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/70 border border-white/10 hover:bg-black/85 active:bg-black flex items-center justify-center transition-colors duration-200 text-white text-2xl touch-manipulation"
             aria-label="Închide"
+            title="Închide"
           >
             ×
           </button>
 
-          {/* Content - Mobile Optimized */}
+          {/* Content */}
           <div className="flex flex-col">
-            {/* Image Section - Full Width on Mobile */}
+            {/* Image Section */}
             <div
               ref={imageRef}
-              className="relative w-full h-48 sm:h-56 md:h-64 lg:h-80 bg-gradient-to-br from-[#023d82] to-[#0355a8] flex items-center justify-center p-4 sm:p-6"
+              className="relative w-full h-52 sm:h-60 md:h-72 lg:h-80 flex items-center justify-center p-4 sm:p-6"
             >
-              <div className="relative w-full h-full max-w-full">
+              {/* Image container */}
+              <div className="relative w-full h-full">
                 <Image
                   src="/images/ungureanu2026-5.jpg"
                   alt="Premiu recunoaștere internațională - Ciprian Ungureanu"
                   fill
-                  className="object-contain rounded-lg shadow-xl"
+                  className="object-contain rounded-2xl shadow-[0_18px_70px_rgba(0,0,0,0.75)]"
                   priority
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 45vw"
                 />
+              </div>
+
+              {/* Overlay gradient */}
+              <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-b from-black/25 via-transparent to-black/60" />
+
+              {/* Corner chip */}
+              <div className="absolute top-3 left-3 rounded-full bg-black/70 border border-[#79FD15]/25 px-3 py-1 text-xs font-pontano-sans text-white/90 backdrop-blur-md">
+                Recunoaștere internațională
+                <span className="ml-2 inline-block h-2 w-2 rounded-full bg-[#79FD15] shadow-[0_0_16px_#79FD15]" />
               </div>
             </div>
 
-            {/* Text Section - Mobile Optimized */}
+            {/* Text Section */}
             <div
               ref={textRef}
-              className="w-full p-5 sm:p-6 md:p-8 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-[#ededed] to-white"
+              className="w-full p-5 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center"
             >
               <div className="mb-4 sm:mb-6">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-stint-ultra-expanded text-[#023d82] mb-3 sm:mb-4 leading-tight">
-                  Fapte nu vorbe.
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-stint-ultra-expanded text-white leading-tight">
+                  Fapte, nu vorbe<span className="text-[#79FD15]">.</span>
                 </h2>
-                <p className="text-sm sm:text-base md:text-lg font-pontano-sans text-gray-700 mb-2">
-                  Recunoaștere internațională pentru excelență
+
+                <p className="mt-3 text-sm sm:text-base md:text-lg font-pontano-sans text-white/80">
+                  Excelență validată — mentorat pentru frizeri care vor
+                  rezultate reale.
                 </p>
-                <p className="text-xs sm:text-sm md:text-base font-pontano-sans text-gray-600 mb-4 sm:mb-6">
-                  Alătură-te cursului condus de un maestru recunoscut la nivel
-                  mondial.
+
+                <p className="mt-2 text-xs sm:text-sm md:text-base font-pontano-sans text-white/65">
+                  Alătură-te cursului condus de un educator de top și ridică
+                  standardul execuției tale.
                 </p>
               </div>
 
-              <div className="border-l-4 border-[#023d82] pl-3 sm:pl-4 mb-4 sm:mb-6">
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-familjen-grotesk font-bold text-[#023d82]">
-                  Inscrie-te la cursul
+              <div className="rounded-2xl border border-[#79FD15]/18 bg-black/40 backdrop-blur-md p-4 sm:p-5 mb-5 sm:mb-6">
+                <p className="text-base sm:text-lg md:text-xl font-pontano-sans font-semibold text-white">
+                  Înscrie-te la cursul
                 </p>
-                <p className="text-xl sm:text-2xl md:text-3xl font-stint-ultra-expanded text-[#023d82] mt-1 sm:mt-2 leading-tight">
+                <p className="mt-1 text-xl sm:text-2xl md:text-3xl font-stint-ultra-expanded text-[#79FD15] leading-tight">
                   APRILIE - IULIE 2026
                 </p>
+                <p className="mt-2 text-xs sm:text-sm font-pontano-sans text-white/65">
+                  Locuri limitate • Focus practică • Standard Fade Academy
+                </p>
               </div>
 
-              {/* CTA Button - Mobile Optimized */}
+              {/* CTA Button */}
               <button
                 ref={buttonRef}
                 onClick={handleEnroll}
-                className="w-full bg-[#023d82] text-[#ededed] px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg md:text-xl font-stint-ultra-expanded hover:bg-[#034ea3] active:bg-[#023d82] active:scale-95 transition-all duration-300 shadow-lg hover:shadow-xl touch-manipulation"
+                className="w-full rounded-2xl bg-[#79FD15] text-black px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-stint-ultra-expanded shadow-[0_18px_70px_rgba(0,0,0,0.75)] hover:brightness-95 active:scale-[0.99] transition-all duration-200 touch-manipulation"
               >
-                Inscrie-te Acum
+                Înscrie-te acum
               </button>
 
-              <p className="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4 text-center font-pontano-sans">
-                Locuri limitate • Garantăm excelența
+              <p className="text-xs sm:text-sm text-white/55 mt-3 sm:mt-4 text-center font-pontano-sans">
+                Garantăm excelența • Vei primi detalii imediat după înscriere
               </p>
             </div>
           </div>

@@ -4,6 +4,7 @@ import {
   Pontano_Sans,
   Luxurious_Script,
   Familjen_Grotesk,
+  Lobster,
 } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -21,6 +22,10 @@ const luxuriousScript = Luxurious_Script({ subsets: ["latin"], weight: "400" });
 const familjenGrotesk = Familjen_Grotesk({
   subsets: ["latin"],
   weight: ["400", "700"],
+});
+const lobster = Lobster({
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -54,12 +59,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&family=Pontano+Sans&family=Luxurious+Script&family=Familjen+Grotesk:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap"
           rel="stylesheet"
         />
       </head>
       <body
-        className={`${stintUltraExpanded.className} ${pontanoSans.className} ${luxuriousScript.className} ${familjenGrotesk.className} flex flex-col min-h-screen`}
+        className={`${stintUltraExpanded.className} ${pontanoSans.className} ${luxuriousScript.className} ${familjenGrotesk.className} ${lobster.className} flex flex-col min-h-screen`}
       >
         <Menux />
         <Providers>

@@ -15,7 +15,7 @@ const Banner2: React.FC = () => {
       overflow="hidden"
     >
       <Image
-        src="/images/f2.webp"
+        src="/images/alege-sig.svg"
         alt="Curs frizerie incepatori , curs frizer, frizer incepatori, frizer, barbershop, barbershop incepatori, barbershop incepatori Bucuresti, barbershop incepatori Timisoara, barbershop incepatori Cluj, barbershop incepatori Iasi"
         fill
         style={{

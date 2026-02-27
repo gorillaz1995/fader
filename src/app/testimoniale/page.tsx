@@ -3,7 +3,7 @@ import Testimonials from "../components/Testimonials";
 
 function Page() {
   return (
-    <div className="bg-[#cbdad4]">
+    <div className="bg-[#79FD15]">
       <Testimonials />
     </div>
   );

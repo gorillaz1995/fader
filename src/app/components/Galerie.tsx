@@ -63,7 +63,7 @@ const EmblaCarousel: React.FC = () => {
 
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
+    [emblaApi],
   );
 
   const onSelect = useCallback(() => {
@@ -79,18 +79,16 @@ const EmblaCarousel: React.FC = () => {
   }, [emblaApi, onSelect]);
 
   return (
-    <Box bg="#cbdad4" py={{ base: 10, md: 20 }}>
+    <Box bg="#000000" py={{ base: 10, md: 20 }}>
       {/* Title Section */}
       <Heading
         as="h2"
         textAlign="center"
-        fontSize="3xl"
+        fontSize="9xl"
         mb={6}
-        className="font-stint-ultra-expanded font-thin text-[#023d82] sparkle-text"
-        letterSpacing="widest"
-        textTransform="uppercase"
+        className="passions-conflict-regular font-thin text-[#79FD15] sparkle-text"
       >
-        GALERIE
+        Galerie
       </Heading>
       <style jsx>{`
         @keyframes sparkle {
@@ -129,7 +127,7 @@ const EmblaCarousel: React.FC = () => {
               height={{ base: "550px", md: "800px" }}
               position="relative"
               p={2}
-              border="1px solid #023d82"
+              border="1px solid #79FD15"
               borderRadius="3xl"
               boxShadow="0 4px 8px rgba(0, 0, 0, 0.5), 0 6px 20px rgba(0, 0, 0, 0.3)"
             >

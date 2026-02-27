@@ -20,7 +20,7 @@ interface ReviewProps {
 const ReviewCard: React.FC<ReviewProps> = ({ name, message }) => {
   return (
     <Box
-      bgGradient="linear(to-br, #0557b5, #023d82)"
+      background="#000000"
       p={6}
       borderRadius="lg"
       boxShadow="0 8px 16px rgba(0,0,0,0.25)"
@@ -30,7 +30,7 @@ const ReviewCard: React.FC<ReviewProps> = ({ name, message }) => {
       display="flex"
       flexDirection="column"
       justifyContent="space-between"
-      border="2px solid #fa6529"
+      border="2px solid #79FD15"
       position="relative"
       _after={{
         content: '""',
@@ -39,7 +39,7 @@ const ReviewCard: React.FC<ReviewProps> = ({ name, message }) => {
         left: "0",
         right: "0",
         height: "8px",
-        background: "#fa6529",
+        background: "#79FD15",
         borderBottomLeftRadius: "lg",
         borderBottomRightRadius: "lg",
         opacity: "0.6",
@@ -50,7 +50,7 @@ const ReviewCard: React.FC<ReviewProps> = ({ name, message }) => {
           fontWeight="bold"
           fontSize="lg"
           fontFamily="var(--font-familjen-grotesk)"
-          color="#ededed"
+          color="#79FD15"
         >
           {name}
         </Text>
@@ -70,17 +70,17 @@ const ReviewCard: React.FC<ReviewProps> = ({ name, message }) => {
               width: "4px",
             },
             "&::-webkit-scrollbar-track": {
-              background: "#023d82",
+              background: "#79FD15",
             },
             "&::-webkit-scrollbar-thumb": {
-              background: "#ededed",
+              background: "#79FD15",
               borderRadius: "2px",
             },
           }}
         >
           <Text
             fontSize="md"
-            color="#ededed"
+            color="#79FD15"
             fontFamily="var(--font-pontano-sans)"
           >
             {message}
@@ -117,7 +117,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => {
         textAlign="center"
         fontSize="2xl"
         fontFamily="stint-ultra-expanded"
-        color="#023d82"
+        color="#79FD15"
         mb={2}
       >
         Recenzii
@@ -125,7 +125,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => {
       <Text
         textAlign="center"
         fontSize="md"
-        color="#023d82"
+        color="#79FD15"
         mb={6}
         fontFamily="var(--font-pontano-sans)"
       >
@@ -177,7 +177,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => {
                 icon={<FaArrowLeft />}
                 onClick={handlePrev}
                 variant="ghost"
-                color="#023d82"
+                color="#79FD15"
                 _hover={{ bg: "rgba(2, 61, 130, 0.1)" }}
               />
             </motion.div>
@@ -193,7 +193,7 @@ const ReviewSection: React.FC<ReviewSectionProps> = ({ reviews }) => {
             icon={<FaArrowRight />}
             onClick={handleNext}
             variant="ghost"
-            color="#023d82"
+            color="#79FD15"
             _hover={{ bg: "rgba(2, 61, 130, 0.1)" }}
           />
         </motion.div>

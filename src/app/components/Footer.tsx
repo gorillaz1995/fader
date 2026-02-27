@@ -5,43 +5,45 @@ import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#023d82] text-[#ededed] p-4">
+    <footer className="bg-[#79FD15] text-[#000000] p-4">
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 items-center mb-4">
         <div className="flex flex-col">
-          <h2 className="text-lg font-medium mb-1 text-[#ededed] font-stint-ultra-expanded">
+          <h2 className="text-lg font-medium mb-1 text-[#000000] font-stint-ultra-expanded">
             Contacteaza-ne:
           </h2>
           <a
             href="tel:+40723403403"
-            className="text-sm text-[#ededed] font-pontano-sans flex items-center hover:underline w-full"
+            className="text-sm text-[#000000] font-pontano-sans flex items-center hover:underline w-full"
           >
             <FaPhone className="mr-2 flex-shrink-0" />
             <span className="flex-grow truncate">(+40) 723 403 403</span>
           </a>
           <a
             href="tel:+40723705702"
-            className="text-sm text-[#ededed] font-pontano-sans flex items-center mt-1 hover:underline w-full"
+            className="text-sm text-[#000000] font-pontano-sans flex items-center mt-1 hover:underline w-full"
           >
             <FaPhone className="mr-2 flex-shrink-0" />
             <span className="flex-grow truncate">(+40) 723 705 702</span>
           </a>
           <a
             href="tel:+40771418581"
-            className="text-sm text-[#ededed] font-pontano-sans flex items-center mt-1 hover:underline w-full"
+            className="text-sm text-[#000000] font-pontano-sans flex items-center mt-1 hover:underline w-full"
           >
             <FaPhone className="mr-2 flex-shrink-0" />
             <span className="flex-grow truncate">(+40) 771 418 581</span>
           </a>
           <a
             href="mailto:contact@fadeacademy.ro"
-            className="text-sm text-[#ededed] font-pontano-sans hover:underline flex items-center mt-1"
+            className="text-sm text-[#000000] font-pontano-sans hover:underline flex items-center mt-1"
           >
             <FaEnvelope className="mr-2 flex-shrink-0" />
-            <span className="flex-grow truncate">contact@fadeacademy.ro</span>
+            <span className="flex-grow truncate text-[#000000]">
+              contact@fadeacademy.ro
+            </span>
           </a>
         </div>
         <div className="text-center">
-          <p className="text-sm text-[#ededed] font-pontano-sans mb-2">
+          <p className="text-sm text-[#000000] font-pontano-sans mb-2">
             Lideri in industrie | Garantam excelenta
           </p>
           <div className="flex justify-center space-x-4">
@@ -49,7 +51,7 @@ const Footer: React.FC = () => {
               href="https://www.facebook.com/byCiprianUngureanu"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#ededed] hover:text-gray-300"
+              className="text-[#000000] hover:text-gray-300"
             >
               <FaFacebookF size={20} />
             </a>
@@ -57,7 +59,7 @@ const Footer: React.FC = () => {
               href="https://www.instagram.com/ciprian_ungureanu_fadeacademy/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#ededed] hover:text-gray-300"
+              className="text-[#000000] hover:text-gray-300"
             >
               <FaInstagram size={20} />
             </a>
@@ -65,15 +67,15 @@ const Footer: React.FC = () => {
               href="https://www.tiktok.com/@byciprianungureanu"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#ededed] hover:text-gray-300"
+              className="text-[#000000] hover:text-gray-300"
             >
               <FaTiktok size={20} />
             </a>
           </div>
         </div>
         <div className="text-right">
-          <p className="text-xs text-[#ededed] font-pontano-sans">
-            © 2024 Usagi Technologies
+          <p className="text-xs text-[#000000] font-pontano-sans">
+            © 2026 Usagi Technologies
           </p>
         </div>
       </div>

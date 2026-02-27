@@ -17,7 +17,7 @@ import styled from "@emotion/styled";
 
 // Styled MenuList
 const StyledMenuList = styled(MenuList)`
-  background: linear-gradient(145deg, #005cb2, #00407d);
+  background: black;
   border-color: #00509d;
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.1),
@@ -43,8 +43,8 @@ const StyledMenuList = styled(MenuList)`
 
 // Styled MenuItem
 const StyledMenuItem = styled(MenuItem)`
-  background: rgba(0, 80, 157, 0.6);
-  color: white;
+  background: #79fd15;
+  color: black;
   font-size: 1.2rem;
   font-family: "Familjen Grotesk", sans-serif;
   padding: 1rem 1.2rem;
@@ -58,29 +58,14 @@ const StyledMenuItem = styled(MenuItem)`
     0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
 
-  &:hover {
-    background: rgba(0, 96, 189, 0.8);
-    transform: translateY(-2px);
-    box-shadow:
-      0 4px 8px rgba(0, 0, 0, 0.2),
-      inset 0 1px 1px rgba(255, 255, 255, 0.2);
   }
 
-  &:active {
-    transform: translateY(1px);
-    box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.1),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  }
 
-  &:last-child {
-    margin-bottom: 0;
-  }
 `;
 
 const StyledMenuButton = styled(Button)`
-  background: rgba(0, 80, 157, 0.6);
-  color: white;
+  background: #79fd15;
+  color: black;
   font-size: 1.2rem;
   font-family: "Familjen Grotesk", sans-serif;
   padding: 1rem 1.2rem;
@@ -92,10 +77,6 @@ const StyledMenuButton = styled(Button)`
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
-
-  &:hover {
-    background: rgba(0, 96, 189, 0.8);
-  }
 `;
 
 const Menux: React.FC = () => {
@@ -113,11 +94,10 @@ const Menux: React.FC = () => {
           aria-label="Options"
           icon={<HamburgerIcon boxSize={24} />}
           variant="solid"
-          bg="linear-gradient(145deg, #0461ab, #023d82)"
-          color="white"
+          bg="#79FD15"
+          color="black"
           size="lg"
           borderRadius="30%"
-          _active={{ bg: "linear-gradient(145deg, #035694, #023168)" }}
           boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
         />
         <StyledMenuList>

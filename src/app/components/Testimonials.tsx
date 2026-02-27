@@ -38,7 +38,7 @@ export default function Testimonials() {
       },
       {
         threshold: 0.1,
-      }
+      },
     );
 
     const currentRef = sectionRef.current;
@@ -56,11 +56,11 @@ export default function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="w-full min-h-screen flex items-center justify-center py-20 px-4 md:px-8 lg:px-16 overflow-hidden"
-      style={{ backgroundColor: "#cbdad4" }}
+      className="w-full min-h-screen flex items-center justify-center py-20 px-4 md:px-8 lg:px-16 overflow-hidden "
+      style={{ backgroundColor: "#79FD15" }}
     >
       <div className="max-w-7xl w-full">
-        <h2 className="text-3xl md:text-5xl font-stint-ultra-expanded text-[#023d82] text-center mb-12">
+        <h2 className="text-3xl md:text-5xl font-stint-ultra-expanded text-[#000000] text-center mb-12">
           Testimoniale
         </h2>
         <p className="text-lg md:text-xl font-pontano-sans text-[#333333] text-center mb-12">
@@ -77,7 +77,7 @@ export default function Testimonials() {
             <a
               key={testimonial.src}
               href={testimonial.link}
-              className="relative rounded-2xl overflow-hidden shadow-lg group border-2 border-[#023d82]"
+              className="relative rounded-2xl overflow-hidden shadow-lg group border-2 border-[#000000]"
               style={{
                 animation: isVisible ? "float 6s ease-in-out infinite" : "none",
                 aspectRatio: testimonial.aspectRatio || "4/3",

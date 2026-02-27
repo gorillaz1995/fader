@@ -11,7 +11,7 @@ const Mapc: React.FC = () => {
         fontSize="2xl"
         fontWeight="thin"
         className="text-center font-stint-ultra-expanded"
-        color="#023d82"
+        color="#79FD15"
         mb={2}
       >
         UNDE NE GASESTI
@@ -22,7 +22,7 @@ const Mapc: React.FC = () => {
         width="100%"
         height="40vh"
         className="rounded-3xl overflow-hidden"
-        border="4px solid #023d82"
+        border="4px solid #79FD15"
         boxShadow="lg"
       >
         <iframe
