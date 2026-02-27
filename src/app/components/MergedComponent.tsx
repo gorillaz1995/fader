@@ -111,119 +111,125 @@ const MergedComponents: React.FC = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { gsap } = require("gsap");
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { ScrollTrigger } = require("gsap/ScrollTrigger");
-    gsap.registerPlugin(ScrollTrigger);
+    const initGsap = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-    const prefersReduced =
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const prefersReduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const ctx = gsap.context(() => {
-      // Card entrance
-      if (cardRef.current) {
-        gsap.fromTo(
-          cardRef.current,
-          { y: prefersReduced ? 0 : 18, opacity: 0, filter: "blur(10px)" },
-          {
-            y: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 0.9,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: cardRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
+      const ctx = gsap.context(() => {
+        if (cardRef.current) {
+          gsap.fromTo(
+            cardRef.current,
+            { y: prefersReduced ? 0 : 18, opacity: 0, filter: "blur(10px)" },
+            {
+              y: 0,
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: 0.9,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: cardRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
             },
-          },
-        );
-      }
+          );
+        }
 
-      if (titleRef.current) {
-        gsap.fromTo(
-          titleRef.current,
-          { y: prefersReduced ? 0 : 10, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.65,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: titleRef.current,
-              start: "top 82%",
-              toggleActions: "play none none none",
+        if (titleRef.current) {
+          gsap.fromTo(
+            titleRef.current,
+            { y: prefersReduced ? 0 : 10, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.65,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: titleRef.current,
+                start: "top 82%",
+                toggleActions: "play none none none",
+              },
             },
-          },
-        );
-      }
+          );
+        }
 
-      if (docsRef.current) {
-        gsap.fromTo(
-          docsRef.current,
-          { y: prefersReduced ? 0 : 16, opacity: 0, filter: "blur(8px)" },
-          {
-            y: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 0.85,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: docsRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
+        if (docsRef.current) {
+          gsap.fromTo(
+            docsRef.current,
+            { y: prefersReduced ? 0 : 16, opacity: 0, filter: "blur(8px)" },
+            {
+              y: 0,
+              opacity: 1,
+              filter: "blur(0px)",
+              duration: 0.85,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: docsRef.current,
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
             },
-          },
-        );
-      }
+          );
+        }
 
-      if (listRef.current) {
-        const listItems = Array.from(listRef.current.children);
+        if (listRef.current) {
+          const listItems = Array.from(listRef.current.children);
 
-        gsap.fromTo(
-          listItems,
-          { autoAlpha: 0, y: prefersReduced ? 0 : 12 },
-          {
-            duration: 0.75,
-            autoAlpha: 1,
-            y: 0,
-            ease: "power2.out",
-            stagger: 0.12,
-            scrollTrigger: {
-              trigger: listRef.current,
-              start: "top 78%",
-              toggleActions: "play none none none",
+          gsap.fromTo(
+            listItems,
+            { autoAlpha: 0, y: prefersReduced ? 0 : 12 },
+            {
+              duration: 0.75,
+              autoAlpha: 1,
+              y: 0,
+              ease: "power2.out",
+              stagger: 0.12,
+              scrollTrigger: {
+                trigger: listRef.current,
+                start: "top 78%",
+                toggleActions: "play none none none",
+              },
             },
-          },
-        );
-      }
+          );
+        }
 
-      if (arrowRef.current && !prefersReduced) {
-        gsap.to(arrowRef.current, {
-          y: 10,
-          duration: 1,
-          repeat: -1,
-          yoyo: true,
-          ease: "power1.inOut",
-        });
-      }
+        if (arrowRef.current && !prefersReduced) {
+          gsap.to(arrowRef.current, {
+            y: 10,
+            duration: 1,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+          });
+        }
 
-      if (!prefersReduced) {
-        gsap.to(".cta-glow", {
-          boxShadow: "0 18px 60px rgba(0,0,0,0.35)",
-          duration: 1.6,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
-    });
+        if (!prefersReduced) {
+          gsap.to(".cta-glow", {
+            boxShadow: "0 18px 60px rgba(0,0,0,0.35)",
+            duration: 1.6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
+      });
+
+      return () => {
+        ctx.revert();
+        (ScrollTrigger as any).getAll().forEach((trigger: any) => trigger.kill());
+      };
+    };
+
+    const cleanupPromise = initGsap();
 
     return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach((trigger: any) => trigger.kill());
+      // ensure any pending async work doesn't try to touch unmounted refs
+      void cleanupPromise;
     };
   }, []);
 
