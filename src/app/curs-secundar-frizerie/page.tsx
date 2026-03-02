@@ -6,7 +6,8 @@ import { cubicBezier, motion, useInView } from "framer-motion";
 
 // Images (local imports)
 import aiaImage from "@/images/aia121.jpeg";
-import faraonusImage from "@/images/stupari.jpg"; // used for both Robert & Alberto (for now)
+import faraonusImage from "@/images/alberto121.jpeg"; // used for both Robert & Alberto (for now)
+import robertMicu from "@/images/robert121.jpeg";
 import andreiiImage from "@/images/andrei14.jpeg";
 import antonioImage from "@/images/antonio121.jpeg";
 
@@ -421,15 +422,27 @@ export default function CursSecundarFrizerie() {
                 <GlassCard className="p-6 sm:p-7">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border"
+                      className="relative w-40 sm:w-52 md:w-60 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
                       style={{ borderColor: "rgba(121,253,21,0.35)" }}
                     >
-                      <Image
-                        src={aiaImage}
-                        alt="Teodora — Profesor"
-                        fill
-                        className="object-cover object-[center_10%]"
-                        priority
+                      <div className="relative aspect-[4/5]">
+                        <Image
+                          src={aiaImage}
+                          alt="Robert Micu — Profesor"
+                          fill
+                          sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 240px"
+                          className="object-cover object-[center_15%]"
+                          priority
+                        />
+                      </div>
+
+                      {/* subtle bottom depth gradient */}
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0))",
+                        }}
                       />
                     </div>
 
@@ -445,13 +458,70 @@ export default function CursSecundarFrizerie() {
                       </div>
                     </div>
 
-                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
-                      Parcursul ei e despre consecvență: ore de practică,
-                      feedback aplicat, apoi încă o rundă — până când detaliul
-                      devine reflex. În școală promovează metodologia pe care a
-                      internalizat-o din cultura de mentorat inspirată de
-                      Ciprian Ungureanu: claritate în pași, ordine în execuție
-                      și respect pentru geometrie.
+                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed space-y-4">
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          ✨ Tehnica mea preferată:
+                        </span>{" "}
+                        Fade-ul și conectările dintre laterale și partea de top
+                        a părului. Îmi place precizia din această zonă, pentru
+                        că o conectare bine realizată face diferența într-o
+                        tunsoare cu adevărat profesionistă.
+                      </span>
+
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          ✨ Tunsoarea care mă reprezintă:
+                        </span>{" "}
+                        Tunsorile elegante. Îmi place ca fiecare rezultat să fie
+                        curat, echilibrat și rafinat, astfel încât clientul să
+                        plece cu un look îngrijit și stilat.
+                      </span>
+
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          ✨ Punctul meu forte la catedră:
+                        </span>{" "}
+                        Explic tehnicile clar și pas cu pas, astfel încât
+                        cursanții să înțeleagă logica din spatele fiecărei
+                        mișcări și să capete încredere în propriul lor stil de
+                        lucru.
+                      </span>
+
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          ✨ Greșeala pe care o văd cel mai des la cursanți:
+                        </span>{" "}
+                        Graba. În frizerie, răbdarea și atenția la detalii sunt
+                        esențiale pentru un rezultat de calitate.
+                      </span>
+
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          ✨ Ce mă diferențiază ca trainer:
+                        </span>{" "}
+                        Pun accent pe practică reală și pe construirea
+                        încrederii cursanților. Îmi place să creez un mediu
+                        relaxat în care fiecare poate învăța și evolua în ritmul
+                        său.
+                      </span>
+
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          ✨ Stilul meu de predare în 3 cuvinte:
+                        </span>{" "}
+                        Clar. Practic. Autentic.
+                      </span>
                     </p>
 
                     <div className="mt-5 w-full grid grid-cols-2 gap-3">
@@ -496,15 +566,27 @@ export default function CursSecundarFrizerie() {
                 <GlassCard className="p-6 sm:p-7">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border"
+                      className="relative w-40 sm:w-52 md:w-60 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
                       style={{ borderColor: "rgba(121,253,21,0.35)" }}
                     >
-                      <Image
-                        src={faraonusImage}
-                        alt="Robert Micu — Profesor"
-                        fill
-                        className="object-cover object-[center_12%]"
-                        priority
+                      <div className="relative aspect-[4/5]">
+                        <Image
+                          src={robertMicu}
+                          alt="Robert Micu — Profesor"
+                          fill
+                          sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 240px"
+                          className="object-cover object-[center_15%]"
+                          priority
+                        />
+                      </div>
+
+                      {/* subtle bottom depth gradient */}
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0))",
+                        }}
                       />
                     </div>
 
@@ -521,15 +603,160 @@ export default function CursSecundarFrizerie() {
                     </div>
 
                     <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
-                      Robert predă „ca la carte”, dar fără rigiditate: îți arată
-                      de ce faci fiecare mișcare, cum construiești tranziția și
-                      cum păstrezi proporțiile. Povestea lui e despre
-                      perseverență: perioade lungi de practică, standarde
-                      ridicate și o etică de lucru alimentată de ideea că
-                      fiecare client e o probă de seriozitate. În academie, duce
-                      mai departe mentalitatea de școală serioasă — aceeași
-                      linie de rigoare și mentorat conectată la Ciprian
-                      Ungureanu.
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          1️⃣ Tehnica mea de tuns:
+                        </span>{" "}
+                        Se bazează pe analiză corectă, secționare precisă și
+                        control al ghidajelor. Construiesc forma progresiv,
+                        folosind linii de bază clare și tranziții graduale
+                        pentru un fade curat și echilibrat. Conexiunea dintre
+                        laterale și partea superioară este realizată prin
+                        blending controlat, pentru o integrare naturală a
+                        volumului.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        Fiecare tunsoare este finalizată prin{" "}
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          verificare și detaliere
+                        </span>
+                        , pentru un rezultat precis și ușor de întreținut.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          2️⃣ Stilul care mă reprezintă:
+                        </span>{" "}
+                        Skin Fade / Mid Fade cu top structurat, construit pe
+                        precizie și control. Pun accent pe tranziții progresive,
+                        curate, fără linii dure, realizate prin pași tehnici
+                        bine calculați. Conectez lateralele cu partea superioară
+                        prin blending atent, pentru o integrare naturală a
+                        volumului. Fiecare tunsoare începe cu analiza formei
+                        capului și a direcției de creștere, apoi construiesc
+                        forma progresiv, cu ghidaje clare și structură bine
+                        definită. Finalul este întotdeauna verificat și detaliat
+                        pentru echilibru și durabilitate.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          Rezultatul:
+                        </span>{" "}
+                        o tunsoare modernă, tehnică și ușor de întreținut.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          3️⃣ Punctul meu forte la catedră:
+                        </span>{" "}
+                        Capacitatea de a explica tehnica simplu, clar și logic,
+                        astfel încât cursanții să înțeleagă nu doar „cum”, ci
+                        mai ales „de ce”. Descompun fiecare tunsoare în pași
+                        practici, ușor de aplicat, cu accent pe structură,
+                        ghidaje și control. Corectez atent, ofer feedback
+                        constructiv și urmăresc progresul fiecărui cursant.
+                        Creez un mediu disciplinat, dar motivant, în care
+                        tehnica și încrederea cresc împreună.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          4️⃣ Greșeala pe care o văd cel mai des:
+                        </span>{" "}
+                        Lipsa controlului asupra ghidajului. Se grăbesc să urce
+                        cu mașina sau să „șteargă” linii fără să construiască
+                        baza corectă.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        O altă problemă comună este{" "}
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          presiunea inegală
+                        </span>{" "}
+                        și{" "}
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          mișcarea necontrolată a mâinii
+                        </span>
+                        , ceea ce duce la tranziții neuniforme. De multe ori nu
+                        respectă pașii logici ai fade-ului și sar etape, crezând
+                        că vor corecta ulterior.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          Nu în ultimul rând: RĂBDAREA.
+                        </span>
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        În esență, greșeala nu este lipsa talentului, ci{" "}
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          lipsa structurii și a răbdării
+                        </span>{" "}
+                        în execuție.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          5️⃣ Ce mă diferențiază:
+                        </span>{" "}
+                        Nu predau doar o tunsoare, ci un sistem de lucru clar și
+                        aplicabil. Pun accent pe structură, logică și
+                        înțelegerea procesului, nu pe copierea mecanică a unor
+                        mișcări. Explic fiecare pas cu motivul din spate, astfel
+                        încât cursanții să poată reproduce rezultatul constant,
+                        nu doar ocazional.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        Corectez tehnic, nu superficial, și urmăresc progresul
+                        real al fiecărui cursant. În plus, îmbin disciplina cu
+                        motivația, formând frizeri care gândesc tehnic, nu doar
+                        execută.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          6️⃣ Stilul meu de predare:
+                        </span>{" "}
+                        Structurat. Tehnic. Clar. Practic. Orientat spre
+                        rezultate.
+                      </span>
                     </p>
 
                     <div className="mt-5 w-full grid grid-cols-2 gap-3">
@@ -574,15 +801,27 @@ export default function CursSecundarFrizerie() {
                 <GlassCard className="p-6 sm:p-7">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border"
+                      className="relative w-40 sm:w-52 md:w-60 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
                       style={{ borderColor: "rgba(121,253,21,0.35)" }}
                     >
-                      <Image
-                        src={faraonusImage}
-                        alt="Alberto Sârbu — Profesor"
-                        fill
-                        className="object-cover object-[center_12%]"
-                        priority
+                      <div className="relative aspect-[4/5]">
+                        <Image
+                          src={faraonusImage}
+                          alt="Robert Micu — Profesor"
+                          fill
+                          sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 240px"
+                          className="object-cover object-[center_15%]"
+                          priority
+                        />
+                      </div>
+
+                      {/* subtle bottom depth gradient */}
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          background:
+                            "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.15) 50%, rgba(0,0,0,0))",
+                        }}
                       />
                     </div>
 
@@ -599,14 +838,76 @@ export default function CursSecundarFrizerie() {
                     </div>
 
                     <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
-                      Alberto e omul detaliilor: muchii, texturi, „finish-ul”
-                      care transformă un tuns bun într-unul memorabil. Îți
-                      explică simplu cum să vezi linia, cum să păstrezi
-                      curățenia în fade și cum să nu „grăbești” etapele. Vine cu
-                      o abordare calmă, dar exigentă — aceeași cultură de
-                      standard ridicat pe care Fade Academy o promovează, cu
-                      rădăcini în mentorat și disciplină asociate școlii și
-                      influenței lui Ciprian Ungureanu.
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          1️⃣ Care este tehnica ta preferată și de ce?
+                        </span>{" "}
+                        Tehnica mea preferată este fade-ul lucrat cu foarfeca
+                        (scissor over comb) și controlul zonelor. Îmi permite să
+                        construiesc forma, nu doar să „șterg linii”. Îmi place
+                        să înțeleg capul, direcția părului și umbrele, nu să mă
+                        bazez doar pe mașină.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          2️⃣ Ce tip de tunsoare te reprezintă cel mai bine?
+                        </span>{" "}
+                        Fade natural, curat, fără linii, cu tranziții fluide și
+                        top lucrat inteligent. Tunsoarea trebuie să arate bine
+                        și peste 2 săptămâni, nu doar în poză imediat după.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          3️⃣ Care este punctul tău forte la catedră?
+                        </span>{" "}
+                        Claritatea și disciplina. Explic simplu lucruri
+                        complexe, corectez la milimetru și nu las cursanții să
+                        se mintă singuri. Îi învăț să vadă greșeala, nu doar să
+                        o repare.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          4️⃣ Ce greșeală vezi cel mai des la cursanți?
+                        </span>{" "}
+                        Se grăbesc. Vor rezultate rapide fără să înțeleagă
+                        structura. Nu citesc capul, nu respectă zonele și apasă
+                        prea mult pe mașină în loc să gândească.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          5️⃣ Ce te diferențiază real față de alți traineri?
+                        </span>{" "}
+                        Nu predau „rețete”. Predau logică, control și
+                        responsabilitate. Sunt activ în salon, în competiții și
+                        în educație. Tot ce predau folosesc zilnic, nu din
+                        povești sau clipuri de pe net.
+                      </span>
+
+                      <br />
+                      <br />
+
+                      <span className="block">
+                        <span className="font-bold" style={{ color: ACCENT }}>
+                          6️⃣ Stilul tău de predare în 3 cuvinte:
+                        </span>{" "}
+                        Clar. Exigent. Real.
+                      </span>
                     </p>
 
                     <div className="mt-5 w-full grid grid-cols-2 gap-3">
