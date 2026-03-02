@@ -126,7 +126,7 @@ const Menux: React.FC = () => {
               <StyledMenuItem
                 onClick={() => handleNavigation("/curs-secundar-frizerie")}
               >
-                Curs Frizerie Secundar
+                Curs Fade Masters
               </StyledMenuItem>
               <StyledMenuItem onClick={() => handleNavigation("/curs-1-1")}>
                 Curs 1 la 1

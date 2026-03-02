@@ -6,7 +6,7 @@ import { cubicBezier, motion, useInView } from "framer-motion";
 
 // Images (local imports)
 import aiaImage from "@/images/aia121.jpeg";
-import faraonusImage from "@/images/alberto121.jpeg"; // used for both Robert & Alberto (for now)
+import faraonusImage from "@/images/alberto121.jpeg";
 import robertMicu from "@/images/robert121.jpeg";
 import andreiiImage from "@/images/andrei14.jpeg";
 import antonioImage from "@/images/antonio121.jpeg";
@@ -25,10 +25,10 @@ const fadeInUp = {
 };
 
 const stagger = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 }, // IMPORTANT: don't hide the whole grid container
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.06 },
   },
 };
 
@@ -180,18 +180,16 @@ const GlassCard = ({
 
 export default function CursSecundarFrizerie() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const teachersRef = useRef<HTMLDivElement>(null);
   const assistantsRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const priceRef = useRef<HTMLDivElement>(null);
 
-  const teachersInView = useInView(teachersRef, { once: true, amount: 0.25 });
   const assistantsInView = useInView(assistantsRef, {
     once: true,
-    amount: 0.25,
+    amount: 0.2,
   });
-  const detailsInView = useInView(detailsRef, { once: true, amount: 0.25 });
-  const priceInView = useInView(priceRef, { once: true, amount: 0.25 });
+  const detailsInView = useInView(detailsRef, { once: true, amount: 0.2 });
+  const priceInView = useInView(priceRef, { once: true, amount: 0.2 });
 
   return (
     <main className="flex flex-col overflow-hidden bg-black text-white">
@@ -378,9 +376,7 @@ export default function CursSecundarFrizerie() {
                   window.open("https://wa.me/40723403403", "_blank")
                 }
                 className="rounded-2xl px-6 py-3 font-pontano-sans font-bold text-black shadow-[0_18px_60px_rgba(0,0,0,0.6)]"
-                style={{
-                  background: ACCENT,
-                }}
+                style={{ background: ACCENT }}
               >
                 Rezervă pe WhatsApp
               </motion.button>
@@ -400,8 +396,8 @@ export default function CursSecundarFrizerie() {
         </div>
       </section>
 
-      {/* TEACHERS */}
-      <section ref={teachersRef} className="py-14 sm:py-16 md:py-20 px-4">
+      {/* TEACHERS (FIXED: use whileInView instead of manual inView gating) */}
+      <section className="py-14 sm:py-16 md:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <SectionTitle
             kicker="Top-level training • standarde reale, fără scurtături"
@@ -412,7 +408,8 @@ export default function CursSecundarFrizerie() {
           <motion.div
             variants={stagger}
             initial="hidden"
-            animate={teachersInView ? "visible" : "hidden"}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.12 }}
             className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6"
           >
             {/* Teacher: Teodora */}
@@ -422,21 +419,19 @@ export default function CursSecundarFrizerie() {
                 <GlassCard className="p-6 sm:p-7">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className="relative w-40 sm:w-52 md:w-60 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
+                      className="relative w-44 sm:w-56 md:w-64 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
                       style={{ borderColor: "rgba(121,253,21,0.35)" }}
                     >
                       <div className="relative aspect-[4/5]">
                         <Image
                           src={aiaImage}
-                          alt="Robert Micu — Profesor"
+                          alt="Teodora — Profesor"
                           fill
-                          sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 240px"
+                          sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 256px"
                           className="object-cover object-[center_15%]"
                           priority
                         />
                       </div>
-
-                      {/* subtle bottom depth gradient */}
                       <div
                         className="absolute inset-0"
                         style={{
@@ -458,7 +453,7 @@ export default function CursSecundarFrizerie() {
                       </div>
                     </div>
 
-                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed space-y-4">
+                    <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
                           ✨ Tehnica mea preferată:
@@ -468,9 +463,8 @@ export default function CursSecundarFrizerie() {
                         că o conectare bine realizată face diferența într-o
                         tunsoare cu adevărat profesionistă.
                       </span>
-
                       <br />
-
+                      <br />
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
                           ✨ Tunsoarea care mă reprezintă:
@@ -479,9 +473,8 @@ export default function CursSecundarFrizerie() {
                         curat, echilibrat și rafinat, astfel încât clientul să
                         plece cu un look îngrijit și stilat.
                       </span>
-
                       <br />
-
+                      <br />
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
                           ✨ Punctul meu forte la catedră:
@@ -491,9 +484,8 @@ export default function CursSecundarFrizerie() {
                         mișcări și să capete încredere în propriul lor stil de
                         lucru.
                       </span>
-
                       <br />
-
+                      <br />
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
                           ✨ Greșeala pe care o văd cel mai des la cursanți:
@@ -501,9 +493,8 @@ export default function CursSecundarFrizerie() {
                         Graba. În frizerie, răbdarea și atenția la detalii sunt
                         esențiale pentru un rezultat de calitate.
                       </span>
-
                       <br />
-
+                      <br />
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
                           ✨ Ce mă diferențiază ca trainer:
@@ -513,9 +504,8 @@ export default function CursSecundarFrizerie() {
                         relaxat în care fiecare poate învăța și evolua în ritmul
                         său.
                       </span>
-
                       <br />
-
+                      <br />
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
                           ✨ Stilul meu de predare în 3 cuvinte:
@@ -566,7 +556,7 @@ export default function CursSecundarFrizerie() {
                 <GlassCard className="p-6 sm:p-7">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className="relative w-40 sm:w-52 md:w-60 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
+                      className="relative w-44 sm:w-56 md:w-64 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
                       style={{ borderColor: "rgba(121,253,21,0.35)" }}
                     >
                       <div className="relative aspect-[4/5]">
@@ -574,13 +564,11 @@ export default function CursSecundarFrizerie() {
                           src={robertMicu}
                           alt="Robert Micu — Profesor"
                           fill
-                          sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 240px"
+                          sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 256px"
                           className="object-cover object-[center_15%]"
                           priority
                         />
                       </div>
-
-                      {/* subtle bottom depth gradient */}
                       <div
                         className="absolute inset-0"
                         style={{
@@ -602,6 +590,7 @@ export default function CursSecundarFrizerie() {
                       </div>
                     </div>
 
+                    {/* Robert text (your arranged version) */}
                     <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
@@ -801,21 +790,19 @@ export default function CursSecundarFrizerie() {
                 <GlassCard className="p-6 sm:p-7">
                   <div className="flex flex-col items-center text-center">
                     <div
-                      className="relative w-40 sm:w-52 md:w-60 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
+                      className="relative w-44 sm:w-56 md:w-64 rounded-2xl overflow-hidden border shadow-[0_16px_55px_rgba(0,0,0,0.65)]"
                       style={{ borderColor: "rgba(121,253,21,0.35)" }}
                     >
                       <div className="relative aspect-[4/5]">
                         <Image
                           src={faraonusImage}
-                          alt="Robert Micu — Profesor"
+                          alt="Alberto Sârbu — Profesor"
                           fill
-                          sizes="(max-width: 640px) 160px, (max-width: 768px) 208px, 240px"
+                          sizes="(max-width: 640px) 176px, (max-width: 768px) 224px, 256px"
                           className="object-cover object-[center_15%]"
                           priority
                         />
                       </div>
-
-                      {/* subtle bottom depth gradient */}
                       <div
                         className="absolute inset-0"
                         style={{
@@ -837,6 +824,7 @@ export default function CursSecundarFrizerie() {
                       </div>
                     </div>
 
+                    {/* Alberto text (your arranged version) */}
                     <p className="mt-4 text-sm sm:text-base font-pontano-sans text-white/80 leading-relaxed">
                       <span className="block">
                         <span className="font-bold" style={{ color: ACCENT }}>
@@ -995,33 +983,18 @@ export default function CursSecundarFrizerie() {
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
-                      <span
-                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
-                        style={{
-                          borderColor: "rgba(121,253,21,0.22)",
-                          color: ACCENT,
-                        }}
-                      >
-                        control
-                      </span>
-                      <span
-                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
-                        style={{
-                          borderColor: "rgba(121,253,21,0.22)",
-                          color: ACCENT,
-                        }}
-                      >
-                        ghidaj unghiuri
-                      </span>
-                      <span
-                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
-                        style={{
-                          borderColor: "rgba(121,253,21,0.22)",
-                          color: ACCENT,
-                        }}
-                      >
-                        practică
-                      </span>
+                      {["control", "ghidaj unghiuri", "practică"].map((x) => (
+                        <span
+                          key={x}
+                          className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                          style={{
+                            borderColor: "rgba(121,253,21,0.22)",
+                            color: ACCENT,
+                          }}
+                        >
+                          {x}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -1060,33 +1033,18 @@ export default function CursSecundarFrizerie() {
                     </p>
 
                     <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
-                      <span
-                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
-                        style={{
-                          borderColor: "rgba(121,253,21,0.22)",
-                          color: ACCENT,
-                        }}
-                      >
-                        contur
-                      </span>
-                      <span
-                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
-                        style={{
-                          borderColor: "rgba(121,253,21,0.22)",
-                          color: ACCENT,
-                        }}
-                      >
-                        bază solidă
-                      </span>
-                      <span
-                        className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
-                        style={{
-                          borderColor: "rgba(121,253,21,0.22)",
-                          color: ACCENT,
-                        }}
-                      >
-                        finishing
-                      </span>
+                      {["contur", "bază solidă", "finishing"].map((x) => (
+                        <span
+                          key={x}
+                          className="px-3 py-1 rounded-full text-xs font-pontano-sans border"
+                          style={{
+                            borderColor: "rgba(121,253,21,0.22)",
+                            color: ACCENT,
+                          }}
+                        >
+                          {x}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -1111,6 +1069,9 @@ export default function CursSecundarFrizerie() {
             animate={detailsInView ? "visible" : "hidden"}
             className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6"
           >
+            {/* ... REST OF YOUR DETAILS SECTION UNCHANGED ... */}
+            {/* (kept exactly like your original; omitted here would break "full code", so it's still included below) */}
+
             <motion.div variants={fadeInUp} className="space-y-5">
               <GlassCard className="p-6 sm:p-7">
                 <div className="flex items-start justify-between gap-4">
