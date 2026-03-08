@@ -28,6 +28,22 @@ const MotionBox = motion(Box);
 const WHATSAPP_BASE = "https://wa.me/40723403403";
 const ACCENT = "#79FD15";
 
+const GLASS_CARD = {
+  borderRadius: "3xl",
+  border: "1px solid",
+  borderColor: "rgba(121,253,21,0.18)",
+  bg: "whiteAlpha.50",
+  backdropFilter: "blur(12px)",
+  boxShadow: "0 18px 70px rgba(0,0,0,0.75)",
+};
+
+const INNER_PANEL = {
+  borderRadius: "2xl",
+  border: "1px solid",
+  borderColor: "rgba(121,253,21,0.18)",
+  bg: "rgba(0,0,0,0.35)",
+};
+
 export default function AcademieOneToOnePage() {
   const openWhatsApp = (message: string) => {
     const encoded = encodeURIComponent(message);
@@ -37,7 +53,17 @@ export default function AcademieOneToOnePage() {
   const heroMinH = useBreakpointValue({ base: "92vh", md: "85vh" });
 
   return (
-    <Box bg="black" color="white" overflow="hidden">
+    <Box
+      bg="black"
+      color="white"
+      overflow="hidden"
+      position="relative"
+      backgroundImage={`
+        radial-gradient(circle at 10% 20%, rgba(121,253,21,0.08), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(121,253,21,0.06), transparent 18%),
+        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.03), transparent 20%)
+      `}
+    >
       {/* ================= HERO ================= */}
       <Box
         position="relative"
@@ -60,7 +86,6 @@ export default function AcademieOneToOnePage() {
           style={{ objectPosition: "center 10%" }}
         />
 
-        {/* Overlays */}
         <Box
           position="absolute"
           inset={0}
@@ -126,7 +151,7 @@ export default function AcademieOneToOnePage() {
               lineHeight="1.7"
               px={{ base: 2, md: 0 }}
             >
-              Trei opțiuni. Trei stiluri de mentorat. Același standard:{" "}
+              Patru opțiuni. Patru stiluri de mentorat. Același standard:{" "}
               <Box as="span" color={ACCENT} fontWeight="700">
                 performanță reală
               </Box>
@@ -175,11 +200,10 @@ export default function AcademieOneToOnePage() {
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Vezi cele 3 opțiuni
+                Vezi cele 4 opțiuni
               </Button>
             </HStack>
 
-            {/* Mobile-first mini stats */}
             <SimpleGrid
               columns={{ base: 1, sm: 3 }}
               spacing={4}
@@ -308,7 +332,6 @@ export default function AcademieOneToOnePage() {
           spacing={{ base: 8, lg: 10 }}
           align="stretch"
         >
-          {/* Evaluation Card */}
           <Box
             borderRadius="3xl"
             border="1px solid"
@@ -390,7 +413,6 @@ export default function AcademieOneToOnePage() {
             </Button>
           </Box>
 
-          {/* Seminar Day Structure */}
           <Box
             borderRadius="3xl"
             border="1px solid"
@@ -475,7 +497,6 @@ export default function AcademieOneToOnePage() {
           </Box>
         </Stack>
 
-        {/* Cost / rezervare */}
         <Box
           mt={{ base: 8, md: 10 }}
           borderRadius="3xl"
@@ -644,7 +665,6 @@ export default function AcademieOneToOnePage() {
             </VStack>
           </Stack>
 
-          {/* TidyCal embed */}
           <Box mt={{ base: 10, md: 14 }} minH={{ base: "680px", md: "720px" }}>
             <div
               className="tidycal-embed"
@@ -660,15 +680,16 @@ export default function AcademieOneToOnePage() {
 
       <Divider borderColor="whiteAlpha.200" />
 
-      {/* ================= 3 OPTIUNI 1 LA 1 ================= */}
+      {/* ================= 4 OPTIUNI 1 LA 1 ================= */}
       <Container id="pachete-1la1" maxW="7xl" py={{ base: 14, md: 20 }}>
         <VStack spacing={{ base: 10, md: 16 }}>
           <VStack spacing={4} textAlign="center" maxW="4xl">
             <Heading
               fontFamily="Stint Ultra Expanded, serif"
               fontSize={{ base: "26px", md: "44px" }}
+              textShadow="0 0 20px rgba(0,0,0,0.55)"
             >
-              3 posibilități de 1 la 1
+              4 posibilități de 1 la 1
               <Box as="span" color={ACCENT}>
                 .
               </Box>
@@ -676,26 +697,25 @@ export default function AcademieOneToOnePage() {
             <Text color="whiteAlpha.900" fontFamily="Pontano Sans, sans-serif">
               Fiecare variantă este „cea mai bună” în felul ei — în funcție de
               nivelul și obiectivul tău: strategie cu mentorul principal,
-              perfecționare avansată în fade & finishing sau consolidare solidă
-              pentru consistență.
+              perfecționare avansată în fade & finishing, consolidare solidă
+              pentru consistență sau bază tehnică profundă pentru a înțelege cum
+              se construiește orice tunsoare.
             </Text>
           </VStack>
 
           {/* ================= OPTION 1: CIPRIAN (SEMINAR) ================= */}
           <MotionBox
-            borderRadius="3xl"
-            boxShadow="0 18px 70px rgba(0,0,0,0.75)"
+            {...GLASS_CARD}
             overflow="hidden"
-            border="1px solid"
-            borderColor="rgba(121,253,21,0.18)"
-            bg="whiteAlpha.50"
-            backdropFilter="blur(10px)"
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
           >
             <Stack direction={{ base: "column", md: "row" }}>
               <Image
-                src="images/ungureanu2026-1.jpg"
+                src="images/ung123.jpeg"
                 alt="Ciprian Ungureanu Premium"
                 w={{ base: "100%", md: "50%" }}
+                minH={{ base: "320px", md: "100%" }}
                 objectFit="cover"
                 style={{ objectPosition: "center 10%" }}
               />
@@ -731,13 +751,7 @@ export default function AcademieOneToOnePage() {
                   urmat cursul nostru de specializare.
                 </Text>
 
-                <Box
-                  borderRadius="2xl"
-                  p={5}
-                  border="1px solid"
-                  borderColor="rgba(121,253,21,0.18)"
-                  bg="rgba(0,0,0,0.35)"
-                >
+                <Box {...INNER_PANEL} p={5}>
                   <Heading
                     size="md"
                     mb={2}
@@ -867,19 +881,17 @@ export default function AcademieOneToOnePage() {
 
           {/* ================= OPTION 2: ROBERT ================= */}
           <MotionBox
-            borderRadius="3xl"
-            boxShadow="0 18px 70px rgba(0,0,0,0.75)"
+            {...GLASS_CARD}
             overflow="hidden"
-            border="1px solid"
-            borderColor="rgba(121,253,21,0.18)"
-            bg="whiteAlpha.50"
-            backdropFilter="blur(10px)"
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
           >
             <Stack direction={{ base: "column", md: "row-reverse" }}>
               <Image
-                src="/stupari.jpg"
+                src="/images/robert121.jpeg"
                 alt="Robert Micu 1 la 1"
                 w={{ base: "100%", md: "50%" }}
+                minH={{ base: "320px", md: "100%" }}
                 objectFit="cover"
               />
 
@@ -916,13 +928,7 @@ export default function AcademieOneToOnePage() {
                 </Text>
 
                 <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4} w="full">
-                  <Box
-                    borderRadius="2xl"
-                    p={4}
-                    border="1px solid"
-                    borderColor="rgba(121,253,21,0.20)"
-                    bg="rgba(0,0,0,0.35)"
-                  >
+                  <Box {...INNER_PANEL} p={4}>
                     <Heading size="sm" mb={2}>
                       Ce obții
                     </Heading>
@@ -996,21 +1002,19 @@ export default function AcademieOneToOnePage() {
             </Stack>
           </MotionBox>
 
-          {/* ================= OPTION 3: ALBERTO (HIGH END FINISHING) ================= */}
+          {/* ================= OPTION 3: ALBERTO ================= */}
           <MotionBox
-            borderRadius="3xl"
-            boxShadow="0 18px 70px rgba(0,0,0,0.75)"
+            {...GLASS_CARD}
             overflow="hidden"
-            border="1px solid"
-            borderColor="rgba(121,253,21,0.18)"
-            bg="whiteAlpha.50"
-            backdropFilter="blur(10px)"
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
           >
             <Stack direction={{ base: "column", md: "row" }}>
               <Image
-                src="/stupari.jpg"
+                src="/images/alb222.jpeg"
                 alt="Alberto Sârbu 1 la 1"
                 w={{ base: "100%", md: "50%" }}
+                minH={{ base: "320px", md: "100%" }}
                 objectFit="cover"
               />
 
@@ -1066,13 +1070,7 @@ export default function AcademieOneToOnePage() {
                     </Text>
                   </Box>
 
-                  <Box
-                    borderRadius="2xl"
-                    p={4}
-                    border="1px solid"
-                    borderColor="rgba(121,253,21,0.20)"
-                    bg="rgba(0,0,0,0.35)"
-                  >
+                  <Box {...INNER_PANEL} p={4}>
                     <Heading size="sm" mb={2}>
                       Focus sesiuni
                     </Heading>
@@ -1123,6 +1121,211 @@ export default function AcademieOneToOnePage() {
                 >
                   Rezervă 1 la 1 cu Alberto
                 </Button>
+              </VStack>
+            </Stack>
+          </MotionBox>
+
+          {/* ================= OPTION 4: FLORIN HARSAN ================= */}
+          <MotionBox
+            {...GLASS_CARD}
+            overflow="hidden"
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Stack direction={{ base: "column", md: "row-reverse" }}>
+              <Image
+                src="/images/flor123.jpeg"
+                alt="Harsan Florin Clasa de Tehnică"
+                w={{ base: "100%", md: "50%" }}
+                minH={{ base: "320px", md: "100%" }}
+                objectFit="cover"
+                style={{ objectPosition: "center center" }}
+              />
+
+              <VStack p={{ base: 6, md: 12 }} align="start" spacing={5}>
+                <Badge
+                  bg={ACCENT}
+                  color="black"
+                  borderRadius="full"
+                  px={3}
+                  py={1}
+                >
+                  OPTION 04 • CLASA DE TEHNICĂ • FLORIN HARSAN
+                </Badge>
+
+                <Heading
+                  fontFamily="Stint Ultra Expanded, serif"
+                  fontSize={{ base: "26px", md: "44px" }}
+                  lineHeight="1.1"
+                >
+                  Clasa de Tehnică – Înțelege tunsorile, nu doar să le execuți
+                </Heading>
+
+                <Text
+                  color="whiteAlpha.900"
+                  fontFamily="Pontano Sans, sans-serif"
+                  lineHeight="1.75"
+                >
+                  Program de specializare creat pentru frizerii și
+                  hair-styliștii care vor să treacă la următorul nivel și să
+                  dobândească control real asupra tunsorilor. Aici nu înveți
+                  doar să reproduci forme, ci să înțelegi logica din spatele
+                  fiecărei construcții.
+                </Text>
+
+                <Box {...INNER_PANEL} p={5} w="full">
+                  <Heading
+                    size="md"
+                    mb={3}
+                    fontFamily="Familjen Grotesk, sans-serif"
+                  >
+                    Cele 3 concepte fundamentale
+                  </Heading>
+                  <List spacing={2} fontFamily="Pontano Sans, sans-serif">
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      <b>Linie</b> – controlul formei și al greutății
+                    </ListItem>
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      <b>Graduare</b> – construcția volumului și a structurii
+                    </ListItem>
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      <b>Treaptă</b> – dinamica și mișcarea părului
+                    </ListItem>
+                  </List>
+                </Box>
+
+                <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4} w="full">
+                  <Box
+                    borderRadius="2xl"
+                    p={4}
+                    bg={ACCENT}
+                    color="black"
+                    boxShadow="0 18px 60px rgba(0,0,0,0.5)"
+                  >
+                    <Text fontSize="xs" opacity={0.75}>
+                      Pentru cine este
+                    </Text>
+                    <Text fontWeight="900" fontSize="lg">
+                      Frizeri & hair-styliști
+                    </Text>
+                    <Text fontSize="xs" opacity={0.75}>
+                      Pentru cei care vor control tehnic real
+                    </Text>
+                  </Box>
+
+                  <Box {...INNER_PANEL} p={4}>
+                    <Heading size="sm" mb={2}>
+                      Ce urmărește
+                    </Heading>
+                    <List spacing={2} fontSize="sm">
+                      <ListItem>
+                        <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                        mai mult control asupra formelor
+                      </ListItem>
+                      <ListItem>
+                        <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                        precizie și viteză mai bună în salon
+                      </ListItem>
+                      <ListItem>
+                        <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                        gândire tehnică în tunsori
+                      </ListItem>
+                    </List>
+                  </Box>
+                </SimpleGrid>
+
+                <Text
+                  color="whiteAlpha.900"
+                  fontFamily="Pontano Sans, sans-serif"
+                  lineHeight="1.75"
+                >
+                  După peste 30 de ani de experiență în salon și în educație,
+                  Harsan Florin a construit un sistem de predare simplu, logic
+                  și aplicabil în orice salon. Scopul este clar: să transforme
+                  tunsoarea dintr-o execuție mecanică într-un proces logic și
+                  controlat.
+                </Text>
+
+                <Box
+                  borderRadius="2xl"
+                  p={5}
+                  border="1px solid"
+                  borderColor="rgba(121,253,21,0.18)"
+                  bg="whiteAlpha.50"
+                  w="full"
+                >
+                  <Heading size="sm" mb={3}>
+                    Ce vei învăța
+                  </Heading>
+                  <List spacing={2} fontSize="sm" color="whiteAlpha.900">
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      cum se construiește corect o tunsoare
+                    </ListItem>
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      cum să controlezi forma și greutatea părului
+                    </ListItem>
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      cum să adaptezi tehnica la orice client
+                    </ListItem>
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      cum să lucrezi mai rapid și mai precis în salon
+                    </ListItem>
+                    <ListItem>
+                      <Icon as={CheckCircleIcon} color={ACCENT} mr={2} />
+                      cum să gândești tunsorile, nu doar să le execuți
+                    </ListItem>
+                  </List>
+                </Box>
+
+                <Text fontSize="sm" color="whiteAlpha.800">
+                  Această specializare nu este doar un curs. Este o schimbare de
+                  perspectivă asupra tunsorilor.
+                </Text>
+
+                <HStack
+                  w="full"
+                  spacing={3}
+                  flexDir={{ base: "column", sm: "row" }}
+                >
+                  <Button
+                    bg={ACCENT}
+                    color="black"
+                    size="lg"
+                    borderRadius="2xl"
+                    w={{ base: "full", sm: "auto" }}
+                    onClick={() =>
+                      openWhatsApp(
+                        "Salut! Sunt interesat de Clasa de Tehnică cu Harsan Florin. Aș dori mai multe detalii și programare.",
+                      )
+                    }
+                  >
+                    Rezervă cu Florin Harsan
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    borderColor="rgba(121,253,21,0.35)"
+                    bg="whiteAlpha.50"
+                    color="white"
+                    size="lg"
+                    borderRadius="2xl"
+                    w={{ base: "full", sm: "auto" }}
+                    onClick={() =>
+                      openWhatsApp(
+                        "Salut! Am întrebări despre Clasa de Tehnică cu Harsan Florin și vreau să aflu dacă mi se potrivește.",
+                      )
+                    }
+                  >
+                    Cere detalii
+                  </Button>
+                </HStack>
               </VStack>
             </Stack>
           </MotionBox>

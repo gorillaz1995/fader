@@ -396,7 +396,7 @@ export default function CursSecundarFrizerie() {
         </div>
       </section>
 
-      {/* TEACHERS (FIXED: use whileInView instead of manual inView gating) */}
+      {/* TEACHERS */}
       <section className="py-14 sm:py-16 md:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <SectionTitle
@@ -408,8 +408,7 @@ export default function CursSecundarFrizerie() {
           <motion.div
             variants={stagger}
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.12 }}
+            animate="visible"
             className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6"
           >
             {/* Teacher: Teodora */}
