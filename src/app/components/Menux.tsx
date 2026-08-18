@@ -6,12 +6,11 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  IconButton,
   Box,
   Text,
   Button,
 } from "@chakra-ui/react";
-import { HamburgerIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/navigation";
 import styled from "@emotion/styled";
 
@@ -58,12 +57,48 @@ const StyledMenuItem = styled(MenuItem)`
     0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
 
+  &:last-child {
+    margin-bottom: 0;
   }
 
-
+  &:hover,
+  &:focus {
+    background: #8aff35;
+    color: black;
+  }
 `;
 
+// Main menu button
 const StyledMenuButton = styled(Button)`
+  background: #79fd15;
+  color: black;
+  font-size: 1.15rem;
+  font-family: "Familjen Grotesk", sans-serif;
+  font-weight: 700;
+  padding: 0.85rem 1.3rem;
+  min-width: 120px;
+  min-height: 52px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #8aff35;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+// Submenu button
+const StyledSubmenuButton = styled(Button)`
   background: #79fd15;
   color: black;
   font-size: 1.2rem;
@@ -77,6 +112,11 @@ const StyledMenuButton = styled(Button)`
   box-shadow:
     0 2px 4px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: #8aff35;
+    color: black;
+  }
 `;
 
 const Menux: React.FC = () => {
@@ -89,17 +129,11 @@ const Menux: React.FC = () => {
   return (
     <Box position="fixed" top={4} right={6} zIndex={1000}>
       <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<HamburgerIcon boxSize={24} />}
-          variant="solid"
-          bg="#79FD15"
-          color="black"
-          size="lg"
-          borderRadius="30%"
-          boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
-        />
+        {/* Clear "ACASA" button instead of hamburger icon */}
+        <MenuButton as={StyledMenuButton} aria-label="Deschide meniul">
+          MENIU
+        </MenuButton>
+
         <StyledMenuList>
           {/* Home */}
           <StyledMenuItem onClick={() => handleNavigation("/")}>
@@ -110,31 +144,37 @@ const Menux: React.FC = () => {
 
           {/* Fade Academy Bucuresti with Submenu */}
           <Menu>
-            <MenuButton as={StyledMenuButton} rightIcon={<ChevronDownIcon />}>
+            <MenuButton
+              as={StyledSubmenuButton}
+              rightIcon={<ChevronDownIcon />}
+            >
               <Text textAlign="center">
                 <span className="font-stint-ultra-expanded">Fade Academy</span>
                 <br />
                 <span className="font-pontano-sans">Bucuresti</span>
               </Text>
             </MenuButton>
+
             <StyledMenuList>
               <StyledMenuItem
                 onClick={() => handleNavigation("/curs-frizerie-bucuresti")}
               >
                 Curs Ciprian Ungureanu
               </StyledMenuItem>
+
               <StyledMenuItem
                 onClick={() => handleNavigation("/curs-secundar-frizerie")}
               >
                 Curs Fade Masters
               </StyledMenuItem>
+
               <StyledMenuItem onClick={() => handleNavigation("/curs-1-1")}>
                 Curs 1 la 1
               </StyledMenuItem>
             </StyledMenuList>
           </Menu>
 
-          {/* Other Locations */}
+          {/* Fade Academy Satu Mare */}
           <StyledMenuItem
             onClick={() => handleNavigation("/curs-frizerie-satu-mare")}
           >
@@ -145,6 +185,7 @@ const Menux: React.FC = () => {
             </Text>
           </StyledMenuItem>
 
+          {/* Fade Academy Botosani */}
           <StyledMenuItem
             onClick={() => handleNavigation("/curs-frizerie-botosani")}
           >
