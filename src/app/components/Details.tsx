@@ -286,9 +286,8 @@ const Details: React.FC = () => {
                       </p>
 
                       <p className="mt-1 text-sm sm:text-base text-[#79FD15] text-right font-pontano-sans">
-                        1 <span className="font-extrabold">SEPTEMBRIE</span>{" "}
-                        2026 – 23{" "}
-                        <span className="font-extrabold">NOIEMBRIE</span> 2026
+                        12 <span className="font-extrabold">IANUARIE</span> 2027
+                        – 8 <span className="font-extrabold">APRILIE</span> 2027
                       </p>
                     </div>
 
