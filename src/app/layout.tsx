@@ -1,78 +1,50 @@
-import type { Metadata } from "next";
-import {
-  Stint_Ultra_Expanded,
-  Pontano_Sans,
-  Luxurious_Script,
-  Familjen_Grotesk,
-  Lobster,
-} from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Anton, Instrument_Serif, Inter_Tight } from "next/font/google";
+import { Providers } from "@/components/chrome/Providers";
 import "./globals.css";
-import { Providers } from "./providers";
-import Menux from "./components/Menux";
-import Footer from "./components/Footer";
-import CookieConsent from "./components/CookieConsent";
-import AwardPopup from "./components/AwardPopup";
 
-const stintUltraExpanded = Stint_Ultra_Expanded({
-  subsets: ["latin"],
+const anton = Anton({ subsets: ["latin", "latin-ext"], weight: "400", variable: "--font-anton", display: "swap" });
+const instrument = Instrument_Serif({
+  subsets: ["latin", "latin-ext"],
   weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
+  display: "swap",
 });
-const pontanoSans = Pontano_Sans({ subsets: ["latin"], weight: "400" });
-const luxuriousScript = Luxurious_Script({ subsets: ["latin"], weight: "400" });
-const familjenGrotesk = Familjen_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-const lobster = Lobster({
-  subsets: ["latin"],
-  weight: "400",
-});
+const inter = Inter_Tight({ subsets: ["latin", "latin-ext"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Ciprian Ungureanu - Fade Academy | Curs Frizerie Incepatori",
+  metadataBase: new URL("https://www.fadeacademy.ro"),
+  title: {
+    default: "Fade Academy — Cea mai bună școală de frizerie din România",
+    template: "%s · Fade Academy",
+  },
   description:
-    "Descopera cursurile de frizerie pentru incepatori oferite de Ciprian Ungureanu, un expert recunoscut international. Inscrie-te acum la Fade Academy pentru a invata tehnicile esentiale ale frizeriei și pentru a-ți începe cariera de succes.",
-  keywords: [
-    "curs frizerie incepatori",
-    "frizerie Ciprian Ungureanu",
-    "Fade Academy",
-    "tehnici frizerie",
-    "cariera frizerie",
-    "cursuri frizerie",
-    "formare frizeri",
-  ],
-  robots: "index, follow",
+    "Fade Academy by Ciprian Ungureanu — #1 Barber Education în România, 7 ani consecutivi. Cursuri de frizerie pentru începători, mentorat 1 la 1 și sesiuni în toată țara.",
+  icons: { icon: "/images/logo.png" },
+  openGraph: {
+    type: "website",
+    locale: "ro_RO",
+    siteName: "Fade Academy",
+    images: ["/images/ungureanu2026-5.jpg"],
+  },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: "#132a13",
+};
+
+// Runs before paint so returning visitors (same session) never see the intro flash.
+const INTRO_SCRIPT = `try{if(sessionStorage.getItem('fa_intro')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-seen')}catch(e){}`;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ro">
+    <html lang="ro" className={`${anton.variable} ${instrument.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Passions+Conflict&display=swap"
-          rel="stylesheet"
-        />
+        <script dangerouslySetInnerHTML={{ __html: INTRO_SCRIPT }} />
       </head>
-      <body
-        className={`${stintUltraExpanded.className} ${pontanoSans.className} ${luxuriousScript.className} ${familjenGrotesk.className} ${lobster.className} flex flex-col min-h-screen`}
-      >
-        <Menux />
-        <Providers>
-          <main className="flex-grow">{children}</main>
-        </Providers>
-        <Footer />
-        <CookieConsent />
-        <AwardPopup />
+      <body>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
